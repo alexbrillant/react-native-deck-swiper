@@ -1,8 +1,0 @@
-android_library(
-  name = 'perftest',
-  srcs = glob(['*.java']),
-  visibility = [
-    'PUBLIC',
-  ],
-)
-

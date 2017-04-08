@@ -1,8 +1,0 @@
-android_library(
-  name = 'systrace',
-  srcs = glob(['*.java']),
-  visibility = [
-    'PUBLIC',
-  ],
-)
-
