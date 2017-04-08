@@ -1,6 +1,7 @@
 ## React Native Swiper component
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/react-native-deck-swiper)
 
 ## Preview
 
