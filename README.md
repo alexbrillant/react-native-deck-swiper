@@ -2,6 +2,10 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![npm version](https://badge.fury.io/js/react-native-deck-swiper.svg)](https://badge.fury.io/js/react-native-deck-swiper)
+## Installation 
+```
+npm install react-native-deck-swiper --save
+```
 ## Preview
 
 ![App preview](/animation.gif)
@@ -78,3 +82,4 @@ const styles = StyleSheet.create({
 ## Todo
 
 Add an opacity animation
+
