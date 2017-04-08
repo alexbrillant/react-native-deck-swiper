@@ -75,4 +75,6 @@ const styles = StyleSheet.create({
   }
 })
 ```
+## Todo
 
+Add an opacity animation
