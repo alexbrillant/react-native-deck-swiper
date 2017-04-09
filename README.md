@@ -29,7 +29,7 @@ npm install react-native-deck-swiper --save
 | cardTopMargin | number | card top margin | 60 |
 |cardLeftMargin | number | card left margin | 20 |
 
-## Exemple Usage
+## Usage example
 
 ```javascript
 render () {
@@ -52,7 +52,7 @@ render () {
 }
 ```
 
-## Stylesheet exemple
+## Stylesheet example
 
 ```javascript
 
