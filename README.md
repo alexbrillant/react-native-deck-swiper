@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
   }
 })
 ```
-## Todo
+## Todo(contributions are welcome)
 
 Add an opacity animation
+Underlaying card offset to achieve a stack effect
 
