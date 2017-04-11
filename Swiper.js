@@ -64,6 +64,7 @@ class Swiper extends React.Component {
     const isSwiping = animatedValueX > horizontalThreshold || animatedValueY > verticalThreshold
     if (isSwiping) {
       this.swipeCard1()
+      this.zoomCard2()
     } else {
       this.resetCard1()
     }
