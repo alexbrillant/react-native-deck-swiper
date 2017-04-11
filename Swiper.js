@@ -13,11 +13,13 @@ const { height, width } = Dimensions.get('window')
 class Swiper extends React.Component {
   constructor(props) {
     super(props)
+    const cardIndexAtLastIndex = props.cardIndex === props.cards.length - 1
+    const secondCardIndex = cardIndexAtLastIndex ? 0 : props.cardIndex + 1
     this.state = {
       pan: new Animated.ValueXY(),
       scale: new Animated.Value(props.secondCardZoom),
       firstCardIndex: props.cardIndex,
-      secondCardIndex: props.cardIndex === props.cards.length - 1 ? 0 : props.cardIndex + 1,
+      secondCardIndex: secondCardIndex,
       cards: props.cards,
       swipedAllCards: false
     }
@@ -28,7 +30,10 @@ class Swiper extends React.Component {
     this._animatedValueY = 0;
     this.state.pan.x.addListener((value) => this._animatedValueX = value.value);
     this.state.pan.y.addListener((value) => this._animatedValueY = value.value);
+    this.initPanResponder()
+  }
 
+  initPanResponder = () => {
     this._panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
@@ -54,9 +59,10 @@ class Swiper extends React.Component {
 
   onPanResponderRelease = (e, gestureState) => {
     const { horizontalThreshold, verticalThreshold } = this.props
-    let isSwipingRight = this._animatedValueX > horizontalThreshold || this._animatedValueY > verticalThreshold
-    let isSwipingLeft = this._animatedValueX < -horizontalThreshold || this._animatedValueY < -verticalThreshold
-    if (isSwipingLeft || isSwipingRight) {
+    const animatedValueX = Math.abs(this._animatedValueX)
+    const animatedValueY = Math.abs(this._animatedValueY)
+    const isSwiping = animatedValueX > horizontalThreshold || animatedValueY > verticalThreshold
+    if (isSwiping) {
       this.swipeCard1()
     } else {
       this.resetCard1()
@@ -81,6 +87,9 @@ class Swiper extends React.Component {
         duration: 350
       }
     ).start(this.incrementCardIndex)
+  }
+
+  zoomCard2 = () => {
     Animated.spring(
       this.state.scale, {
         toValue: 1,
@@ -115,8 +124,8 @@ class Swiper extends React.Component {
   }
 
   componentWillUnmount() {
-      this.state.pan.x.removeAllListeners();
-      this.state.pan.y.removeAllListeners();
+    this.state.pan.x.removeAllListeners();
+    this.state.pan.y.removeAllListeners();
   }
 
   getCardStyles = () => {
