@@ -2,7 +2,7 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![npm version](https://badge.fury.io/js/react-native-deck-swiper.svg)](https://badge.fury.io/js/react-native-deck-swiper)
-## Installation 
+## Installation
 ```
 npm install react-native-deck-swiper --save
 ```
@@ -13,7 +13,7 @@ npm install react-native-deck-swiper --save
 ## Props
 
 | Props    | type   | description                                                                                             | required or default                          |
-|----------|--------|---------------------------------------------------------------------------------------------------------|----------------------------------|
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|----------------------------------|
 | cards    | array | array of data for the cards to be rendered | required                         |
 | renderCard    | func | function to render the card based on the data | required                         |
 | onSwipedAll| func | function to be called when all cards have been swiped | () => {} |
@@ -28,6 +28,11 @@ npm install react-native-deck-swiper --save
 | inputRotationRange | array | x values range for the rotation output | [-width / 2, 0, width / 2] |
 | cardTopMargin | number | card top margin | 60 |
 |cardLeftMargin | number | card left margin | 20 |
+| animateOpacity| bool | animate opacity | false |
+| inputOpacityRangeX | array | pan x opacity input range | [-width / 2, -width / 3, 0, width / 3, width / 2] |
+| outputOpacityRangeX | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
+| inputOpacityRangeY | array | pan y opacity input range | [-height / 2, -height / 3, 0, height / 3, height / 2]
+| outputOpacityRangeY | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
 
 ## Usage example
 
@@ -81,7 +86,4 @@ const styles = StyleSheet.create({
 ```
 ## Todo(contributions are welcome)
 
-Add an opacity animation
-
 Underlaying card offset to achieve a stack effect
-
