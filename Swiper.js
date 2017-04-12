@@ -101,9 +101,9 @@ class Swiper extends React.Component {
 
   incrementCardIndex = () => {
     this.setState((prevState) => {
-      let swipedAllCards
       let newCardIndex = prevState.firstCardIndex + 1
-      swipedAllCards = prevState.swipedAllCards
+      let swipedAllCards = prevState.swipedAllCards
+
       if (newCardIndex > this.state.cards.length - 1) {
         newCardIndex = 0
         swipedAllCards = true
@@ -141,79 +141,97 @@ class Swiper extends React.Component {
       position: 'absolute'
     }
 
+    let card1Opacity = this.props.animateOpacity ? this.interpolateOpacity() : 1
     const cardStyle1 = [
       styles.card,
       cardStyle,
       {
         zIndex: 2,
-        transform: [{
-          translateX: this.state.pan.x
-        },
-        {
-          translateY: this.state.pan.y
-        },
-        {
-          rotate: this.state.pan.x.interpolate({
-            inputRange: this.props.inputRotationRange,
-            outputRange: this.props.outputRotationRange
-          })
-        }
-      ]
-    }
-  ]
+        opacity: card1Opacity,
+        transform: [
+          {translateX: this.state.pan.x},
+          {translateY: this.state.pan.y},
+          {rotate: this.interpolateRotation()}
+        ]
+      }
+    ]
 
-  const cardStyle2 = [
-    styles.card,
-    cardStyle,
-    {
-      zIndex: 1,
-      transform: [{
-        scale: this.state.scale
-      }]
-    }
-  ]
+    const cardStyle2 = [
+      styles.card,
+      cardStyle,
+      {
+        zIndex: 1,
+        transform: [
+          {scale: this.state.scale}
+        ]
+      }
+    ]
 
-  return [cardStyle1, cardStyle2]
-}
-
-render() {
-  const style1 = this.getCardStyles()[0]
-  const style2 = this.getCardStyles()[1]
-  const { cards, firstCardIndex, secondCardIndex } = this.state
-  let firstCardContent = cards[firstCardIndex]
-  let secondCardContent = cards[secondCardIndex]
-  let firstCard = this.props.renderCard(firstCardContent)
-  let secondCard = this.props.renderCard(secondCardContent)
-
-  if (!this.props.infinite) {
-    if (secondCardIndex === 0) {
-      secondCard = null
-    }
-    if (this.state.swipedAllCards) {
-      firstCard = null
-      secondCard = null
-    }
+    return [cardStyle1, cardStyle2]
   }
 
-  return (
-    <View style = {
-      [styles.container,
-        {
-          backgroundColor: this.props.backgroundColor
-        }
-      ]}>
-      <Animated.View
-        style={style1}
-        {...this._panResponder.panHandlers}>
-        {firstCard}
-      </Animated.View>
-      <Animated.View
-        style={style2}>
-        {secondCard}
-      </Animated.View>
-    </View>
-  )
-}
+  interpolateOpacity = () => {
+    const animatedValueX = Math.abs(this._animatedValueX)
+    const animatedValueY = Math.abs(this._animatedValueY)
+    let opacity
+    if (animatedValueX > animatedValueY) {
+      opacity = this.state.pan.x.interpolate({
+        inputRange: this.props.inputOpacityRangeX,
+        outputRange: this.props.outputOpacityRangeX
+      })
+    }
+    else {
+      opacity = this.state.pan.y.interpolate({
+        inputRange: this.props.inputOpacityRangeY,
+        outputRange: this.props.outputOpacityRangeY
+      })
+    }
+    return opacity
+  }
+
+  interpolateRotation = () => {
+    return this.state.pan.x.interpolate({
+      inputRange: this.props.inputRotationRange,
+      outputRange: this.props.outputRotationRange
+    })
+  }
+
+  render() {
+    const style1 = this.getCardStyles()[0]
+    const style2 = this.getCardStyles()[1]
+    const { cards, firstCardIndex, secondCardIndex } = this.state
+    let firstCardContent = cards[firstCardIndex]
+    let secondCardContent = cards[secondCardIndex]
+    let firstCard = this.props.renderCard(firstCardContent)
+    let secondCard = this.props.renderCard(secondCardContent)
+
+    if (!this.props.infinite) {
+      if (secondCardIndex === 0) {
+        secondCard = null
+      }
+      if (this.state.swipedAllCards) {
+        firstCard = null
+        secondCard = null
+      }
+    }
+
+    return (
+      <View style = {
+        [styles.container,
+          {backgroundColor: this.props.backgroundColor}
+        ]}>
+        <Animated.View
+          style={style1}
+          {...this._panResponder.panHandlers}>
+          {firstCard}
+        </Animated.View>
+        <Animated.View
+          style={style2}>
+          {secondCard}
+        </Animated.View>
+      </View>
+    )
+  }
 }
 
 Swiper.propTypes = {
@@ -223,14 +241,17 @@ Swiper.propTypes = {
   onSwiped: React.PropTypes.func,
   cardIndex: React.PropTypes.number,
   infinite: React.PropTypes.bool,
-  verticalThreshold: React.PropTypes.number,
-  horizontalThreshold: React.PropTypes.number,
   secondCardZoom: React.PropTypes.number,
   backgroundColor: React.PropTypes.string,
-  outputRotationRange: React.PropTypes.array,
-  inputRotationRange: React.PropTypes.array,
   cardTopMargin: React.PropTypes.number,
   cardLeftMargin: React.PropTypes.number,
+  outputRotationRange: React.PropTypes.array,
+  inputRotationRange: React.PropTypes.array,
+  animateOpacity: React.PropTypes.bool,
+  inputOpacityRange: React.PropTypes.array,
+  outputOpacityRange: React.PropTypes.array,
+  verticalThreshold: React.PropTypes.number,
+  horizontalThreshold: React.PropTypes.number,
 }
 
 Swiper.defaultProps = {
@@ -245,7 +266,12 @@ Swiper.defaultProps = {
   cardTopMargin: 60,
   cardLeftMargin: 20,
   outputRotationRange: ["-10deg", "0deg", "10deg"],
-  inputRotationRange: [-width / 2, 0, width / 2]
+  inputRotationRange: [-width / 2, 0, width / 2],
+  animateOpacity: false,
+  inputOpacityRangeX: [-width / 2, -width / 3, 0, width / 3, width / 2],
+  outputOpacityRangeX: [0.8, 1, 1, 1, 0.8],
+  inputOpacityRangeY: [-height / 2, -height / 3, 0, height / 3, height / 2],
+  outputOpacityRangeY: [0.8, 1, 1, 1, 0.8]
 }
 
 export default Swiper
