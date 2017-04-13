@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   PanResponder,
   Slider,
@@ -140,9 +140,9 @@ class Swiper extends React.Component {
   }
 
   getCardStyles = () => {
-    const { cardTopMargin, cardLeftMargin } = this.props
+    const { cardTopMargin, cardLeftMargin, marginTop, marginBottom } = this.props
     let cardWidth = width - (cardLeftMargin * 2)
-    let cardHeight = height - (cardTopMargin * 2)
+    let cardHeight = height - ((cardTopMargin * 2) + marginTop + marginBottom)
     const cardStyle = {
       top: cardTopMargin,
       left: cardLeftMargin,
