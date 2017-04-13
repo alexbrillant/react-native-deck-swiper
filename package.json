@@ -1,50 +1,47 @@
 {
-    "name": "react-native-deck-swiper",
-    "version": "1.0.1",
-    "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/alexbrillant/react-native-deck-swiper.git"
-    },
-    "keywords": [
-        "react-native",
-        "react-native-component",
-        "tinder",
-        "cards",
-        "card",
-        "swipe",
-        "swiper",
-        "deck",
-        "animation"
-    ],
-    "author": "Alexandre Brillant",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/alexbrillant/react-native-deck-swiper/issues"
-    },
-    "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
-    "scripts": {
-        "test": "jest --coverage",
-        "lint": "standard --verbose | snazzy",
-        "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
-        "fixcode": "standard --fix"
-    },
-    "devDependencies": {
-        "babel-eslint": "^7.1.1",
-        "jest-cli": "^18.1.0",
-        "react": "15.4.2",
-        "react-native": "0.41.2",
-        "babel-jest": "18.0.0",
-        "babel-preset-react-native": "1.9.1",
-        "jest": "18.1.0",
-        "react-test-renderer": "15.4.2"
-    },
-    "jest": {
-        "preset": "react-native"
-    },
-    "dependencies": {}
+  "name": "react-native-deck-swiper",
+  "version": "1.0.2",
+  "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "standard --verbose | snazzy",
+    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
+    "fixcode": "standard --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexbrillant/react-native-deck-swiper.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-component",
+    "tinder",
+    "cards",
+    "card",
+    "swipe",
+    "swiper",
+    "deck",
+    "animation"
+  ],
+  "author": "Alexandre Brillant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexbrillant/react-native-deck-swiper/issues"
+  },
+  "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "jest-cli": "^18.1.0",
+    "react": "15.4.2",
+    "react-native": "0.41.2",
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "18.1.0",
+    "react-test-renderer": "15.4.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {}
 }

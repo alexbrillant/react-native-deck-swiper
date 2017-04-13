@@ -46,10 +46,19 @@ class Swiper extends React.Component {
     })
   }
 
-  onPanResponderGrant = (e, gestureState) => {
+  onMoveShouldSetResponderCapture = (e, gestureState) => {
+    if (gestureState.y0 < gestureState.moveY) {
+      return false
+    }
+    return true
+  }
+
+  onPanResponderGrant = (event, gestureState) => {
+    let x = this._animatedValueX
+    let y = this._animatedValueY
     this.state.pan.setOffset({
-      x: this._animatedValueX,
-      y: this._animatedValueY
+      x: x,
+      y: y
     })
     this.state.pan.setValue({
       x: 0,
@@ -218,7 +227,7 @@ class Swiper extends React.Component {
     return (
       <View style = {
         [styles.container,
-          {backgroundColor: this.props.backgroundColor}
+          {backgroundColor: this.props.backgroundColor, marginTop: this.props.marginTop}
         ]}>
         <Animated.View
           style={style1}
@@ -243,6 +252,7 @@ Swiper.propTypes = {
   infinite: React.PropTypes.bool,
   secondCardZoom: React.PropTypes.number,
   backgroundColor: React.PropTypes.string,
+  marginTop: React.PropTypes.number,
   cardTopMargin: React.PropTypes.number,
   cardLeftMargin: React.PropTypes.number,
   outputRotationRange: React.PropTypes.array,
@@ -263,6 +273,7 @@ Swiper.defaultProps = {
   horizontalThreshold: width / 4,
   secondCardZoom: 0.97,
   backgroundColor: '#4FD0E9',
+  marginTop: 0,
   cardTopMargin: 60,
   cardLeftMargin: 20,
   outputRotationRange: ["-10deg", "0deg", "10deg"],
