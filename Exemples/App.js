@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Swiper from 'react-native-deck-swiper'
+import Swiper from './Swiper'
 import {
   StyleSheet,
   View,
@@ -33,7 +33,6 @@ export default class Exemple extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <Button title="Hello World" onPress={()=>{}}>Hello World</Button>
         <Swiper
           cards={this.state.cards}
           renderCard={this.renderCard}
