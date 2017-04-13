@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import Swiper from 'react-native-deck-swiper'
+import Swiper from './Swiper'
 import {
   StyleSheet,
   View,
-  Text
+  Text,
+  Button
 } from 'react-native'
 
 export default class Exemple extends Component {
@@ -32,6 +33,7 @@ export default class Exemple extends Component {
   render () {
     return (
       <View style={styles.container}>
+        <Button title="Hello World" onPress={()=>{}}>Hello World</Button>
         <Swiper
           cards={this.state.cards}
           renderCard={this.renderCard}
@@ -49,8 +51,6 @@ export default class Exemple extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
   card: {
