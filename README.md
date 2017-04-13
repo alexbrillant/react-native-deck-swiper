@@ -12,29 +12,41 @@ npm install react-native-deck-swiper --save
 
 ## Props
 
+### Card props
+
 | Props    | type   | description                                                                                             | required or default                          |
-|:----------|:--------|:---------------------------------------------------------------------------------------------------------|----------------------------------|
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | cards    | array | array of data for the cards to be rendered | required                         |
 | renderCard    | func | function to render the card based on the data | required                         |
 | onSwipedAll| func | function to be called when all cards have been swiped | () => {} |
 | onSwiped | func | function to be called when a card is swiped. it receives the new card index | (cardIndex) => {} |
 | cardIndex | number | cardIndex to start with | 0 |
 | infinite | bool | keep swiping indefinitely | false |
+
+### Animation props
+
+| Props    | type   | description                                                                                             | required or default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | verticalThreshold | number | vertical swipe threshold  | height / 5 |
 | horizontalThreshold | number | horizontal swipe threshold  | width / 4 |
 | secondCardZoom | number | second card zoom | 0.97 |
-| backgroundColor | number | background color for the view containing the cards | '#4FD0E9' |
-| marginTop | number | marginTop for the swiper container | 0 |
-| marginBottom | number | marginBottom for the swiper container | 0 |
-| outputRotationRange | array | rotation values for the x values in inputRotationRange |  ["-10deg", "0deg", "10deg"] |
 | inputRotationRange | array | x values range for the rotation output | [-width / 2, 0, width / 2] |
-| cardTopMargin | number | card top margin | 60 |
-|cardLeftMargin | number | card left margin | 20 |
+| outputRotationRange | array | rotation values for the x values in inputRotationRange |  ["-10deg", "0deg", "10deg"] |
 | animateOpacity| bool | animate opacity | false |
 | inputOpacityRangeX | array | pan x opacity input range | [-width / 2, -width / 3, 0, width / 3, width / 2] |
 | outputOpacityRangeX | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
 | inputOpacityRangeY | array | pan y opacity input range | [-height / 2, -height / 3, 0, height / 3, height / 2]
 | outputOpacityRangeY | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
+
+### Style props
+
+| Props    | type   | description                                                                                             | required or default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
+| backgroundColor | number | background color for the view containing the cards | '#4FD0E9' |
+| marginTop | number | marginTop for the swiper container | 0 |
+| marginBottom | number | marginBottom for the swiper container | 0 |
+| cardTopMargin | number | card top margin | 60 |
+| cardLeftMargin | number | card left margin | 20 |
 
 ## Usage example
 
