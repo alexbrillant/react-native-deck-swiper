@@ -35,8 +35,8 @@ class Swiper extends React.Component {
 
   initPanResponder = () => {
     this._panResponder = PanResponder.create({
-      onMoveShouldSetResponderCapture: () => true,
-      onMoveShouldSetPanResponderCapture: () => true,
+      onStartShouldSetPanResponder: this.onStartShouldSetPanResponder,
+      onMoveShouldSetPanResponder: this.onMoveShouldSetPanResponder,
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: Animated.event([
         null,
@@ -46,10 +46,11 @@ class Swiper extends React.Component {
     })
   }
 
-  onMoveShouldSetResponderCapture = (e, gestureState) => {
-    if (gestureState.y0 < gestureState.moveY) {
-      return false
-    }
+  onStartShouldSetPanResponder = (event, gestureState) => {
+    return true
+  }
+
+  onMoveShouldSetPanResponder = (event, gestureState) => {
     return true
   }
 
