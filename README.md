@@ -25,6 +25,7 @@ npm install react-native-deck-swiper --save
 | secondCardZoom | number | second card zoom | 0.97 |
 | backgroundColor | number | background color for the view containing the cards | '#4FD0E9' |
 | marginTop | number | marginTop for the swiper container | 0 |
+| marginBottom | number | marginBottom for the swiper container | 0 |
 | outputRotationRange | array | rotation values for the x values in inputRotationRange |  ["-10deg", "0deg", "10deg"] |
 | inputRotationRange | array | x values range for the rotation output | [-width / 2, 0, width / 2] |
 | cardTopMargin | number | card top margin | 60 |
