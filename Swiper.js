@@ -227,7 +227,7 @@ class Swiper extends React.Component {
     return (
       <View style = {
         [styles.container,
-          {backgroundColor: this.props.backgroundColor, marginTop: this.props.marginTop}
+          {backgroundColor: this.props.backgroundColor, marginTop: this.props.marginTop, marginBottom: this.props.marginBottom}
         ]}>
         <Animated.View
           style={style1}
@@ -253,6 +253,7 @@ Swiper.propTypes = {
   secondCardZoom: React.PropTypes.number,
   backgroundColor: React.PropTypes.string,
   marginTop: React.PropTypes.number,
+  marginBottom: React.PropTypes.number,
   cardTopMargin: React.PropTypes.number,
   cardLeftMargin: React.PropTypes.number,
   outputRotationRange: React.PropTypes.array,
@@ -274,6 +275,7 @@ Swiper.defaultProps = {
   secondCardZoom: 0.97,
   backgroundColor: '#4FD0E9',
   marginTop: 0,
+  marginBottom: 0,
   cardTopMargin: 60,
   cardLeftMargin: 20,
   outputRotationRange: ["-10deg", "0deg", "10deg"],
