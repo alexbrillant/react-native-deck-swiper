@@ -19,7 +19,11 @@ npm install react-native-deck-swiper --save
 | cards    | array | array of data for the cards to be rendered | required                         |
 | renderCard    | func | function to render the card based on the data | required                         |
 | onSwipedAll| func | function to be called when all cards have been swiped | () => {} |
-| onSwiped | func | function to be called when a card is swiped. it receives the new card index | (cardIndex) => {} |
+| onSwiped | func | function to be called when a card is swiped. it receives the swiped card index | (cardIndex) => {} |
+| onSwipedLeft | func | function to be called when a card is swiped left. it receives the swiped card index | (cardIndex) => {} |
+| onSwipedRight | func | function to be called when a card is swiped right. it receives the swiped card index | (cardIndex) => {} |
+| onSwipedTop | func | function to be called when a card is swiped top. it receives the swiped card index | (cardIndex) => {} |
+| onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | (cardIndex) => {} |
 | cardIndex | number | cardIndex to start with | 0 |
 | infinite | bool | keep swiping indefinitely | false |
 

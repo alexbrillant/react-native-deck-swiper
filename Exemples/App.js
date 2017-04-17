@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Swiper from './Swiper'
+import Swiper from 'react-native-deck-swiper'
 import {
   StyleSheet,
   View,
@@ -12,7 +12,8 @@ export default class Exemple extends Component {
     super(props);
     this.state = {
       cards:  ['1', '2', '3'],
-      swipedAllCards: false
+      swipedAllCards: false,
+      swipeDirection: ''
     }
   }
 
@@ -40,7 +41,10 @@ export default class Exemple extends Component {
         />
         {
           this.state.swipedAllCards &&
+          <View>
           <Text style={styles.done}>Lesson done!</Text>
+          <Text style={styles.done}>{this.state.swipeDirection}</Text>
+        </View>
         }
       </View>
     )
