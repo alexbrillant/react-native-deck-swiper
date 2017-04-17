@@ -73,10 +73,36 @@ class Swiper extends React.Component {
     const animatedValueY = Math.abs(this._animatedValueY)
     const isSwiping = animatedValueX > horizontalThreshold || animatedValueY > verticalThreshold
     if (isSwiping) {
-      this.swipeCard1()
+      const onSwipeDirectionCallback = this.getonSwipeDirectionCallback(this._animatedValueX, this._animatedValueY)
+      this.swipeCard1(onSwipeDirectionCallback)
       this.zoomCard2()
     } else {
       this.resetCard1()
+    }
+  }
+
+  getonSwipeDirectionCallback = (animatedValueX, animatedValueY) => {
+    const {
+      horizontalThreshold,
+      verticalThreshold,
+      onSwipedLeft,
+      onSwipedRight,
+      onSwipedTop,
+      onSwipedBottom
+    } = this.props
+    const isSwipingLeft = animatedValueX < -horizontalThreshold
+    const isSwipingRight = animatedValueX > horizontalThreshold
+    const isSwipingTop = animatedValueY < -verticalThreshold
+    const isSwipingBottom = animatedValueY > verticalThreshold
+    let onDirectionCallback
+    if (isSwipingRight) {
+      return onSwipedRight
+    } else if (isSwipingLeft) {
+      return onSwipedLeft
+    } else if (isSwipingTop) {
+      return onSwipedTop
+    } else if (isSwipingBottom) {
+      return onSwipedBottom
     }
   }
 
@@ -88,7 +114,7 @@ class Swiper extends React.Component {
     ).start(cb)
   }
 
-  swipeCard1 = () => {
+  swipeCard1 = (onSwiped) => {
     Animated.timing(
       this.state.pan, {
         toValue: {
@@ -97,7 +123,9 @@ class Swiper extends React.Component {
         },
         duration: 350
       }
-    ).start(this.incrementCardIndex)
+    ).start(() => {
+      this.incrementCardIndex(onSwiped)
+    })
   }
 
   zoomCard2 = () => {
@@ -109,8 +137,9 @@ class Swiper extends React.Component {
     ).start()
   }
 
-  incrementCardIndex = () => {
+  incrementCardIndex = (onSwiped) => {
     this.setState((prevState) => {
+      let previousCardIndex = prevState.firstCardIndex
       let newCardIndex = prevState.firstCardIndex + 1
       let swipedAllCards = prevState.swipedAllCards
 
@@ -120,7 +149,8 @@ class Swiper extends React.Component {
         this.props.onSwipedAll()
       }
 
-      this.props.onSwiped(newCardIndex)
+      this.props.onSwiped(previousCardIndex)
+      onSwiped(previousCardIndex)
 
       return {
         ...prevState,
@@ -249,6 +279,10 @@ Swiper.propTypes = {
   renderCard: React.PropTypes.func.isRequired,
   onSwipedAll: React.PropTypes.func,
   onSwiped: React.PropTypes.func,
+  onSwipedLeft: React.PropTypes.func,
+  onSwipedRight: React.PropTypes.func,
+  onSwipedTop: React.PropTypes.func,
+  onSwipedBottom: React.PropTypes.func,
   cardIndex: React.PropTypes.number,
   infinite: React.PropTypes.bool,
   secondCardZoom: React.PropTypes.number,
@@ -269,6 +303,10 @@ Swiper.propTypes = {
 Swiper.defaultProps = {
   cardIndex: 0,
   onSwiped: (cardIndex) => { console.log(cardIndex) },
+  onSwipedLeft: (cardIndex) => { console.log('onSwipedLeft') },
+  onSwipedRight: (cardIndex) => { console.log('onSwipedRight') },
+  onSwipedTop: (cardIndex) => { console.log('onSwipedTop') },
+  onSwipedBottom: (cardIndex) => { console.log('onSwipedBottom') },
   onSwipedAll: () => { console.log('onSwipedAll') },
   infinite: false,
   verticalThreshold: height / 5,
