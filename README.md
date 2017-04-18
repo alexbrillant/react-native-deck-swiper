@@ -55,7 +55,6 @@ npm install react-native-deck-swiper --save
 ## Usage example
 
 Example usage with a pressable button contained in the component.
-
 ```javascript
 render () {
     <View style={styles.container}>
@@ -81,6 +80,7 @@ render () {
     </View>
 }
 ```
+Demo inside the [Examples Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Exemples)
 
 ## Stylesheet example
 
