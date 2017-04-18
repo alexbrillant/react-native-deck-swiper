@@ -80,7 +80,7 @@ render () {
     </View>
 }
 ```
-Demo inside the [Examples Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Exemples)
+Demo inside the [Exemples Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Exemples)
 
 ## Stylesheet example
 
