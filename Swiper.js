@@ -170,15 +170,14 @@ class Swiper extends React.Component {
   }
 
   getCardStyles = () => {
-    const { cardTopMargin, cardLeftMargin, marginTop, marginBottom } = this.props
-    let cardWidth = width - (cardLeftMargin * 2)
-    let cardHeight = height - ((cardTopMargin * 2) + marginTop + marginBottom)
+    const { cardVerticalMargin, cardHorizontalMargin, marginTop, marginBottom } = this.props
+    let cardWidth = width - (cardHorizontalMargin * 2)
+    let cardHeight = height - (cardVerticalMargin * 2) - marginTop - marginBottom
     const cardStyle = {
-      top: cardTopMargin,
-      left: cardLeftMargin,
+      top: cardVerticalMargin,
+      left: cardHorizontalMargin,
       width: cardWidth,
-      height: cardHeight,
-      position: 'absolute'
+      height: cardHeight
     }
 
     let card1Opacity = this.props.animateOpacity ? this.interpolateOpacity() : 1
@@ -258,8 +257,13 @@ class Swiper extends React.Component {
     return (
       <View style = {
         [styles.container,
-          {backgroundColor: this.props.backgroundColor, marginTop: this.props.marginTop, marginBottom: this.props.marginBottom}
+          {
+            backgroundColor: this.props.backgroundColor,
+            marginTop: this.props.marginTop,
+            marginBottom: this.props.marginBottom
+          }
         ]}>
+        {this.props.children}
         <Animated.View
           style={style1}
           {...this._panResponder.panHandlers}>
@@ -289,8 +293,8 @@ Swiper.propTypes = {
   backgroundColor: React.PropTypes.string,
   marginTop: React.PropTypes.number,
   marginBottom: React.PropTypes.number,
-  cardTopMargin: React.PropTypes.number,
-  cardLeftMargin: React.PropTypes.number,
+  cardVerticalMargin: React.PropTypes.number,
+  cardHorizontalMargin: React.PropTypes.number,
   outputRotationRange: React.PropTypes.array,
   inputRotationRange: React.PropTypes.array,
   animateOpacity: React.PropTypes.bool,
@@ -315,8 +319,8 @@ Swiper.defaultProps = {
   backgroundColor: '#4FD0E9',
   marginTop: 0,
   marginBottom: 0,
-  cardTopMargin: 60,
-  cardLeftMargin: 20,
+  cardVerticalMargin: 60,
+  cardHorizontalMargin: 20,
   outputRotationRange: ["-10deg", "0deg", "10deg"],
   inputRotationRange: [-width / 2, 0, width / 2],
   animateOpacity: false,
