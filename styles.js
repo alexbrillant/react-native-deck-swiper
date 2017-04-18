@@ -1,22 +1,20 @@
-import {StyleSheet} from 'react-native'
+import { StyleSheet } from "react-native";
 
-export const circleSize = 200
+export const circleSize = 200;
 
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    position: "absolute"
   },
   container: {
-    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'stretch'
+    alignItems: "stretch",
+    position: 'absolute'
   }
-})
+});
 
-export default styles
+export default styles;

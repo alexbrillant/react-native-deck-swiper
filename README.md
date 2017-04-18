@@ -49,10 +49,12 @@ npm install react-native-deck-swiper --save
 | backgroundColor | number | background color for the view containing the cards | '#4FD0E9' |
 | marginTop | number | marginTop for the swiper container | 0 |
 | marginBottom | number | marginBottom for the swiper container | 0 |
-| cardTopMargin | number | card top margin | 60 |
-| cardLeftMargin | number | card left margin | 20 |
+| cardVerticalMargin | number | card vertical margin | 60 |
+| cardHorizontalMargin | number | card horizontal margin | 20 |
 
 ## Usage example
+
+Example usage with a pressable button contained in the component.
 
 ```javascript
 render () {
@@ -69,8 +71,13 @@ render () {
             onSwiped={(cardIndex) => {console.log(cardIndex)}}
             onSwipedAll={() => {console.log('onSwipedAll')}}
             cardIndex={0}
-            backgroundColor={'#4FD0E9'}
-        />
+            backgroundColor={'#4FD0E9'}>
+            <Button 
+                onPress={() => {console.log('oulala')}} 
+                title="Press me">
+                You can press me
+            </Button>
+        </Swiper>
     </View>
 }
 ```
@@ -82,13 +89,10 @@ render () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF'
   },
   card: {
     flex: 1,
-    alignSelf: 'stretch',
     borderRadius: 4,
     borderWidth: 2,
     borderColor: '#E8E8E8',

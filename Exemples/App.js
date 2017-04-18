@@ -37,15 +37,9 @@ export default class Exemple extends Component {
         <Swiper
           cards={this.state.cards}
           renderCard={this.renderCard}
-          onSwipedAll={this.onSwipedAllCards}
-        />
-        {
-          this.state.swipedAllCards &&
-          <View>
-          <Text style={styles.done}>Lesson done!</Text>
-          <Text style={styles.done}>{this.state.swipeDirection}</Text>
-        </View>
-        }
+          onSwipedAll={this.onSwipedAllCards}>
+          <Button onPress={() => {}} title="Press me">Press me</Button>
+        </Swiper>
       </View>
     )
   }
@@ -58,7 +52,6 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 1,
-    alignSelf: 'stretch',
     borderRadius: 4,
     borderWidth: 2,
     borderColor: '#E8E8E8',
