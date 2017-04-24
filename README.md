@@ -27,20 +27,47 @@ npm install react-native-deck-swiper --save
 | cardIndex | number | cardIndex to start with | 0 |
 | infinite | bool | keep swiping indefinitely | false |
 
-### Animation props
+### Swipe animation props
 
 | Props    | type   | description                                                                                             | required or default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | verticalThreshold | number | vertical swipe threshold  | height / 5 |
 | horizontalThreshold | number | horizontal swipe threshold  | width / 4 |
+| swipeAnimationDuration | number | duration of the swipe animation | 350 |
+  
+### Zoom animation props
+
+| Props    | type   | description                                                                                             | required or default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | secondCardZoom | number | second card zoom | 0.97 |
+| zoomAnimationDuration | number | duration of the zoom animation | 100 |
+| zoomFriction | number | zoom spring animation friction | 7 |
+
+### Rotation animation props
+
+| Props    | type   | description                                                                                             | required or default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | inputRotationRange | array | x values range for the rotation output | [-width / 2, 0, width / 2] |
 | outputRotationRange | array | rotation values for the x values in inputRotationRange |  ["-10deg", "0deg", "10deg"] |
+
+### Opacity animation props
+
+| Props    | type   | description                                                                                             | required or default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | animateOpacity| bool | animate opacity | false |
 | inputOpacityRangeX | array | pan x opacity input range | [-width / 2, -width / 3, 0, width / 3, width / 2] |
 | outputOpacityRangeX | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
 | inputOpacityRangeY | array | pan y opacity input range | [-height / 2, -height / 3, 0, height / 3, height / 2]
 | outputOpacityRangeY | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
+
+### Swipe back animation props
+
+| Props    | type   | description                                                                                             | required or default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
+| previousCardInitialPositionX | number | initial x position of the swipe back card | 0 |
+| previousCardInitialPositionY | number | initial y position of the swipe back card | -height |
+| swipeBackAnimationDuration | number | swipe back animation duration | 600 |
+| swipeBackFriction | number | swipe back spring animation friction | 11 |
 
 ### Style props
 
@@ -51,6 +78,15 @@ npm install react-native-deck-swiper --save
 | marginBottom | number | marginBottom for the swiper container | 0 |
 | cardVerticalMargin | number | card vertical margin | 60 |
 | cardHorizontalMargin | number | card horizontal margin | 20 |
+
+### Methods 
+
+To trigger imperative animations, you can use a reference to the Swiper component.
+
+| Props    | arguments   | description                                                                                             |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|
+| swipeBack | callback(previousCardIndex) | swipe to the previous card |
+| jumpTo | cardIndex | set the current card index |
 
 ## Usage example
 

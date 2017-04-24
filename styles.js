@@ -1,7 +1,5 @@
 import { StyleSheet } from "react-native";
 
-export const circleSize = 200;
-
 const styles = StyleSheet.create({
   card: {
     flex: 1,

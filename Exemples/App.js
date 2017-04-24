@@ -13,7 +13,9 @@ export default class Exemple extends Component {
     this.state = {
       cards:  ['1', '2', '3'],
       swipedAllCards: false,
-      swipeDirection: ''
+      swipeDirection: '',
+      isSwipingBack: false,
+      cardIndex: 0
     }
   }
 
@@ -31,14 +33,38 @@ export default class Exemple extends Component {
     })
   }
 
+  swipeBack = () => {
+    if (!this.state.isSwipingBack) {
+      this.setIsSwipingBack(true, () => {
+        this.swiper.swipeBack(() => {
+          this.setIsSwipingBack(false, () => {})
+        })
+      })
+    }
+  }
+
+  setIsSwipingBack = (isSwipingBack, cb) => {
+    this.setState({
+      isSwipingBack: isSwipingBack
+    }, cb)
+  }
+
+  jumpTo = () => {
+    this.swiper.jumpToCardIndex(2)
+  }
+
   render () {
     return (
       <View style={styles.container}>
         <Swiper
+          ref={(swiper) => {this.swiper = swiper}}
           cards={this.state.cards}
+          cardIndex={this.state.cardIndex}
+          cardVerticalMargin={80}
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}>
-          <Button onPress={() => {}} title="Press me">Press me</Button>
+          <Button onPress={this.swipeBack} title="Swipe Back">Swipe Back</Button>
+          <Button onPress={this.jumpTo} title="Jump to last index">Jump to last index</Button>
         </Swiper>
       </View>
     )
