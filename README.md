@@ -86,7 +86,7 @@ To trigger imperative animations, you can use a reference to the Swiper componen
 | Props    | arguments   | description                                                                                             |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|
 | swipeBack | callback(previousCardIndex) | swipe to the previous card |
-| jumpTo | cardIndex | set the current card index |
+| jumpToCardIndex | cardIndex | set the current card index |
 
 ## Usage example
 
