@@ -14,14 +14,13 @@ const { height, width } = Dimensions.get('window')
 class Swiper extends React.Component {
   constructor(props) {
     super(props)
-    const secondCardIndex = this.calculateSecondCardIndex(props.cardIndex)
-    const previousCardIndex = this.calculatePreviousCardIndex(props.cardIndex)
+
     this.state = {
       pan: new Animated.ValueXY(),
       scale: new Animated.Value(props.secondCardZoom),
       firstCardIndex: props.cardIndex,
-      secondCardIndex: secondCardIndex,
-      previousCardIndex: previousCardIndex,
+      secondCardIndex: this.calculateSecondCardIndex(props.cardIndex),
+      previousCardIndex: this.calculatePreviousCardIndex(props.cardIndex),
       previousCardX: new Animated.Value(props.previousCardInitialPositionX),
       previousCardY: new Animated.Value(props.previousCardInitialPositionY),
       swipedAllCards: false
@@ -43,14 +42,19 @@ class Swiper extends React.Component {
     this._animatedValueY = 0;
     this.state.pan.x.addListener((value) => this._animatedValueX = value.value);
     this.state.pan.y.addListener((value) => this._animatedValueY = value.value);
-    this.initCardStyle()
-    this.initPanResponder()
+    this.initializeCardStyle()
+    this.initializePanResponder()
   }
 
-  initCardStyle = () => {
+  componentWillUnmount() {
+    this.state.pan.x.removeAllListeners();
+    this.state.pan.y.removeAllListeners();
+  }
+
+  initializeCardStyle = () => {
     const { cardVerticalMargin, cardHorizontalMargin, marginTop, marginBottom } = this.props
-    let cardWidth = width - (cardHorizontalMargin * 2)
-    let cardHeight = height - (cardVerticalMargin * 2) - marginTop - marginBottom
+    const cardWidth = width - (cardHorizontalMargin * 2)
+    const cardHeight = height - (cardVerticalMargin * 2) - marginTop - marginBottom
     this.cardStyle = {
       top: cardVerticalMargin,
       left: cardHorizontalMargin,
@@ -59,10 +63,10 @@ class Swiper extends React.Component {
     }
   }
 
-  initPanResponder = () => {
+  initializePanResponder = () => {
     this._panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: this.onStartShouldSetPanResponder,
-      onMoveShouldSetPanResponder: this.onMoveShouldSetPanResponder,
+      onStartShouldSetPanResponder: (event, gestureState) => true,
+      onMoveShouldSetPanResponder: (event, gestureState) => true,
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: Animated.event([
         null,
@@ -72,20 +76,10 @@ class Swiper extends React.Component {
     })
   }
 
-  onStartShouldSetPanResponder = (event, gestureState) => {
-    return true
-  }
-
-  onMoveShouldSetPanResponder = (event, gestureState) => {
-    return true
-  }
-
   onPanResponderGrant = (event, gestureState) => {
-    let x = this._animatedValueX
-    let y = this._animatedValueY
     this.state.pan.setOffset({
-      x: x,
-      y: y
+      x: this._animatedValueX,
+      y: this._animatedValueY
     })
     this.state.pan.setValue({
       x: 0,
@@ -99,15 +93,15 @@ class Swiper extends React.Component {
     const animatedValueY = Math.abs(this._animatedValueY)
     const isSwiping = animatedValueX > horizontalThreshold || animatedValueY > verticalThreshold
     if (isSwiping) {
-      const onSwipeDirectionCallback = this.getonSwipeDirectionCallback(this._animatedValueX, this._animatedValueY)
-      this.swipeCard1(onSwipeDirectionCallback)
-      this.zoomCard2()
+      const onSwipeDirectionCallback = this.getOnSwipeDirectionCallback(this._animatedValueX, this._animatedValueY)
+      this.swipeCard(onSwipeDirectionCallback)
+      this.zoomNextCard()
     } else {
-      this.resetCard1()
+      this.resetTopCard()
     }
   }
 
-  getonSwipeDirectionCallback = (animatedValueX, animatedValueY) => {
+  getOnSwipeDirectionCallback = (animatedValueX, animatedValueY) => {
     const {
       horizontalThreshold,
       verticalThreshold,
@@ -120,6 +114,7 @@ class Swiper extends React.Component {
     const isSwipingRight = animatedValueX > horizontalThreshold
     const isSwipingTop = animatedValueY < -verticalThreshold
     const isSwipingBottom = animatedValueY > verticalThreshold
+
     if (isSwipingRight) {
       return onSwipedRight
     } else if (isSwipingLeft) {
@@ -131,7 +126,7 @@ class Swiper extends React.Component {
     }
   }
 
-  resetCard1 = (cb) => {
+  resetTopCard = (cb) => {
     Animated.spring(
       this.state.pan, {
         toValue: 0
@@ -151,7 +146,7 @@ class Swiper extends React.Component {
     })
   }
 
-  swipeCard1 = (onSwiped) => {
+  swipeCard = (onSwiped) => {
     Animated.timing(
       this.state.pan, {
         toValue: {
@@ -165,7 +160,7 @@ class Swiper extends React.Component {
     })
   }
 
-  zoomCard2 = () => {
+  zoomNextCard = () => {
     Animated.spring(
       this.state.scale, {
         toValue: 1,
@@ -211,17 +206,11 @@ class Swiper extends React.Component {
   }
 
   setCardIndex = (newCardIndex, swipedAllCards) => {
-    this.setState((prevState) => {
-      const { cards } = this.props
-      const secondCardIndex = this.calculateSecondCardIndex(newCardIndex)
-      const previousCardIndex = this.calculatePreviousCardIndex(newCardIndex)
-      return {
-        ...prevState,
+    this.setState({
         firstCardIndex: newCardIndex,
-        secondCardIndex: secondCardIndex,
-        previousCardIndex: previousCardIndex,
+        secondCardIndex: this.calculateSecondCardIndex(newCardIndex),
+        previousCardIndex: this.calculatePreviousCardIndex(newCardIndex),
         swipedAllCards: swipedAllCards
-      }
     }, this.resetPanAndScale)
   }
 
@@ -230,11 +219,6 @@ class Swiper extends React.Component {
     this.state.scale.setValue(this.props.secondCardZoom);
     this.state.previousCardX.setValue(this.props.previousCardInitialPositionX)
     this.state.previousCardY.setValue(this.props.previousCardInitialPositionY)
-  }
-
-  componentWillUnmount() {
-    this.state.pan.x.removeAllListeners();
-    this.state.pan.y.removeAllListeners();
   }
 
   calculateSwipableCardStyle = () => {
@@ -346,10 +330,11 @@ class Swiper extends React.Component {
 
   renderSecondCard = () => {
     const { secondCardIndex } = this.state
-    const { cards } = this.props
+    const { cards, renderCard } = this.props
+
     const secondCardZoomStyle = this.calculateSecondCardZoomStyle()
     const secondCardContent = cards[secondCardIndex]
-    let secondCard = this.props.renderCard(secondCardContent)
+    let secondCard = renderCard(secondCardContent)
     const notInfinite = !this.props.infinite
     const lastCardOrSwipedAllCards = secondCardIndex === 0 || this.state.swipedAllCards
     if (notInfinite && lastCardOrSwipedAllCards) {
