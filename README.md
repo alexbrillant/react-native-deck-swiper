@@ -14,22 +14,22 @@ npm install react-native-deck-swiper --save
 
 ### Card props
 
-| Props    | type   | description                                                                                             | required or default                          |
-|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
+| Props    | type   | description                                                                                             | required | default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|:------------|
 | cards    | array | array of data for the cards to be rendered | required                         |
-| renderCard    | func | function to render the card based on the data | required                         |
-| onSwipedAll| func | function to be called when all cards have been swiped | () => {} |
-| onSwiped | func | function to be called when a card is swiped. it receives the swiped card index | (cardIndex) => {} |
-| onSwipedLeft | func | function to be called when a card is swiped left. it receives the swiped card index | (cardIndex) => {} |
-| onSwipedRight | func | function to be called when a card is swiped right. it receives the swiped card index | (cardIndex) => {} |
-| onSwipedTop | func | function to be called when a card is swiped top. it receives the swiped card index | (cardIndex) => {} |
-| onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | (cardIndex) => {} |
-| cardIndex | number | cardIndex to start with | 0 |
-| infinite | bool | keep swiping indefinitely | false |
+| renderCard    | func(cardData) | function to render the card based on the data | required                         |
+| onSwipedAll| func | function to be called when all cards have been swiped | | () => {} |
+| onSwiped | func | function to be called when a card is swiped. it receives the swiped card index | | (cardIndex) => {} |
+| onSwipedLeft | func | function to be called when a card is swiped left. it receives the swiped card index | | (cardIndex) => {} |
+| onSwipedRight | func | function to be called when a card is swiped right. it receives the swiped card index |  | (cardIndex) => {} |
+| onSwipedTop | func | function to be called when a card is swiped top. it receives the swiped card index | | (cardIndex) => {} |
+| onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | | (cardIndex) => {} |
+| cardIndex | number | cardIndex to start with | | 0 |
+| infinite | bool | keep swiping indefinitely | | false |
 
 ### Swipe animation props
 
-| Props    | type   | description                                                                                             | required or default                          |
+| Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | verticalThreshold | number | vertical swipe threshold  | height / 5 |
 | horizontalThreshold | number | horizontal swipe threshold  | width / 4 |
@@ -37,7 +37,7 @@ npm install react-native-deck-swiper --save
   
 ### Zoom animation props
 
-| Props    | type   | description                                                                                             | required or default                          |
+| Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | secondCardZoom | number | second card zoom | 0.97 |
 | zoomAnimationDuration | number | duration of the zoom animation | 100 |
@@ -45,14 +45,14 @@ npm install react-native-deck-swiper --save
 
 ### Rotation animation props
 
-| Props    | type   | description                                                                                             | required or default                          |
+| Props    | type   | description                                                                                             |  default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | inputRotationRange | array | x values range for the rotation output | [-width / 2, 0, width / 2] |
 | outputRotationRange | array | rotation values for the x values in inputRotationRange |  ["-10deg", "0deg", "10deg"] |
 
 ### Opacity animation props
 
-| Props    | type   | description                                                                                             | required or default                          |
+| Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | animateOpacity| bool | animate opacity | false |
 | inputOpacityRangeX | array | pan x opacity input range | [-width / 2, -width / 3, 0, width / 3, width / 2] |
@@ -62,7 +62,7 @@ npm install react-native-deck-swiper --save
 
 ### Swipe back animation props
 
-| Props    | type   | description                                                                                             | required or default                          |
+| Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | previousCardInitialPositionX | number | initial x position of the swipe back card | 0 |
 | previousCardInitialPositionY | number | initial y position of the swipe back card | -height |
@@ -71,7 +71,7 @@ npm install react-native-deck-swiper --save
 
 ### Style props
 
-| Props    | type   | description                                                                                             | required or default                          |
+| Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | backgroundColor | number | background color for the view containing the cards | '#4FD0E9' |
 | marginTop | number | marginTop for the swiper container | 0 |
