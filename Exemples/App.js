@@ -58,6 +58,7 @@ export default class Exemple extends Component {
           ref={swiper => {
             this.swiper = swiper
           }}
+          onSwiped={this.onSwiped}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={80}
