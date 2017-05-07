@@ -1,19 +1,14 @@
-import React, { Component } from 'react'
-import Swiper from 'react-native-deck-swiper'
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button
-} from 'react-native'
+import React, { Component } from "react"
+import Swiper from "react-native-deck-swiper"
+import { StyleSheet, View, Text, Image, Button } from "react-native"
 
 export default class Exemple extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      cards:  ['1', '2', '3'],
+      cards: ["1", "2", "3"],
       swipedAllCards: false,
-      swipeDirection: '',
+      swipeDirection: "",
       isSwipingBack: false,
       cardIndex: 0
     }
@@ -37,34 +32,39 @@ export default class Exemple extends Component {
     if (!this.state.isSwipingBack) {
       this.setIsSwipingBack(true, () => {
         this.swiper.swipeBack(() => {
-          this.setIsSwipingBack(false, () => {})
+          this.setIsSwipingBack(false)
         })
       })
     }
   }
 
   setIsSwipingBack = (isSwipingBack, cb) => {
-    this.setState({
-      isSwipingBack: isSwipingBack
-    }, cb)
+    this.setState(
+      {
+        isSwipingBack: isSwipingBack
+      },
+      cb
+    )
   }
 
   jumpTo = () => {
     this.swiper.jumpToCardIndex(2)
   }
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <Swiper
-          ref={(swiper) => {this.swiper = swiper}}
+          ref={swiper => {
+            this.swiper = swiper
+          }}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={80}
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}>
-          <Button onPress={this.swipeBack} title="Swipe Back">Swipe Back</Button>
-          <Button onPress={this.jumpTo} title="Jump to last index">Jump to last index</Button>
+          <Button onPress={this.swipeBack} title="Swipe Back" />
+          <Button onPress={this.jumpTo} title="Jump to last index" />
         </Swiper>
       </View>
     )
@@ -74,25 +74,25 @@ export default class Exemple extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: "#F5FCFF"
   },
   card: {
     flex: 1,
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: '#E8E8E8',
-    justifyContent: 'center',
-    backgroundColor: 'white'
+    borderColor: "#E8E8E8",
+    justifyContent: "center",
+    backgroundColor: "white"
   },
   text: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 50,
-    backgroundColor: 'transparent'
+    backgroundColor: "transparent"
   },
   done: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 30,
-    color: 'white',
-    backgroundColor: 'transparent'
+    color: "white",
+    backgroundColor: "transparent"
   }
 })
