@@ -78,6 +78,8 @@ npm install react-native-deck-swiper --save
 | marginBottom | number | marginBottom for the swiper container | 0 |
 | cardVerticalMargin | number | card vertical margin | 60 |
 | cardHorizontalMargin | number | card horizontal margin | 20 |
+| cardHorizontalMargin | number | card horizontal margin | 20 |
+| childrenOnTop | bool | render children on top or not | false |
 
 ### Methods 
 

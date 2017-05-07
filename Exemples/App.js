@@ -63,8 +63,8 @@ export default class Exemple extends Component {
           cardVerticalMargin={80}
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}>
-          <Button onPress={this.swipeBack} title="Swipe Back" />
-          <Button onPress={this.jumpTo} title="Jump to last index" />
+            <Button onPress={this.swipeBack} title="Swipe Back" />
+            <Button onPress={this.jumpTo} title="Jump to last index" />
         </Swiper>
       </View>
     )
@@ -72,6 +72,9 @@ export default class Exemple extends Component {
 }
 
 const styles = StyleSheet.create({
+  box1: {
+    flex: 1
+  },
   container: {
     flex: 1,
     backgroundColor: "#F5FCFF"

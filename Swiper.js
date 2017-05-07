@@ -301,10 +301,23 @@ class Swiper extends React.Component {
             marginBottom: this.props.marginBottom
           }
         ]}>
-        {this.props.children}
+        {this.renderChildren()}
         {this.renderFirstCard()}
         {this.renderSecondCard()}
         {this.renderSwipeBackCard()}
+      </View>
+    )
+  }
+
+  renderChildren() {
+    const {childrenOnTop, children} = this.props
+    let zIndex = 1
+    if (childrenOnTop) {
+      zIndex = 5
+    }
+    return (
+      <View style={{zIndex: zIndex}}>
+        {children}
       </View>
     )
   }
@@ -364,6 +377,7 @@ class Swiper extends React.Component {
 
 Swiper.propTypes = {
   cards: React.PropTypes.array.isRequired,
+  childrenOnTop: React.PropTypes.bool,
   renderCard: React.PropTypes.func.isRequired,
   onSwipedAll: React.PropTypes.func,
   onSwiped: React.PropTypes.func,
@@ -397,6 +411,7 @@ Swiper.propTypes = {
 
 Swiper.defaultProps = {
   cardIndex: 0,
+  childrenOnTop: false,
   onSwiped: (cardIndex) => {
     console.log(cardIndex)
   },
