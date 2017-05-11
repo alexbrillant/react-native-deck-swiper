@@ -58,9 +58,11 @@ class Swiper extends React.Component {
       marginTop,
       marginBottom
     } = this.props;
+
     const cardWidth = width - cardHorizontalMargin * 2;
     const cardHeight =
       height - cardVerticalMargin * 2 - marginTop - marginBottom;
+
     this.cardStyle = {
       top: cardVerticalMargin,
       left: cardHorizontalMargin,
@@ -88,6 +90,7 @@ class Swiper extends React.Component {
       x: this._animatedValueX,
       y: this._animatedValueY
     });
+
     this.state.pan.setValue({
       x: 0,
       y: 0
@@ -98,6 +101,7 @@ class Swiper extends React.Component {
     const { horizontalThreshold, verticalThreshold } = this.props;
     const animatedValueX = Math.abs(this._animatedValueX);
     const animatedValueY = Math.abs(this._animatedValueY);
+
     const isSwiping =
       animatedValueX > horizontalThreshold ||
       animatedValueY > verticalThreshold;
@@ -122,6 +126,7 @@ class Swiper extends React.Component {
       onSwipedTop,
       onSwipedBottom
     } = this.props;
+
     const isSwipingLeft = animatedValueX < -horizontalThreshold;
     const isSwipingRight = animatedValueX > horizontalThreshold;
     const isSwipingTop = animatedValueY < -verticalThreshold;
@@ -182,6 +187,7 @@ class Swiper extends React.Component {
       newCardIndex = 0;
       swipedAllCards = true;
     }
+
     this.onSwipedCallbacks(onSwiped, swipedAllCards);
     this.setCardIndex(newCardIndex, swipedAllCards);
   };
@@ -192,6 +198,7 @@ class Swiper extends React.Component {
       ? this.props.cards.length - 1
       : firstCardIndex - 1;
     const swipedAllCards = false;
+
     this.onSwipedCallbacks(cb, swipedAllCards);
     this.setCardIndex(newCardIndex, swipedAllCards);
   };
@@ -205,6 +212,7 @@ class Swiper extends React.Component {
   onSwipedCallbacks = (swipeDirectionCallback, swipedAllCards) => {
     let previousCardIndex = this.state.firstCardIndex;
     this.props.onSwiped(previousCardIndex);
+
     swipeDirectionCallback(previousCardIndex);
     if (swipedAllCards) {
       this.props.onSwipedAll();
@@ -233,6 +241,7 @@ class Swiper extends React.Component {
   calculateSwipableCardStyle = () => {
     let opacity = this.props.animateOpacity ? this.interpolateOpacity() : 1;
     let rotation = this.interpolateRotation();
+
     return [
       styles.card,
       this.cardStyle,
@@ -277,6 +286,7 @@ class Swiper extends React.Component {
     const animatedValueX = Math.abs(this._animatedValueX);
     const animatedValueY = Math.abs(this._animatedValueY);
     let opacity;
+
     if (animatedValueX > animatedValueY) {
       opacity = this.state.pan.x.interpolate({
         inputRange: this.props.inputOpacityRangeX,
@@ -288,6 +298,7 @@ class Swiper extends React.Component {
         outputRange: this.props.outputOpacityRangeY
       });
     }
+
     return opacity;
   };
 
@@ -320,10 +331,12 @@ class Swiper extends React.Component {
 
   renderChildren() {
     const { childrenOnTop, children } = this.props;
+
     let zIndex = 1;
     if (childrenOnTop) {
       zIndex = 5;
     }
+
     return (
       <View style={[styles.childrenViewStyle, { zIndex: zIndex }]}>
         {children}
@@ -334,13 +347,16 @@ class Swiper extends React.Component {
   renderFirstCard = () => {
     const { firstCardIndex } = this.state;
     const { cards } = this.props;
+
     const swipableCardStyle = this.calculateSwipableCardStyle();
     const firstCardContent = cards[firstCardIndex];
     let firstCard = this.props.renderCard(firstCardContent);
+
     const notInfinite = !this.props.infinite;
     if (notInfinite && this.state.swipedAllCards) {
       return <Animated.View />;
     }
+
     return (
       <Animated.View
         style={swipableCardStyle}
