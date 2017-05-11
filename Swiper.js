@@ -69,13 +69,17 @@ class Swiper extends React.Component {
   }
 
   initializePanResponder = () => {
+    const { horizontalSwipe, verticalSwipe } = this.props;
+    const dx = horizontalSwipe ? this.state.pan.x : 0;
+    const dy = verticalSwipe ? this.state.pan.y : 0;
+
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => true,
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: Animated.event([
         null,
-        { dx: this.state.pan.x, dy: this.state.pan.y }
+        { dx, dy }
       ]),
       onPanResponderRelease: this.onPanResponderRelease
     })
@@ -406,7 +410,9 @@ Swiper.propTypes = {
   swipeAnimationDuration: React.PropTypes.number,
   swipeBackAnimationDuration: React.PropTypes.number,
   zoomAnimationDuration: React.PropTypes.number,
-  swipeBackFriction: React.PropTypes.number
+  swipeBackFriction: React.PropTypes.number,
+  horizontalSwipe: React.PropTypes.bool,
+  verticalSwipe: React.PropTypes.bool,
 }
 
 Swiper.defaultProps = {
@@ -452,7 +458,9 @@ Swiper.defaultProps = {
   swipeAnimationDuration: 350,
   swipeBackAnimationDuration: 600,
   zoomAnimationDuration: 100,
-  swipeBackFriction: 11
+  swipeBackFriction: 11,
+  horizontalSwipe: true,
+  verticalSwipe: true,
 }
 
 export default Swiper
