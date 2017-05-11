@@ -9,6 +9,7 @@ npm install react-native-deck-swiper --save
 ## Preview
 
 ![App preview](/animation.gif)
+![App preview2](/animation2.gif)
 
 ## Props
 
@@ -26,6 +27,8 @@ npm install react-native-deck-swiper --save
 | onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | | (cardIndex) => {} |
 | cardIndex | number | cardIndex to start with | | 0 |
 | infinite | bool | keep swiping indefinitely | | false |
+| horizontalSwipe | bool | enable/disable horizontal swiping | | true |
+| verticalSwipe | bool | enable/disable vertical swiping | | true |
 
 ### Swipe animation props
 
