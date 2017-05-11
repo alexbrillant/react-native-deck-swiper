@@ -210,14 +210,21 @@ class Swiper extends React.Component {
     }
   }
 
-  setCardIndex = (newCardIndex, swipedAllCards) => {
-    this.setState({
-        firstCardIndex: newCardIndex,
-        secondCardIndex: this.calculateSecondCardIndex(newCardIndex),
-        previousCardIndex: this.calculatePreviousCardIndex(newCardIndex),
-        swipedAllCards: swipedAllCards
-      }, this.resetPanAndScale)
-  };
+
+    setCardIndex = (newCardIndex, swipedAllCards) => {
+      this.setState({
+          firstCardIndex: newCardIndex,
+          secondCardIndex: newCardIndex,
+      }, () => {
+        setTimeout(() =>{
+          this.setState({
+            secondCardIndex: this.calculateSecondCardIndex(newCardIndex),
+            previousCardIndex: this.calculatePreviousCardIndex(newCardIndex),
+            swipedAllCards: swipedAllCards
+          }, this.resetPanAndScale)
+        }, 50)
+      })
+    };
 
   resetPanAndScale = () => {
     this.state.pan.setValue({ x: 0, y: 0 })
