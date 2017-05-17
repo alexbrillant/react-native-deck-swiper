@@ -23,7 +23,8 @@ class Swiper extends React.Component {
       previousCardIndex: this.calculatePreviousCardIndex(props.cardIndex),
       previousCardX: new Animated.Value(props.previousCardInitialPositionX),
       previousCardY: new Animated.Value(props.previousCardInitialPositionY),
-      swipedAllCards: false
+      swipedAllCards: false,
+      panResponderLocked: false
     };
   }
 
@@ -72,24 +73,30 @@ class Swiper extends React.Component {
   };
 
   initializePanResponder = () => {
-    const { horizontalSwipe, verticalSwipe } = this.props;
-    const dx = horizontalSwipe ? this.state.pan.x : 0;
-    const dy = verticalSwipe ? this.state.pan.y : 0;
-
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => true,
       onPanResponderGrant: this.onPanResponderGrant,
-      onPanResponderMove: Animated.event([null, { dx, dy }]),
+      onPanResponderMove: Animated.event([null, this.createAnimatedEvent()]),
       onPanResponderRelease: this.onPanResponderRelease
     });
   };
 
+  createAnimatedEvent = () => {
+    const { horizontalSwipe, verticalSwipe } = this.props;
+    const { x, y } = this.state.pan;
+    const dx = horizontalSwipe ? x : 0;
+    const dy = verticalSwipe ? y : 0;
+    return { dx, dy };
+  };
+
   onPanResponderGrant = (event, gestureState) => {
-    this.state.pan.setOffset({
-      x: this._animatedValueX,
-      y: this._animatedValueY
-    });
+    if (!this.state.panResponderLocked) {
+      this.state.pan.setOffset({
+        x: this._animatedValueX,
+        y: this._animatedValueY
+      });
+    }
 
     this.state.pan.setValue({
       x: 0,
@@ -110,8 +117,11 @@ class Swiper extends React.Component {
         this._animatedValueX,
         this._animatedValueY
       );
-      this.swipeCard(onSwipeDirectionCallback);
-      this.zoomNextCard();
+
+      this.setState({ panResponderLocked: true }, () => {
+        this.swipeCard(onSwipeDirectionCallback);
+        this.zoomNextCard();
+      });
     } else {
       this.resetTopCard();
     }
@@ -183,6 +193,7 @@ class Swiper extends React.Component {
     const { firstCardIndex } = this.state;
     let newCardIndex = firstCardIndex + 1;
     let swipedAllCards = false;
+
     if (newCardIndex === this.props.cards.length) {
       newCardIndex = 0;
       swipedAllCards = true;
@@ -225,7 +236,8 @@ class Swiper extends React.Component {
         firstCardIndex: newCardIndex,
         secondCardIndex: this.calculateSecondCardIndex(newCardIndex),
         previousCardIndex: this.calculatePreviousCardIndex(newCardIndex),
-        swipedAllCards: swipedAllCards
+        swipedAllCards: swipedAllCards,
+        panResponderLocked: false
       },
       this.resetPanAndScale
     );
