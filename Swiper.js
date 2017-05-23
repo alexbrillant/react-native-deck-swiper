@@ -70,6 +70,8 @@ class Swiper extends React.Component {
       width: cardWidth,
       height: cardHeight
     };
+
+    this.customCardStyle = this.props.cardStyle;
   };
 
   initializePanResponder = () => {
@@ -265,7 +267,8 @@ class Swiper extends React.Component {
           { translateY: this.state.pan.y },
           { rotate: rotation }
         ]
-      }
+      },
+      this.customCardStyle
     ];
   };
 
@@ -276,7 +279,8 @@ class Swiper extends React.Component {
       {
         zIndex: 1,
         transform: [{ scale: this.state.scale }]
-      }
+      },
+      this.customCardStyle
     ];
   };
 
@@ -290,7 +294,8 @@ class Swiper extends React.Component {
           { translateX: this.state.previousCardX },
           { translateY: this.state.previousCardY }
         ]
-      }
+      },
+      this.customCardStyle
     ];
   };
 
