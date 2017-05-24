@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   PanResponder,
   Easing,
@@ -70,6 +71,8 @@ class Swiper extends React.Component {
       width: cardWidth,
       height: cardHeight
     };
+
+    this.customCardStyle = this.props.cardStyle;
   };
 
   initializePanResponder = () => {
@@ -265,7 +268,8 @@ class Swiper extends React.Component {
           { translateY: this.state.pan.y },
           { rotate: rotation }
         ]
-      }
+      },
+      this.customCardStyle
     ];
   };
 
@@ -276,7 +280,8 @@ class Swiper extends React.Component {
       {
         zIndex: 1,
         transform: [{ scale: this.state.scale }]
-      }
+      },
+      this.customCardStyle
     ];
   };
 
@@ -290,7 +295,8 @@ class Swiper extends React.Component {
           { translateX: this.state.previousCardX },
           { translateY: this.state.previousCardY }
         ]
-      }
+      },
+      this.customCardStyle
     ];
   };
 
@@ -415,39 +421,40 @@ class Swiper extends React.Component {
 }
 
 Swiper.propTypes = {
-  cards: React.PropTypes.array.isRequired,
-  childrenOnTop: React.PropTypes.bool,
-  renderCard: React.PropTypes.func.isRequired,
-  onSwipedAll: React.PropTypes.func,
-  onSwiped: React.PropTypes.func,
-  onSwipedLeft: React.PropTypes.func,
-  onSwipedRight: React.PropTypes.func,
-  onSwipedTop: React.PropTypes.func,
-  onSwipedBottom: React.PropTypes.func,
-  cardIndex: React.PropTypes.number,
-  infinite: React.PropTypes.bool,
-  secondCardZoom: React.PropTypes.number,
-  zoomFriction: React.PropTypes.number,
-  backgroundColor: React.PropTypes.string,
-  marginTop: React.PropTypes.number,
-  marginBottom: React.PropTypes.number,
-  cardVerticalMargin: React.PropTypes.number,
-  cardHorizontalMargin: React.PropTypes.number,
-  outputRotationRange: React.PropTypes.array,
-  inputRotationRange: React.PropTypes.array,
-  animateOpacity: React.PropTypes.bool,
-  inputOpacityRange: React.PropTypes.array,
-  outputOpacityRange: React.PropTypes.array,
-  verticalThreshold: React.PropTypes.number,
-  horizontalThreshold: React.PropTypes.number,
-  previousCardInitialPositionX: React.PropTypes.number,
-  previousCardInitialPositionY: React.PropTypes.number,
-  swipeAnimationDuration: React.PropTypes.number,
-  swipeBackAnimationDuration: React.PropTypes.number,
-  zoomAnimationDuration: React.PropTypes.number,
-  swipeBackFriction: React.PropTypes.number,
-  horizontalSwipe: React.PropTypes.bool,
-  verticalSwipe: React.PropTypes.bool
+  cards: PropTypes.array.isRequired,
+  childrenOnTop: PropTypes.bool,
+  renderCard: PropTypes.func.isRequired,
+  onSwipedAll: PropTypes.func,
+  onSwiped: PropTypes.func,
+  onSwipedLeft: PropTypes.func,
+  onSwipedRight: PropTypes.func,
+  onSwipedTop: PropTypes.func,
+  onSwipedBottom: PropTypes.func,
+  cardIndex: PropTypes.number,
+  infinite: PropTypes.bool,
+  secondCardZoom: PropTypes.number,
+  zoomFriction: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  marginTop: PropTypes.number,
+  marginBottom: PropTypes.number,
+  cardVerticalMargin: PropTypes.number,
+  cardHorizontalMargin: PropTypes.number,
+  outputRotationRange: PropTypes.array,
+  inputRotationRange: PropTypes.array,
+  animateOpacity: PropTypes.bool,
+  inputOpacityRange: PropTypes.array,
+  outputOpacityRange: PropTypes.array,
+  verticalThreshold: PropTypes.number,
+  horizontalThreshold: PropTypes.number,
+  previousCardInitialPositionX: PropTypes.number,
+  previousCardInitialPositionY: PropTypes.number,
+  swipeAnimationDuration: PropTypes.number,
+  swipeBackAnimationDuration: PropTypes.number,
+  zoomAnimationDuration: PropTypes.number,
+  swipeBackFriction: PropTypes.number,
+  horizontalSwipe: PropTypes.bool,
+  verticalSwipe: PropTypes.bool,
+  cardStyle: PropTypes.node
 };
 
 Swiper.defaultProps = {
@@ -495,7 +502,8 @@ Swiper.defaultProps = {
   zoomAnimationDuration: 100,
   swipeBackFriction: 11,
   horizontalSwipe: true,
-  verticalSwipe: true
+  verticalSwipe: true,
+  cardStyle: {}
 };
 
 export default Swiper;
