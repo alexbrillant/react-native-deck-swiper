@@ -43,5 +43,7 @@
     "jest": {
         "preset": "react-native"
     },
-    "dependencies": {}
+    "dependencies": {
+      "prop-types": "15.5.10"
+    }
 }
