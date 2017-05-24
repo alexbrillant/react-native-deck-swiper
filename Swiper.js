@@ -454,7 +454,7 @@ Swiper.propTypes = {
   swipeBackFriction: PropTypes.number,
   horizontalSwipe: PropTypes.bool,
   verticalSwipe: PropTypes.bool,
-  cardStyle: PropTypes.node
+  cardStyle: PropTypes.object
 };
 
 Swiper.defaultProps = {
