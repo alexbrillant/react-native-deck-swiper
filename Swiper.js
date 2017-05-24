@@ -452,7 +452,8 @@ Swiper.propTypes = {
   zoomAnimationDuration: React.PropTypes.number,
   swipeBackFriction: React.PropTypes.number,
   horizontalSwipe: React.PropTypes.bool,
-  verticalSwipe: React.PropTypes.bool
+  verticalSwipe: React.PropTypes.bool,
+  cardStyle: React.PropTypes.object
 };
 
 Swiper.defaultProps = {
@@ -500,7 +501,8 @@ Swiper.defaultProps = {
   zoomAnimationDuration: 100,
   swipeBackFriction: 11,
   horizontalSwipe: true,
-  verticalSwipe: true
+  verticalSwipe: true,
+  cardStyle: {}
 };
 
 export default Swiper;
