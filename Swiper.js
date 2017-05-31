@@ -392,6 +392,7 @@ class Swiper extends React.Component {
     const secondCardZoomStyle = this.calculateSecondCardZoomStyle();
     const secondCardContent = cards[secondCardIndex];
     let secondCard = renderCard(secondCardContent);
+
     const notInfinite = !this.props.infinite;
     const lastCardOrSwipedAllCards =
       secondCardIndex === 0 || this.state.swipedAllCards;
@@ -421,45 +422,58 @@ class Swiper extends React.Component {
 }
 
 Swiper.propTypes = {
+  animateOpacity: PropTypes.bool,
+  backgroundColor: PropTypes.string,
+  cardHorizontalMargin: PropTypes.number,
+  cardIndex: PropTypes.number,
+  cardStyle: PropTypes.object,
+  cardVerticalMargin: PropTypes.number,
   cards: PropTypes.array.isRequired,
   childrenOnTop: PropTypes.bool,
-  renderCard: PropTypes.func.isRequired,
-  onSwipedAll: PropTypes.func,
+  horizontalSwipe: PropTypes.bool,
+  horizontalThreshold: PropTypes.number,
+  infinite: PropTypes.bool,
+  inputOpacityRange: PropTypes.array,
+  inputRotationRange: PropTypes.array,
+  marginBottom: PropTypes.number,
+  marginTop: PropTypes.number,
   onSwiped: PropTypes.func,
+  onSwipedAll: PropTypes.func,
+  onSwipedBottom: PropTypes.func,
   onSwipedLeft: PropTypes.func,
   onSwipedRight: PropTypes.func,
   onSwipedTop: PropTypes.func,
-  onSwipedBottom: PropTypes.func,
-  cardIndex: PropTypes.number,
-  infinite: PropTypes.bool,
-  secondCardZoom: PropTypes.number,
-  zoomFriction: PropTypes.number,
-  backgroundColor: PropTypes.string,
-  marginTop: PropTypes.number,
-  marginBottom: PropTypes.number,
-  cardVerticalMargin: PropTypes.number,
-  cardHorizontalMargin: PropTypes.number,
-  outputRotationRange: PropTypes.array,
-  inputRotationRange: PropTypes.array,
-  animateOpacity: PropTypes.bool,
-  inputOpacityRange: PropTypes.array,
   outputOpacityRange: PropTypes.array,
-  verticalThreshold: PropTypes.number,
-  horizontalThreshold: PropTypes.number,
+  outputRotationRange: PropTypes.array,
   previousCardInitialPositionX: PropTypes.number,
   previousCardInitialPositionY: PropTypes.number,
+  renderCard: PropTypes.func.isRequired,
+  secondCardZoom: PropTypes.number,
   swipeAnimationDuration: PropTypes.number,
   swipeBackAnimationDuration: PropTypes.number,
-  zoomAnimationDuration: PropTypes.number,
   swipeBackFriction: PropTypes.number,
-  horizontalSwipe: PropTypes.bool,
   verticalSwipe: PropTypes.bool,
-  cardStyle: PropTypes.object
+  verticalThreshold: PropTypes.number,
+  zoomAnimationDuration: PropTypes.number,
+  zoomFriction: PropTypes.number
 };
 
 Swiper.defaultProps = {
+  animateOpacity: false,
+  backgroundColor: "#4FD0E9",
+  cardHorizontalMargin: 20,
   cardIndex: 0,
+  cardStyle: {},
+  cardVerticalMargin: 60,
   childrenOnTop: false,
+  horizontalSwipe: true,
+  horizontalThreshold: width / 4,
+  infinite: false,
+  inputOpacityRangeX: [-width / 2, -width / 3, 0, width / 3, width / 2],
+  inputOpacityRangeY: [-height / 2, -height / 3, 0, height / 3, height / 2],
+  inputRotationRange: [-width / 2, 0, width / 2],
+  marginBottom: 0,
+  marginTop: 0,
   onSwiped: cardIndex => {
     console.log(cardIndex);
   },
@@ -478,32 +492,19 @@ Swiper.defaultProps = {
   onSwipedAll: () => {
     console.log("onSwipedAll");
   },
-  infinite: false,
-  verticalThreshold: height / 5,
-  horizontalThreshold: width / 4,
-  secondCardZoom: 0.97,
-  zoomFriction: 7,
-  backgroundColor: "#4FD0E9",
-  marginTop: 0,
-  marginBottom: 0,
-  cardVerticalMargin: 60,
-  cardHorizontalMargin: 20,
-  outputRotationRange: ["-10deg", "0deg", "10deg"],
-  inputRotationRange: [-width / 2, 0, width / 2],
-  animateOpacity: false,
-  inputOpacityRangeX: [-width / 2, -width / 3, 0, width / 3, width / 2],
   outputOpacityRangeX: [0.8, 1, 1, 1, 0.8],
-  inputOpacityRangeY: [-height / 2, -height / 3, 0, height / 3, height / 2],
   outputOpacityRangeY: [0.8, 1, 1, 1, 0.8],
+  outputRotationRange: ["-10deg", "0deg", "10deg"],
   previousCardInitialPositionX: 0,
   previousCardInitialPositionY: -height,
+  secondCardZoom: 0.97,
   swipeAnimationDuration: 350,
   swipeBackAnimationDuration: 600,
-  zoomAnimationDuration: 100,
   swipeBackFriction: 11,
-  horizontalSwipe: true,
   verticalSwipe: true,
-  cardStyle: {}
+  verticalThreshold: height / 5,
+  zoomAnimationDuration: 100,
+  zoomFriction: 7
 };
 
 export default Swiper;
