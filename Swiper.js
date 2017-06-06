@@ -107,6 +107,26 @@ class Swiper extends React.Component {
     });
   };
 
+  validPanResponderRelease = (animatedValueX, animatedValueY) => {
+    const {
+      horizontalThreshold,
+      verticalThreshold,
+      disableBottomSwipe,
+      disableLeftSwipe,
+      disableRightSwipe,
+      disableTopSwipe } = this.props;
+
+    const isSwipingLeft = animatedValueX < -horizontalThreshold;
+    const isSwipingRight = animatedValueX > horizontalThreshold;
+    const isSwipingTop = animatedValueY < -verticalThreshold;
+    const isSwipingBottom = animatedValueY > verticalThreshold;
+
+    return (isSwipingLeft && !disableLeftSwipe) ||
+      (isSwipingRight && !disableRightSwipe) ||
+      (isSwipingTop && !disableTopSwipe) ||
+      (isSwipingBottom && !disableBottomSwipe);
+  };
+
   onPanResponderRelease = (e, gestureState) => {
     const { horizontalThreshold, verticalThreshold } = this.props;
     const animatedValueX = Math.abs(this._animatedValueX);
@@ -115,7 +135,7 @@ class Swiper extends React.Component {
     const isSwiping =
       animatedValueX > horizontalThreshold ||
       animatedValueY > verticalThreshold;
-    if (isSwiping) {
+    if (isSwiping && this.validPanResponderRelease(animatedValueX,animatedValueY)) {
       const onSwipeDirectionCallback = this.getOnSwipeDirectionCallback(
         this._animatedValueX,
         this._animatedValueY
@@ -273,8 +293,7 @@ class Swiper extends React.Component {
     ];
   };
 
-  calculateSecondCardZoomStyle = () => {
-    return [
+  calculateSecondCardZoomStyle = () => [
       styles.card,
       this.cardStyle,
       {
@@ -283,10 +302,8 @@ class Swiper extends React.Component {
       },
       this.customCardStyle
     ];
-  };
 
-  calculateSwipeBackCardStyle = () => {
-    return [
+  calculateSwipeBackCardStyle = () => [
       styles.card,
       this.cardStyle,
       {
@@ -298,7 +315,6 @@ class Swiper extends React.Component {
       },
       this.customCardStyle
     ];
-  };
 
   interpolateOpacity = () => {
     const animatedValueX = Math.abs(this._animatedValueX);
@@ -320,12 +336,10 @@ class Swiper extends React.Component {
     return opacity;
   };
 
-  interpolateRotation = () => {
-    return this.state.pan.x.interpolate({
+  interpolateRotation = () => this.state.pan.x.interpolate({
       inputRange: this.props.inputRotationRange,
       outputRange: this.props.outputRotationRange
     });
-  };
 
   render() {
     return (
@@ -430,6 +444,10 @@ Swiper.propTypes = {
   cardVerticalMargin: PropTypes.number,
   cards: PropTypes.array.isRequired,
   childrenOnTop: PropTypes.bool,
+  disableBottomSwipe: PropTypes.bool,
+  disableLeftSwipe: PropTypes.bool,
+  disableRightSwipe: PropTypes.bool,
+  disableTopSwipe: PropTypes.bool,
   horizontalSwipe: PropTypes.bool,
   horizontalThreshold: PropTypes.number,
   infinite: PropTypes.bool,
@@ -466,6 +484,10 @@ Swiper.defaultProps = {
   cardStyle: {},
   cardVerticalMargin: 60,
   childrenOnTop: false,
+  disableBottomSwipe: false,
+  disableLeftSwipe: false,
+  disableRightSwipe: false,
+  disableTopSwipe: false,
   horizontalSwipe: true,
   horizontalThreshold: width / 4,
   infinite: false,
