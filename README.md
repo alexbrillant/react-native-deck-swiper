@@ -37,9 +37,9 @@ npm install react-native-deck-swiper --save
 | horizontalThreshold | number | horizontal swipe threshold  | width / 4 |
 | swipeAnimationDuration | number | duration of the swipe animation | 350 |
 | disableBottomSwipe | bool | disable bottom swipe | false |
-| disableLeftSwipe | bool | disable bottom swipe | false |
-| disableRightSwipe | bool | disable bottom swipe | false |
-| disableTopSwipe | bool | disable bottom swipe | false |
+| disableLeftSwipe | bool | disable left swipe | false |
+| disableRightSwipe | bool | disable right swipe | false |
+| disableTopSwipe | bool | disable top swipe | false |
 
 ### Zoom animation props
 
