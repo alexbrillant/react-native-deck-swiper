@@ -36,7 +36,11 @@ npm install react-native-deck-swiper --save
 | verticalThreshold | number | vertical swipe threshold  | height / 5 |
 | horizontalThreshold | number | horizontal swipe threshold  | width / 4 |
 | swipeAnimationDuration | number | duration of the swipe animation | 350 |
-  
+| disableBottomSwipe | bool | disable bottom swipe | false |
+| disableLeftSwipe | bool | disable left swipe | false |
+| disableRightSwipe | bool | disable right swipe | false |
+| disableTopSwipe | bool | disable top swipe | false |
+
 ### Zoom animation props
 
 | Props    | type   | description                                                                                             | default                          |
@@ -82,9 +86,9 @@ npm install react-native-deck-swiper --save
 | cardHorizontalMargin | number | card horizontal margin | 20 |
 | cardHorizontalMargin | number | card horizontal margin | 20 |
 | childrenOnTop | bool | render children on top or not | false |
-|cardStyle| node | override swipable card style | {} |
+| cardStyle | node | override swipable card style | {} |
 
-### Methods 
+### Methods
 
 To trigger imperative animations, you can use a reference to the Swiper component.
 
@@ -112,8 +116,8 @@ render () {
             onSwipedAll={() => {console.log('onSwipedAll')}}
             cardIndex={0}
             backgroundColor={'#4FD0E9'}>
-            <Button 
-                onPress={() => {console.log('oulala')}} 
+            <Button
+                onPress={() => {console.log('oulala')}}
                 title="Press me">
                 You can press me
             </Button>
