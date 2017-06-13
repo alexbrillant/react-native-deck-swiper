@@ -306,35 +306,17 @@ class Swiper extends React.Component {
   };
 
   calculateOverlayLabelStyle = () => {
-    let externalStyles = {}, dynamicStyles = {};
+    let externalStyles = styles.overlayLabel, dynamicStyles = {};
     const labelProps = this.props.overlayLabels[this.state.labelType];
-    switch(this.state.labelType) {
-      case 'bottom':
-        externalStyles = styles.overlayLabelBottom;
-      break;
-
-      case 'left':
-        externalStyles = styles.overlayLabelLeft;
-      break;
-
-      case 'right':
-        externalStyles = styles.overlayLabelRight;
-      break;
-
-      case 'top':
-        externalStyles = styles.overlayLabelTop;
-      break;
-
-      default:
-        externalStyles = styles.hideOverlayLabel;
-    }
     if (this.state.labelType!=='none') {
       dynamicStyles = {
         backgroundColor: this.hex2rgba(labelProps.swipeColor, labelProps.backgroundOpacity),
         borderColor: labelProps.swipeColor,
-        color: '#FFF',
+        color: labelProps.fontColor,
         borderWidth: 1
       };
+    } else {
+      externalStyles = styles.hideOverlayLabel;
     }
     return [externalStyles, dynamicStyles];
   }
@@ -667,22 +649,26 @@ Swiper.defaultProps = {
     bottom: {
       title: 'BLEAH',
       swipeColor: '#946C8C',
-      backgroundOpacity: '0.75'
+      backgroundOpacity: '0.75',
+      fontColor: '#FFF'
     },
     left: {
       title: 'NOPE',
       swipeColor: '#4A2359',
-      backgroundOpacity: '0.75'
+      backgroundOpacity: '0.75',
+      fontColor: '#FFF'
     },
     right: {
       title: 'LIKE',
       swipeColor: '#FA9F8C',
-      backgroundOpacity: '0.75'
+      backgroundOpacity: '0.75',
+      fontColor: '#FFF'
     },
     top: {
       title: 'SUPER LIKE',
       swipeColor: '#FFC37B',
-      backgroundOpacity: '0.75'
+      backgroundOpacity: '0.75',
+      fontColor: '#FFF'
     }
   },
   previousCardInitialPositionX: 0,
