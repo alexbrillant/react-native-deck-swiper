@@ -30,6 +30,14 @@ class Swiper extends React.Component {
     };
   }
 
+  hex2rgba = (hex,opacity  = 1) => {
+    hex = hex.replace('#','');
+    r = parseInt(hex.substring(0,2), 16);
+    g = parseInt(hex.substring(2,4), 16);
+    b = parseInt(hex.substring(4,6), 16);
+    return `'rgba(${r},${g},${b},${opacity})'`;
+  }
+
   calculateSecondCardIndex = firstCardIndex => {
     const cardIndexAtLastIndex = firstCardIndex === this.props.cards.length - 1;
     return cardIndexAtLastIndex ? 0 : firstCardIndex + 1;
@@ -101,9 +109,6 @@ class Swiper extends React.Component {
     const isSwipingRight = this._animatedValueX > horizontalThreshold;
     const isSwipingTop = this._animatedValueY < -verticalThreshold;
     const isSwipingBottom = this._animatedValueY > verticalThreshold;
-
-    console.log(this._animatedValueX, this._animatedValueY, horizontalThreshold, verticalThreshold);
-
     if (isSwipingRight) {
       this.setState({labelType: 'right'});
     } else if (isSwipingLeft) {
@@ -302,6 +307,7 @@ class Swiper extends React.Component {
 
   calculateOverlayLabelStyle = () => {
     let externalStyles = {}, dynamicStyles = {};
+    const labelProps = this.props.overlayLabels[this.state.labelType];
     switch(this.state.labelType) {
       case 'bottom':
         externalStyles = styles.overlayLabelBottom;
@@ -324,8 +330,8 @@ class Swiper extends React.Component {
     }
     if (this.state.labelType!=='none') {
       dynamicStyles = {
-        backgroundColor: this.props.overlayLabels[this.state.labelType].backgroundColor,
-        borderColor: this.props.overlayLabels[this.state.labelType].borderColor,
+        backgroundColor: this.hex2rgba(labelProps.swipeColor, labelProps.backgroundOpacity),
+        borderColor: labelProps.swipeColor,
         color: '#FFF',
         borderWidth: 1
       };
@@ -660,23 +666,23 @@ Swiper.defaultProps = {
   overlayLabels: {
     bottom: {
       title: 'BLEAH',
-      backgroundColor: 'rgba(148,108,140,0.75)',
-      borderColor: '#946C8C'
+      swipeColor: '#946C8C',
+      backgroundOpacity: '0.75'
     },
     left: {
       title: 'NOPE',
-      backgroundColor: 'rgba(74,35,89,0.75)',
-      borderColor: '#4A2359'
+      swipeColor: '#4A2359',
+      backgroundOpacity: '0.75'
     },
     right: {
       title: 'LIKE',
-      backgroundColor: 'rgba(250,159,140,0.75)',
-      borderColor: '#FA9F8C'
+      swipeColor: '#FA9F8C',
+      backgroundOpacity: '0.75'
     },
     top: {
       title: 'SUPER LIKE',
-      backgroundColor: 'rgba(255,195,123,0.75)',
-      borderColor: '#FFC37B'
+      swipeColor: '#FFC37B',
+      backgroundOpacity: '0.75'
     }
   },
   previousCardInitialPositionX: 0,
