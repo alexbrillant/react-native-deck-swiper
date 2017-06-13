@@ -25,7 +25,8 @@ class Swiper extends React.Component {
       previousCardX: new Animated.Value(props.previousCardInitialPositionX),
       previousCardY: new Animated.Value(props.previousCardInitialPositionY),
       swipedAllCards: false,
-      panResponderLocked: false
+      panResponderLocked: false,
+      labelType: 'none'
     };
   }
 
@@ -80,7 +81,7 @@ class Swiper extends React.Component {
       onStartShouldSetPanResponder: (event, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => true,
       onPanResponderGrant: this.onPanResponderGrant,
-      onPanResponderMove: Animated.event([null, this.createAnimatedEvent()]),
+      onPanResponderMove: this.onPanResponderMove,
       onPanResponderRelease: this.onPanResponderRelease
     });
   };
@@ -92,6 +93,31 @@ class Swiper extends React.Component {
     const dy = verticalSwipe ? y : 0;
     return { dx, dy };
   };
+
+  onPanResponderMove = (event, gestureState) => {
+
+    const { horizontalThreshold, verticalThreshold } = this.props;
+    const isSwipingLeft = this._animatedValueX < -horizontalThreshold;
+    const isSwipingRight = this._animatedValueX > horizontalThreshold;
+    const isSwipingTop = this._animatedValueY < -verticalThreshold;
+    const isSwipingBottom = this._animatedValueY > verticalThreshold;
+
+    console.log(this._animatedValueX, this._animatedValueY, horizontalThreshold, verticalThreshold);
+
+    if (isSwipingRight) {
+      this.setState({labelType: 'right'});
+    } else if (isSwipingLeft) {
+      this.setState({labelType: 'left'});
+    } else if (isSwipingTop) {
+      this.setState({labelType: 'top'});
+    } else if (isSwipingBottom) {
+      this.setState({labelType: 'bottom'});
+    } else {
+      this.setState({labelType: 'none'});
+    }
+
+    return Animated.event([null, this.createAnimatedEvent()])(event,gestureState);
+  }
 
   onPanResponderGrant = (event, gestureState) => {
     if (!this.state.panResponderLocked) {
@@ -148,6 +174,7 @@ class Swiper extends React.Component {
     } else {
       this.resetTopCard();
     }
+    this.setState({labelType: 'none'});
   };
 
   getOnSwipeDirectionCallback = (animatedValueX, animatedValueY) => {
@@ -273,8 +300,84 @@ class Swiper extends React.Component {
     this.state.previousCardY.setValue(this.props.previousCardInitialPositionY);
   };
 
+  calculateOverlayLabelStyle = () => {
+    let externalStyles = {}, dynamicStyles = {};
+    switch(this.state.labelType) {
+      case 'bottom':
+        externalStyles = styles.overlayLabelBottom;
+      break;
+
+      case 'left':
+        externalStyles = styles.overlayLabelLeft;
+      break;
+
+      case 'right':
+        externalStyles = styles.overlayLabelRight;
+      break;
+
+      case 'top':
+        externalStyles = styles.overlayLabelTop;
+      break;
+
+      default:
+        externalStyles = styles.hideOverlayLabel;
+    }
+    if (this.state.labelType!=='none') {
+      dynamicStyles = {
+        backgroundColor: this.props.overlayLabels[this.state.labelType].backgroundColor,
+        borderColor: this.props.overlayLabels[this.state.labelType].borderColor,
+        color: '#FFF',
+        borderWidth: 1
+      };
+    }
+    return [externalStyles, dynamicStyles];
+  }
+
+  calculateOverlayLabelWrapperStyle = () => {
+    let dynamicStyles = {};
+    switch(this.state.labelType) {
+      case 'bottom':
+        dynamicStyles = {
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
+        };
+      break;
+
+      case 'left':
+        dynamicStyles = {
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          justifyContent: 'flex-start',
+          marginTop: 30,
+          marginLeft: -30
+        };
+      break;
+
+      case 'right':
+        dynamicStyles = {
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+          marginTop: 30,
+          marginLeft: 30
+        };
+      break;
+
+      case 'top':
+        dynamicStyles = {
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
+        };
+      break;
+    }
+    let opacity = this.props.animateOverlayLabelsOpacity ? this.interpolateOverlayLabelsOpacity() : 1;
+    return [styles.overlayLabelWrapper, dynamicStyles, {opacity}];
+  }
+
   calculateSwipableCardStyle = () => {
-    let opacity = this.props.animateOpacity ? this.interpolateOpacity() : 1;
+    let opacity = this.props.animateCardOpacity ? this.interpolateCardOpacity() : 1;
     let rotation = this.interpolateRotation();
 
     return [
@@ -316,25 +419,45 @@ class Swiper extends React.Component {
     this.customCardStyle
   ];
 
-  interpolateOpacity = () => {
+  interpolateCardOpacity = () => {
     const animatedValueX = Math.abs(this._animatedValueX);
     const animatedValueY = Math.abs(this._animatedValueY);
     let opacity;
 
     if (animatedValueX > animatedValueY) {
       opacity = this.state.pan.x.interpolate({
-        inputRange: this.props.inputOpacityRangeX,
-        outputRange: this.props.outputOpacityRangeX
+        inputRange: this.props.inputCardOpacityRangeX,
+        outputRange: this.props.outputCardOpacityRangeX
       });
     } else {
       opacity = this.state.pan.y.interpolate({
-        inputRange: this.props.inputOpacityRangeY,
-        outputRange: this.props.outputOpacityRangeY
+        inputRange: this.props.inputCardOpacityRangeY,
+        outputRange: this.props.outputCardOpacityRangeY
       });
     }
 
     return opacity;
   };
+
+  interpolateOverlayLabelsOpacity = () => {
+    const animatedValueX = Math.abs(this._animatedValueX);
+    const animatedValueY = Math.abs(this._animatedValueY);
+    let opacity;
+
+    if (animatedValueX > animatedValueY) {
+      opacity = this.state.pan.x.interpolate({
+        inputRange: this.props.inputOverlayLabelsOpacityRangeX,
+        outputRange: this.props.outputOverlayLabelsOpacityRangeX
+      });
+    } else {
+      opacity = this.state.pan.y.interpolate({
+        inputRange: this.props.inputOverlayLabelsOpacityRangeY,
+        outputRange: this.props.outputOverlayLabelsOpacityRangeY
+      });
+    }
+
+    return opacity;
+  }
 
   interpolateRotation = () => this.state.pan.x.interpolate({
     inputRange: this.props.inputRotationRange,
@@ -383,6 +506,7 @@ class Swiper extends React.Component {
     const swipableCardStyle = this.calculateSwipableCardStyle();
     const firstCardContent = cards[firstCardIndex];
     let firstCard = this.props.renderCard(firstCardContent);
+    let renderOverlayLabel = this.renderOverlayLabel();
 
     const notInfinite = !this.props.infinite;
     if (notInfinite && this.state.swipedAllCards) {
@@ -394,6 +518,7 @@ class Swiper extends React.Component {
         style={swipableCardStyle}
         {...this._panResponder.panHandlers}
       >
+        {renderOverlayLabel}
         {firstCard}
       </Animated.View>
     );
@@ -433,10 +558,19 @@ class Swiper extends React.Component {
       </Animated.View>
     );
   };
+
+  renderOverlayLabel = () => this.state.labelType!=='none' ?
+      (<Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
+        <Text style={this.calculateOverlayLabelStyle()}>
+          {this.props.overlayLabels[this.state.labelType].title}
+        </Text>
+      </Animated.View>)
+    : null
 }
 
 Swiper.propTypes = {
-  animateOpacity: PropTypes.bool,
+  animateCardOpacity: PropTypes.bool,
+  animateOverlayLabelsOpacity: PropTypes.bool,
   backgroundColor: PropTypes.string,
   cardHorizontalMargin: PropTypes.number,
   cardIndex: PropTypes.number,
@@ -451,7 +585,7 @@ Swiper.propTypes = {
   horizontalSwipe: PropTypes.bool,
   horizontalThreshold: PropTypes.number,
   infinite: PropTypes.bool,
-  inputOpacityRange: PropTypes.array,
+  inputCardOpacityRange: PropTypes.array,
   inputRotationRange: PropTypes.array,
   marginBottom: PropTypes.number,
   marginTop: PropTypes.number,
@@ -461,8 +595,9 @@ Swiper.propTypes = {
   onSwipedLeft: PropTypes.func,
   onSwipedRight: PropTypes.func,
   onSwipedTop: PropTypes.func,
-  outputOpacityRange: PropTypes.array,
+  outputCardOpacityRange: PropTypes.array,
   outputRotationRange: PropTypes.array,
+  overlayLabels: PropTypes.object,
   previousCardInitialPositionX: PropTypes.number,
   previousCardInitialPositionY: PropTypes.number,
   renderCard: PropTypes.func.isRequired,
@@ -477,7 +612,8 @@ Swiper.propTypes = {
 };
 
 Swiper.defaultProps = {
-  animateOpacity: false,
+  animateCardOpacity: false,
+  animateOverlayLabelsOpacity: false,
   backgroundColor: "#4FD0E9",
   cardHorizontalMargin: 20,
   cardIndex: 0,
@@ -491,8 +627,10 @@ Swiper.defaultProps = {
   horizontalSwipe: true,
   horizontalThreshold: width / 4,
   infinite: false,
-  inputOpacityRangeX: [-width / 2, -width / 3, 0, width / 3, width / 2],
-  inputOpacityRangeY: [-height / 2, -height / 3, 0, height / 3, height / 2],
+  inputCardOpacityRangeX: [-width / 2, -width / 3, 0, width / 3, width / 2],
+  inputCardOpacityRangeY: [-height / 2, -height / 3, 0, height / 3, height / 2],
+  inputOverlayLabelsOpacityRangeX: [-width / 3, -width / 4, 0, width / 4, width / 3],
+  inputOverlayLabelsOpacityRangeY: [-height / 4, -height / 5, 0, height / 5, height / 4],
   inputRotationRange: [-width / 2, 0, width / 2],
   marginBottom: 0,
   marginTop: 0,
@@ -514,9 +652,33 @@ Swiper.defaultProps = {
   onSwipedAll: () => {
     console.log("onSwipedAll");
   },
-  outputOpacityRangeX: [0.8, 1, 1, 1, 0.8],
-  outputOpacityRangeY: [0.8, 1, 1, 1, 0.8],
+  outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
+  outputCardOpacityRangeY: [0.8, 1, 1, 1, 0.8],
+  outputOverlayLabelsOpacityRangeX: [1, 0, 0, 0, 1],
+  outputOverlayLabelsOpacityRangeY: [1, 0, 0, 0, 1],
   outputRotationRange: ["-10deg", "0deg", "10deg"],
+  overlayLabels: {
+    bottom: {
+      title: 'BLEAH',
+      backgroundColor: 'rgba(148,108,140,0.75)',
+      borderColor: '#946C8C'
+    },
+    left: {
+      title: 'NOPE',
+      backgroundColor: 'rgba(74,35,89,0.75)',
+      borderColor: '#4A2359'
+    },
+    right: {
+      title: 'LIKE',
+      backgroundColor: 'rgba(250,159,140,0.75)',
+      borderColor: '#FA9F8C'
+    },
+    top: {
+      title: 'SUPER LIKE',
+      backgroundColor: 'rgba(255,195,123,0.75)',
+      borderColor: '#FFC37B'
+    }
+  },
   previousCardInitialPositionX: 0,
   previousCardInitialPositionY: -height,
   secondCardZoom: 0.97,
