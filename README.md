@@ -75,7 +75,9 @@ npm install react-native-deck-swiper --save
 ### Swipe overlay labels
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| overlayLabels| object | swipe labels info | {
+| overlayLabels| object | swipe labels info | see below |
+```javascript
+{
   bottom: {
     title: 'BLEAH',
     swipeColor: '#946C8C',
@@ -100,7 +102,8 @@ npm install react-native-deck-swiper --save
     backgroundOpacity: '0.75',
     fontColor: '#FFF'
   }
-} |
+}
+```
 
 ### Swipe back animation props
 
