@@ -16,8 +16,8 @@ npm install react-native-deck-swiper --save
 
 | Props    | type   | description                                                                                             | required | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|:------------|
-| cards    | array | array of data for the cards to be rendered | required                         |
-| renderCard    | func(cardData) | function to render the card based on the data | required                         |
+| cards    | array | array of data for the cards to be rendered | required |
+| renderCard    | func(cardData) | function to render the card based on the data | required |
 | onSwipedAll| func | function to be called when all cards have been swiped | | () => {} |
 | onSwiped | func | function to be called when a card is swiped. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedLeft | func | function to be called when a card is swiped left. it receives the swiped card index | | (cardIndex) => {} |
@@ -57,14 +57,50 @@ npm install react-native-deck-swiper --save
 | outputRotationRange | array | rotation values for the x values in inputRotationRange |  ["-10deg", "0deg", "10deg"] |
 
 ### Opacity animation props
-
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| animateOpacity| bool | animate opacity | false |
-| inputOpacityRangeX | array | pan x opacity input range | [-width / 2, -width / 3, 0, width / 3, width / 2] |
-| outputOpacityRangeX | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
-| inputOpacityRangeY | array | pan y opacity input range | [-height / 2, -height / 3, 0, height / 3, height / 2]
-| outputOpacityRangeY | array | opacity values for the values in inputOpacityRange | [0.8, 1, 1, 1, 0.8] |
+| animateCardOpacity| bool | animate card opacity | false |
+| inputCardOpacityRangeX | array | pan x card opacity input range | [-width / 2, -width / 3, 0, width / 3, width / 2] |
+| outputCardOpacityRangeX | array | opacity values for the values in inputCardOpacityRangeX | [0.8, 1, 1, 1, 0.8] |
+| inputCardOpacityRangeY | array | pan y card opacity input range | [-height / 2, -height / 3, 0, height / 3, height / 2]
+| outputCardOpacityRangeY | array | opacity values for the values in inputCardOpacityRangeY | [0.8, 1, 1, 1, 0.8] |
+| animateOverlayLabelsOpacity| bool | animate card overlay labels opacity | false |
+| inputOverlayLabelsOpacityRangeX | array | pan x overlay labels opacity input range | [-width / 3, -width / 4, 0, width / 4, width / 3] |
+| outputOverlayLabelsOpacityRangeX | array | opacity values for the values in inputOverlayLabelsOpacityRangeX | [1, 0, 0, 0, 1] |
+| inputOverlayLabelsOpacityRangeY | array | pan x overlay labels opacity input range | [-height / 4, -height / 5, 0, height / 5, height / 4] |
+| outputOverlayLabelsOpacityRangeY | array | opacity values for the values in inputOverlayLabelsOpacityRangeY | [1, 0, 0, 0, 1] |
+
+2 steps of inputOverlayLabelsOpacityRangeX and inputOverlayLabelsOpacityRangeY should match horizontalThreshold and verticalThreshold, respectively.
+
+### Swipe overlay labels
+| Props    | type   | description                                                                                             | default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
+| overlayLabels| object | swipe labels info | {
+  bottom: {
+    title: 'BLEAH',
+    swipeColor: '#946C8C',
+    backgroundOpacity: '0.75',
+    fontColor: '#FFF'
+  },
+  left: {
+    title: 'NOPE',
+    swipeColor: '#4A2359',
+    backgroundOpacity: '0.75',
+    fontColor: '#FFF'
+  },
+  right: {
+    title: 'LIKE',
+    swipeColor: '#FA9F8C',
+    backgroundOpacity: '0.75',
+    fontColor: '#FFF'
+  },
+  top: {
+    title: 'SUPER LIKE',
+    swipeColor: '#FFC37B',
+    backgroundOpacity: '0.75',
+    fontColor: '#FFF'
+  }
+} |
 
 ### Swipe back animation props
 
