@@ -276,7 +276,7 @@ class Swiper extends React.Component {
   };
 
   onSwipedCallbacks = (swipeDirectionCallback, swipedAllCards) => {
-    let previousCardIndex = this.state.firstCardIndex;
+    const previousCardIndex = this.state.firstCardIndex;
     this.props.onSwiped(previousCardIndex);
 
     swipeDirectionCallback(previousCardIndex);
@@ -360,13 +360,13 @@ class Swiper extends React.Component {
         };
       break;
     }
-    let opacity = this.props.animateOverlayLabelsOpacity ? this.interpolateOverlayLabelsOpacity() : 1;
+    const opacity = this.props.animateOverlayLabelsOpacity ? this.interpolateOverlayLabelsOpacity() : 1;
     return [styles.overlayLabelWrapper, dynamicStyles, {opacity}];
   }
 
   calculateSwipableCardStyle = () => {
-    let opacity = this.props.animateCardOpacity ? this.interpolateCardOpacity() : 1;
-    let rotation = this.interpolateRotation();
+    const opacity = this.props.animateCardOpacity ? this.interpolateCardOpacity() : 1;
+    const rotation = this.interpolateRotation();
 
     return [
       styles.card,
@@ -493,8 +493,8 @@ class Swiper extends React.Component {
 
     const swipableCardStyle = this.calculateSwipableCardStyle();
     const firstCardContent = cards[firstCardIndex];
-    let firstCard = this.props.renderCard(firstCardContent);
-    let renderOverlayLabel = this.renderOverlayLabel();
+    const firstCard = this.props.renderCard(firstCardContent);
+    const renderOverlayLabel = this.renderOverlayLabel();
 
     const notInfinite = !this.props.infinite;
     if (notInfinite && this.state.swipedAllCards) {
@@ -518,7 +518,7 @@ class Swiper extends React.Component {
 
     const secondCardZoomStyle = this.calculateSecondCardZoomStyle();
     const secondCardContent = cards[secondCardIndex];
-    let secondCard = renderCard(secondCardContent);
+    const secondCard = renderCard(secondCardContent);
 
     const notInfinite = !this.props.infinite;
     const lastCardOrSwipedAllCards =
@@ -547,13 +547,27 @@ class Swiper extends React.Component {
     );
   };
 
-  renderOverlayLabel = () => this.state.labelType!=='none' ?
+  renderOverlayLabel = () => {
+    const {
+      disableBottomSwipe,
+      disableLeftSwipe,
+      disableRightSwipe,
+      disableTopSwipe
+    } = this.props;
+
+    return this.state.labelType!=='none' ?
+    (!(this.state.labelType==='bottom' && disableBottomSwipe) &&
+    !(this.state.labelType==='left' && disableLeftSwipe) &&
+    !(this.state.labelType==='right' && disableRightSwipe) &&
+    !(this.state.labelType==='top' && disableTopSwipe)) ?
       (<Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
         <Text style={this.calculateOverlayLabelStyle()}>
           {this.props.overlayLabels[this.state.labelType].title}
         </Text>
       </Animated.View>)
-    : null
+      : null
+    : null;
+  }
 }
 
 Swiper.propTypes = {
