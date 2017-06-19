@@ -589,7 +589,7 @@ Swiper.propTypes = {
   backgroundColor: PropTypes.string,
   cardHorizontalMargin: PropTypes.number,
   cardIndex: PropTypes.number,
-  cardStyle: PropTypes.object,
+  cardStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   cardVerticalMargin: PropTypes.number,
   cards: PropTypes.array.isRequired,
   childrenOnTop: PropTypes.bool,
