@@ -64,11 +64,39 @@ export default class Exemple extends Component {
           cardVerticalMargin={80}
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}
+          overlayLabels={{
+            bottom: {
+              title: 'BLEAH',
+              swipeColor: '#9262C2',
+              backgroundOpacity: '0.75',
+              fontColor: '#FFF'
+            },
+            left: {
+              title: 'NOPE',
+              swipeColor: '#FF6C6C',
+              backgroundOpacity: '0.75',
+              fontColor: '#FFF'
+            },
+            right: {
+              title: 'LIKE',
+              swipeColor: '#4CCC93',
+              backgroundOpacity: '0.75',
+              fontColor: '#FFF'
+            },
+            top: {
+              title: 'SUPER LIKE',
+              swipeColor: '#4EB8B7',
+              backgroundOpacity: '0.75',
+              fontColor: '#FFF'
+            }
+          }}
+          animateOverlayLabelsOpacity
+          animateCardOpacity
         >
           <Button onPress={this.swipeBack} title="Swipe Back" />
           <Button onPress={this.jumpTo} title="Jump to last index" />
         </Swiper>
-      </View>
+      </View >
     );
   }
 }
