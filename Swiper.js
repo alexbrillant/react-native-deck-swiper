@@ -553,7 +553,7 @@ class Swiper extends React.Component {
     }
 
     return (
-      <Animated.View style={[secondCardZoomStyle,{opacity:1}]}>
+      <Animated.View style={secondCardZoomStyle}>
         {showSecondCard ? secondCard : null}
       </Animated.View>
     );
