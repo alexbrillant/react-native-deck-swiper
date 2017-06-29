@@ -539,7 +539,7 @@ class Swiper extends React.Component {
 
   renderSecondCard = () => {
     const { secondCardIndex } = this.state;
-    const { cards, renderCard } = this.props;
+    const { cards, renderCard, showSecondCard } = this.props;
 
     const secondCardZoomStyle = this.calculateSecondCardZoomStyle();
     const secondCardContent = cards[secondCardIndex];
@@ -554,7 +554,7 @@ class Swiper extends React.Component {
 
     return (
       <Animated.View style={secondCardZoomStyle}>
-        {secondCard}
+        {showSecondCard ? secondCard : null}
       </Animated.View>
     );
   };
@@ -640,6 +640,7 @@ Swiper.propTypes = {
   previousCardInitialPositionY: PropTypes.number,
   renderCard: PropTypes.func.isRequired,
   secondCardZoom: PropTypes.number,
+  showSecondCard: PropTypes.bool,
   swipeAnimationDuration: PropTypes.number,
   swipeBackAnimationDuration: PropTypes.number,
   swipeBackFriction: PropTypes.number,
@@ -699,6 +700,7 @@ Swiper.defaultProps = {
   previousCardInitialPositionX: 0,
   previousCardInitialPositionY: -height,
   secondCardZoom: 0.97,
+  showSecondCard: true,
   swipeAnimationDuration: 350,
   swipeBackAnimationDuration: 600,
   swipeBackFriction: 11,
