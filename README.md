@@ -28,7 +28,7 @@ npm install react-native-deck-swiper --save
 | infinite | bool | keep swiping indefinitely | | false |
 | horizontalSwipe | bool | enable/disable horizontal swiping | | true |
 | verticalSwipe | bool | enable/disable vertical swiping | | true |
-| showSecondCard | bool | enable/disable second card while swiping | | true |
+
 ### Swipe animation props
 
 | Props    | type   | description                                                                                             | default                          |
