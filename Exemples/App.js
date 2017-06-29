@@ -64,6 +64,7 @@ export default class Exemple extends Component {
           cardVerticalMargin={80}
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}
+          showSecondCard={false}
           overlayLabels={{
             bottom: {
               title: 'BLEAH',
