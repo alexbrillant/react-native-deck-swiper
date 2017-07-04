@@ -111,7 +111,8 @@ class Swiper extends React.Component {
       onMoveShouldSetPanResponder: (event, gestureState) => true,
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: this.onPanResponderMove,
-      onPanResponderRelease: this.onPanResponderRelease
+      onPanResponderRelease: this.onPanResponderRelease,
+      onPanResponderTerminate: this.onPanResponderRelease
     });
   };
 
