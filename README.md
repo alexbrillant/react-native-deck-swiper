@@ -28,6 +28,7 @@ npm install react-native-deck-swiper --save
 | infinite | bool | keep swiping indefinitely | | false |
 | horizontalSwipe | bool | enable/disable horizontal swiping | | true |
 | verticalSwipe | bool | enable/disable vertical swiping | | true |
+| showSecondCard | bool | enable/disable second card while swiping | | true |
 
 ### Swipe animation props
 
@@ -75,7 +76,10 @@ npm install react-native-deck-swiper --save
 ### Swipe overlay labels
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| overlayLabels| object | swipe labels info | see below |
+| overlayLabels| object | swipe labels info | null, see below for format |
+
+Demo inside the [Exemples Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Exemples)
+
 ```javascript
 {
   bottom: {
@@ -138,7 +142,7 @@ To trigger imperative animations, you can use a reference to the Swiper componen
 
 ## Usage example
 
-Example usage with a pressable button contained in the component.
+
 ```javascript
 render () {
     <View style={styles.container}>
