@@ -204,6 +204,11 @@ class Swiper extends React.Component {
         this.resetTopCard();
       }
       this.setState({ labelType: LABEL_TYPES.NONE });
+    } else {
+      this.state.pan.setValue({
+        x: 0,
+        y: 0
+      });
     }
   };
 
