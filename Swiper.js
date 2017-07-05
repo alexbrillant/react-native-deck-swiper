@@ -18,7 +18,7 @@ const LABEL_TYPES = {
   RIGHT: 'right',
   TOP: 'top',
   BOTTOM: 'bottom'
-}
+};
 
 class Swiper extends React.Component {
   componentWillReceiveProps(newProps) {
@@ -29,7 +29,8 @@ class Swiper extends React.Component {
       previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
       swipedAllCards: false,
       secondCardIndex: newProps.cards.length === 1 ? 0 : 1,
-      previousCardIndex: newProps.cards.length === 1 ? 0 : newProps.cards.length - 1
+      previousCardIndex: newProps.cards.length === 1 ? 0 : newProps.cards.length - 1,
+      panResponderLocked: newProps.cards && newProps.cards.length === 0
     });
   }
 
@@ -182,26 +183,28 @@ class Swiper extends React.Component {
   };
 
   onPanResponderRelease = (e, gestureState) => {
-    const { horizontalThreshold, verticalThreshold } = this.props;
-    const animatedValueX = Math.abs(this._animatedValueX);
-    const animatedValueY = Math.abs(this._animatedValueY);
-    const isSwiping = animatedValueX > horizontalThreshold ||
-      animatedValueY > verticalThreshold;
+    if (!this.state.panResponderLocked) {
+      const { horizontalThreshold, verticalThreshold } = this.props;
+      const animatedValueX = Math.abs(this._animatedValueX);
+      const animatedValueY = Math.abs(this._animatedValueY);
+      const isSwiping = animatedValueX > horizontalThreshold ||
+        animatedValueY > verticalThreshold;
 
-    if (isSwiping && this.validPanResponderRelease()) {
-      const onSwipeDirectionCallback = this.getOnSwipeDirectionCallback(
-        this._animatedValueX,
-        this._animatedValueY
-      );
+      if (isSwiping && this.validPanResponderRelease()) {
+        const onSwipeDirectionCallback = this.getOnSwipeDirectionCallback(
+          this._animatedValueX,
+          this._animatedValueY
+        );
 
-      this.setState({ panResponderLocked: true }, () => {
-        this.swipeCard(onSwipeDirectionCallback);
-        this.zoomNextCard();
-      });
-    } else {
-      this.resetTopCard();
+        this.setState({ panResponderLocked: true }, () => {
+          this.swipeCard(onSwipeDirectionCallback);
+          this.zoomNextCard();
+        });
+      } else {
+        this.resetTopCard();
+      }
+      this.setState({ labelType: LABEL_TYPES.NONE });
     }
-    this.setState({ labelType: LABEL_TYPES.NONE });
   };
 
   getOnSwipeDirectionCallback = (animatedValueX, animatedValueY) => {
