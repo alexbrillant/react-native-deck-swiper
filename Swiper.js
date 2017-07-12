@@ -209,6 +209,10 @@ class Swiper extends React.Component {
         x: 0,
         y: 0
       });
+      this.state.pan.setOffset({
+        x: 0,
+        y: 0,
+      });
     }
   };
 
@@ -242,6 +246,10 @@ class Swiper extends React.Component {
     Animated.spring(this.state.pan, {
       toValue: 0
     }).start(cb);
+    this.state.pan.setOffset({
+      x: 0,
+      y: 0,
+    });
   };
 
   swipeBack = cb => {
