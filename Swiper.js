@@ -274,11 +274,11 @@ class Swiper extends React.Component {
   }
 
   swipeTop = () => {
-    this.swipeCard(this.props.onSwipedRight, 0, -this.props.verticalThreshold);
+    this.swipeCard(this.props.onSwipedTop, 0, -this.props.verticalThreshold);
   }
 
   swipeBottom = () => {
-    this.swipeCard(this.props.onSwipedRight, 0, this.props.verticalThreshold);
+    this.swipeCard(this.props.onSwipedBottom, 0, this.props.verticalThreshold);
   }
 
   swipeCard = (onSwiped, x = this._animatedValueX, y = this._animatedValueY) => {
