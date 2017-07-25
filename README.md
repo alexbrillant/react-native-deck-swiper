@@ -5,10 +5,18 @@
 ```
 npm install react-native-deck-swiper --save
 ```
+
+## Usage with images (workaround)
+
+Rendering images in a card causes flickering. React Native's Image component handles image caching like browsers for the most part. This causes flickering. 
+
+Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) solves these issues.
+
 ## Preview
 
 ![App preview](/animation.gif)
 ![App preview2](/animation2.gif)
+
 
 ## Props
 
@@ -137,6 +145,10 @@ To trigger imperative animations, you can use a reference to the Swiper componen
 
 | Props    | arguments   | description                                                                                             |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|
+| swipeLeft |  | swipe left to the next card |
+| swipeRight |  | swipe right to the next card |
+| swipeTop |  | swipe top to the next card |
+| swipeBottom |  | swipe bottom to the next card |
 | swipeBack | callback(previousCardIndex) | swipe to the previous card |
 | jumpToCardIndex | cardIndex | set the current card index |
 
