@@ -110,6 +110,9 @@ class Swiper extends React.Component {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => false,
+
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => gestureState.dx != 0 && gestureState.dy != 0,
+
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: this.onPanResponderMove,
       onPanResponderRelease: this.onPanResponderRelease,
@@ -194,6 +197,7 @@ class Swiper extends React.Component {
       });
 
       return;
+
     }
 
     const { horizontalThreshold, verticalThreshold } = this.props;
@@ -274,11 +278,11 @@ class Swiper extends React.Component {
   }
 
   swipeTop = () => {
-    this.swipeCard(this.props.onSwipedRight, 0, -this.props.verticalThreshold);
+    this.swipeCard(this.props.onSwipedTop, 0, -this.props.verticalThreshold);
   }
 
   swipeBottom = () => {
-    this.swipeCard(this.props.onSwipedRight, 0, this.props.verticalThreshold);
+    this.swipeCard(this.props.onSwipedBottom, 0, this.props.verticalThreshold);
   }
 
   swipeCard = (onSwiped, x = this._animatedValueX, y = this._animatedValueY) => {
