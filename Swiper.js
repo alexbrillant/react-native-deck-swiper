@@ -48,6 +48,7 @@ class Swiper extends React.Component {
       panResponderLocked: false,
       labelType: LABEL_TYPES.NONE
     };
+
     this.state.secondCardIndex = this.calculateSecondCardIndex(props.cardIndex);
     this.state.previousCardIndex = this.calculatePreviousCardIndex(props.cardIndex);
   }
@@ -73,8 +74,10 @@ class Swiper extends React.Component {
   componentWillMount() {
     this._animatedValueX = 0;
     this._animatedValueY = 0;
+
     this.state.pan.x.addListener(value => (this._animatedValueX = value.value));
     this.state.pan.y.addListener(value => (this._animatedValueY = value.value));
+
     this.initializeCardStyle();
     this.initializePanResponder();
   }
@@ -174,10 +177,12 @@ class Swiper extends React.Component {
       disableTopSwipe
     } = this.props;
 
-    const isSwipingLeft = this._animatedValueX < -horizontalThreshold;
-    const isSwipingRight = this._animatedValueX > horizontalThreshold;
-    const isSwipingTop = this._animatedValueY < -verticalThreshold;
-    const isSwipingBottom = this._animatedValueY > verticalThreshold;
+    const {
+      isSwipingLeft,
+      isSwipingRight,
+      isSwipingTop,
+      isSwipingBottom
+    } = this.getSwipeDirection(this._animatedValueX, this._animatedValueY);
 
     return (isSwipingLeft && !disableLeftSwipe) ||
       (isSwipingRight && !disableRightSwipe) ||
@@ -197,12 +202,13 @@ class Swiper extends React.Component {
       });
 
       return;
-
     }
 
     const { horizontalThreshold, verticalThreshold } = this.props;
+
     const animatedValueX = Math.abs(this._animatedValueX);
     const animatedValueY = Math.abs(this._animatedValueY);
+
     const isSwiping = animatedValueX > horizontalThreshold ||
       animatedValueY > verticalThreshold;
 
@@ -233,10 +239,12 @@ class Swiper extends React.Component {
       onSwipedBottom
     } = this.props;
 
-    const isSwipingLeft = animatedValueX < -horizontalThreshold;
-    const isSwipingRight = animatedValueX > horizontalThreshold;
-    const isSwipingTop = animatedValueY < -verticalThreshold;
-    const isSwipingBottom = animatedValueY > verticalThreshold;
+    const {
+      isSwipingLeft,
+      isSwipingRight,
+      isSwipingTop,
+      isSwipingBottom
+    } = this.getSwipeDirection(animatedValueX, animatedValueY)
 
     if (isSwipingRight) {
       return onSwipedRight;
@@ -249,10 +257,34 @@ class Swiper extends React.Component {
     }
   };
 
+  mustDecrementCardIndex(animatedValueX, animatedValueY) {
+    const {
+      isSwipingLeft,
+      isSwipingRight,
+      isSwipingTop,
+      isSwipingBottom
+    } = this.getSwipeDirection(animatedValueX, animatedValueY)
+
+    return (isSwipingLeft && this.props.goBackToPreviousCardOnSwipeLeft) ||
+      (isSwipingRight && this.props.goBackToPreviousCardOnSwipeRight) ||
+      (isSwipingTop && this.props.goBackToPreviousCardOnSwipeTop) ||
+      (isSwipingBottom && this.props.goBackToPreviousCardOnSwipeBottom)
+  }
+
+  getSwipeDirection(animatedValueX, animatedValueY) {
+    const isSwipingLeft = animatedValueX < -this.props.horizontalThreshold;
+    const isSwipingRight = animatedValueX > this.props.horizontalThreshold;
+    const isSwipingTop = animatedValueY < -this.props.verticalThreshold;
+    const isSwipingBottom = animatedValueY > this.props.verticalThreshold;
+
+    return { isSwipingLeft, isSwipingRight, isSwipingTop, isSwipingBottom }
+  }
+
   resetTopCard = cb => {
     Animated.spring(this.state.pan, {
       toValue: 0
     }).start(cb);
+
     this.state.pan.setOffset({
       x: 0,
       y: 0,
@@ -269,23 +301,23 @@ class Swiper extends React.Component {
     });
   };
 
-  swipeLeft = () => {
-    this.swipeCard(this.props.onSwipedLeft, -this.props.horizontalThreshold);
+  swipeLeft = (mustDecrementCardIndex = false) => {
+    this.swipeCard(this.props.onSwipedLeft, -this.props.horizontalThreshold, 0, mustDecrementCardIndex);
   }
 
-  swipeRight = () => {
-    this.swipeCard(this.props.onSwipedRight, this.props.horizontalThreshold);
+  swipeRight = (mustDecrementCardIndex = false) => {
+    this.swipeCard(this.props.onSwipedRight, this.props.horizontalThreshold, 0, mustDecrementCardIndex);
   }
 
-  swipeTop = () => {
-    this.swipeCard(this.props.onSwipedTop, 0, -this.props.verticalThreshold);
+  swipeTop = (mustDecrementCardIndex = false) => {
+    this.swipeCard(this.props.onSwipedTop, 0, -this.props.verticalThreshold, mustDecrementCardIndex);
   }
 
-  swipeBottom = () => {
-    this.swipeCard(this.props.onSwipedBottom, 0, this.props.verticalThreshold);
+  swipeBottom = (mustDecrementCardIndex = false) => {
+    this.swipeCard(this.props.onSwipedBottom, 0, this.props.verticalThreshold, mustDecrementCardIndex);
   }
 
-  swipeCard = (onSwiped, x = this._animatedValueX, y = this._animatedValueY) => {
+  swipeCard = (onSwiped, x = this._animatedValueX, y = this._animatedValueY, mustDecrementCardIndex = false) => {
     Animated.timing(this.state.pan, {
       toValue: {
         x: x * 4.5,
@@ -293,19 +325,13 @@ class Swiper extends React.Component {
       },
       duration: this.props.swipeAnimationDuration
     }).start(() => {
+      const { horizontalThreshold, verticalThreshold } = this.props;
 
-      const simpleSwiperStatus = this.props.simpleSwiper;
-      if(simpleSwiperStatus){
+      mustDecrementCardIndex = mustDecrementCardIndex ? true : this.mustDecrementCardIndex(this._animatedValueX, this._animatedValueY)
 
-              const { horizontalThreshold, verticalThreshold } = this.props;
-              const isSwipingRight = this._animatedValueX > horizontalThreshold;
-
-              if(isSwipingRight){
-                this.decrementCardIndex(onSwiped);
-              }else {
-                this.incrementCardIndex(onSwiped);
-              }
-      }else {
+      if (mustDecrementCardIndex) {
+        this.decrementCardIndex(onSwiped);
+      } else {
         this.incrementCardIndex(onSwiped);
       }
     });
@@ -377,6 +403,7 @@ class Swiper extends React.Component {
   resetPanAndScale = () => {
     this.state.pan.setValue({ x: 0, y: 0 });
     this.state.scale.setValue(this.props.secondCardZoom);
+
     this.state.previousCardX.setValue(this.props.previousCardInitialPositionX);
     this.state.previousCardY.setValue(this.props.previousCardInitialPositionY);
   };
@@ -703,7 +730,10 @@ Swiper.propTypes = {
   verticalThreshold: PropTypes.number,
   zoomAnimationDuration: PropTypes.number,
   zoomFriction: PropTypes.number,
-  simpleSwiper: PropTypes.bool
+  goBackToPreviousCardOnSwipeLeft: PropTypes.bool,
+  goBackToPreviousCardOnSwipeRight: PropTypes.bool,
+  goBackToPreviousCardOnSwipeTop: PropTypes.bool,
+  goBackToPreviousCardOnSwipeBottom: PropTypes.bool,
 };
 
 Swiper.defaultProps = {
@@ -764,7 +794,10 @@ Swiper.defaultProps = {
   verticalThreshold: height / 5,
   zoomAnimationDuration: 100,
   zoomFriction: 7,
-  simpleSwiper: false
+  goBackToPreviousCardOnSwipeLeft: false,
+  goBackToPreviousCardOnSwipeRight: false,
+  goBackToPreviousCardOnSwipeTop: false,
+  goBackToPreviousCardOnSwipeBottom: false,
 };
 
 export default Swiper;
