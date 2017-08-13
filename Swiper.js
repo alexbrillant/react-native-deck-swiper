@@ -110,7 +110,9 @@ class Swiper extends React.Component {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (event, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => false,
+
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => gestureState.dx != 0 && gestureState.dy != 0,
+
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: this.onPanResponderMove,
       onPanResponderRelease: this.onPanResponderRelease,
@@ -195,6 +197,7 @@ class Swiper extends React.Component {
       });
 
       return;
+
     }
 
     const { horizontalThreshold, verticalThreshold } = this.props;
@@ -290,7 +293,21 @@ class Swiper extends React.Component {
       },
       duration: this.props.swipeAnimationDuration
     }).start(() => {
-      this.incrementCardIndex(onSwiped);
+
+      const simpleSwiperStatus = this.props.simpleSwiper;
+      if(simpleSwiperStatus){
+
+              const { horizontalThreshold, verticalThreshold } = this.props;
+              const isSwipingRight = this._animatedValueX > horizontalThreshold;
+
+              if(isSwipingRight){
+                this.decrementCardIndex(onSwiped);
+              }else {
+                this.incrementCardIndex(onSwiped);
+              }
+      }else {
+        this.incrementCardIndex(onSwiped);
+      }
     });
   };
 
@@ -686,6 +703,7 @@ Swiper.propTypes = {
   verticalThreshold: PropTypes.number,
   zoomAnimationDuration: PropTypes.number,
   zoomFriction: PropTypes.number,
+  simpleSwiper: PropTypes.bool
 };
 
 Swiper.defaultProps = {
@@ -745,7 +763,8 @@ Swiper.defaultProps = {
   verticalSwipe: true,
   verticalThreshold: height / 5,
   zoomAnimationDuration: 100,
-  zoomFriction: 7
+  zoomFriction: 7,
+  simpleSwiper: false
 };
 
 export default Swiper;
