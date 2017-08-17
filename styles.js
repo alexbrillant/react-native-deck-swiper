@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   card: {
@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     padding: 10,
     overflow: 'hidden'
   }
-});
+})
 
-export default styles;
+export default styles
