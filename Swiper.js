@@ -1,15 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  PanResponder,
-  Easing,
-  Slider,
-  Text,
-  View,
-  Dimensions,
-  Animated
-} from 'react-native'
-import styles, { circleSize } from './styles'
+import { PanResponder, Text, View, Dimensions, Animated } from 'react-native'
+import styles from './styles'
 
 const { height, width } = Dimensions.get('window')
 const LABEL_TYPES = {
@@ -58,9 +50,9 @@ class Swiper extends React.Component {
 
   hex2rgba = (hex, opacity = 1) => {
     hex = hex.replace('#', '')
-    r = parseInt(hex.substring(0, 2), 16)
-    g = parseInt(hex.substring(2, 4), 16)
-    b = parseInt(hex.substring(4, 6), 16)
+    const r = parseInt(hex.substring(0, 2), 16)
+    const g = parseInt(hex.substring(2, 4), 16)
+    const b = parseInt(hex.substring(4, 6), 16)
     return `'rgba(${r},${g},${b},${opacity})'`
   }
 
@@ -118,7 +110,7 @@ class Swiper extends React.Component {
       onMoveShouldSetPanResponder: (event, gestureState) => false,
 
       onMoveShouldSetPanResponderCapture: (evt, gestureState) =>
-        gestureState.dx != 0 && gestureState.dy != 0,
+        gestureState.dx !== 0 && gestureState.dy !== 0,
 
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: this.onPanResponderMove,
@@ -176,8 +168,6 @@ class Swiper extends React.Component {
 
   validPanResponderRelease = () => {
     const {
-      horizontalThreshold,
-      verticalThreshold,
       disableBottomSwipe,
       disableLeftSwipe,
       disableRightSwipe,
@@ -240,8 +230,6 @@ class Swiper extends React.Component {
 
   getOnSwipeDirectionCallback = (animatedValueX, animatedValueY) => {
     const {
-      horizontalThreshold,
-      verticalThreshold,
       onSwipedLeft,
       onSwipedRight,
       onSwipedTop,
@@ -361,8 +349,6 @@ class Swiper extends React.Component {
       },
       duration: this.props.swipeAnimationDuration
     }).start(() => {
-      const { horizontalThreshold, verticalThreshold } = this.props
-
       mustDecrementCardIndex = mustDecrementCardIndex
         ? true
         : this.mustDecrementCardIndex(
