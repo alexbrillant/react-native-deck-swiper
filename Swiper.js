@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   PanResponder,
   Easing,
@@ -8,16 +8,16 @@ import {
   View,
   Dimensions,
   Animated
-} from "react-native";
-import styles, { circleSize } from "./styles";
+} from 'react-native';
+import styles, { circleSize } from './styles';
 
-const { height, width } = Dimensions.get("window");
+const { height, width } = Dimensions.get('window');
 const LABEL_TYPES = {
-  NONE: "none",
-  LEFT: "left",
-  RIGHT: "right",
-  TOP: "top",
-  BOTTOM: "bottom"
+  NONE: 'none',
+  LEFT: 'left',
+  RIGHT: 'right',
+  TOP: 'top',
+  BOTTOM: 'bottom'
 };
 
 class Swiper extends React.Component {
@@ -57,7 +57,7 @@ class Swiper extends React.Component {
   }
 
   hex2rgba = (hex, opacity = 1) => {
-    hex = hex.replace("#", "");
+    hex = hex.replace('#', '');
     r = parseInt(hex.substring(0, 2), 16);
     g = parseInt(hex.substring(2, 4), 16);
     b = parseInt(hex.substring(4, 6), 16);
@@ -478,17 +478,17 @@ class Swiper extends React.Component {
     switch (this.state.labelType) {
       case LABEL_TYPES.BOTTOM:
         dynamicStyles = {
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center"
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
         };
         break;
 
       case LABEL_TYPES.LEFT:
         dynamicStyles = {
-          flexDirection: "column",
-          alignItems: "flex-end",
-          justifyContent: "flex-start",
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          justifyContent: 'flex-start',
           marginTop: 30,
           marginLeft: -30
         };
@@ -496,9 +496,9 @@ class Swiper extends React.Component {
 
       case LABEL_TYPES.RIGHT:
         dynamicStyles = {
-          flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "flex-start",
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
           marginTop: 30,
           marginLeft: 30
         };
@@ -506,9 +506,9 @@ class Swiper extends React.Component {
 
       case LABEL_TYPES.TOP:
         dynamicStyles = {
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center"
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center'
         };
         break;
     }
@@ -793,7 +793,7 @@ Swiper.propTypes = {
 Swiper.defaultProps = {
   animateCardOpacity: false,
   animateOverlayLabelsOpacity: false,
-  backgroundColor: "#4FD0E9",
+  backgroundColor: '#4FD0E9',
   cardHorizontalMargin: 20,
   cardIndex: 0,
   cardStyle: {},
@@ -829,25 +829,25 @@ Swiper.defaultProps = {
     console.log(cardIndex);
   },
   onSwipedLeft: cardIndex => {
-    console.log("onSwipedLeft");
+    console.log('onSwipedLeft');
   },
   onSwipedRight: cardIndex => {
-    console.log("onSwipedRight");
+    console.log('onSwipedRight');
   },
   onSwipedTop: cardIndex => {
-    console.log("onSwipedTop");
+    console.log('onSwipedTop');
   },
   onSwipedBottom: cardIndex => {
-    console.log("onSwipedBottom");
+    console.log('onSwipedBottom');
   },
   onSwipedAll: () => {
-    console.log("onSwipedAll");
+    console.log('onSwipedAll');
   },
   outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
   outputCardOpacityRangeY: [0.8, 1, 1, 1, 0.8],
   outputOverlayLabelsOpacityRangeX: [1, 0, 0, 0, 1],
   outputOverlayLabelsOpacityRangeY: [1, 0, 0, 0, 1],
-  outputRotationRange: ["-10deg", "0deg", "10deg"],
+  outputRotationRange: ['-10deg', '0deg', '10deg'],
   overlayLabels: null,
   previousCardInitialPositionX: 0,
   previousCardInitialPositionY: -height,
