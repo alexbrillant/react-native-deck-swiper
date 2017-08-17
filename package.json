@@ -8,7 +8,7 @@
     "lint": "standard --verbose | snazzy",
     "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
     "format": "prettier-eslint \"./**/*.js\" --ignore \"./node_modules/**\" --write",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix Swiper.js index.js styles.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,13 @@
     "url": "https://github.com/alexbrillant/react-native-deck-swiper/issues"
   },
   "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
+  "dependencies": {
+    "prop-types": "15.5.10"
+  },
+  "peerDependencies": {
+    "react": "15.4.2",
+    "react-native": "0.41.2"
+  },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "eslint": "^4.4.1",
@@ -45,8 +52,6 @@
     "jest-cli": "^18.1.0",
     "prettier-eslint": "^6.4.2",
     "prettier-eslint-cli": "^4.1.1",
-    "react": "15.4.2",
-    "react-native": "0.41.2",
     "babel-jest": "18.0.0",
     "babel-preset-react-native": "1.9.1",
     "jest": "18.1.0",
@@ -54,9 +59,6 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "dependencies": {
-    "prop-types": "15.5.10"
   },
   "eslintConfig": {
     "parser": "babel-eslint",
