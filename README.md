@@ -5,10 +5,18 @@
 ```
 npm install react-native-deck-swiper --save
 ```
+
+## Usage with images (workaround)
+
+Rendering images in a card causes flickering. React Native's Image component handles image caching like browsers for the most part. This causes flickering. 
+
+Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) solves these issues.
+
 ## Preview
 
 ![App preview](/animation.gif)
 ![App preview2](/animation2.gif)
+
 
 ## Props
 
@@ -109,14 +117,17 @@ Demo inside the [Exemples Folder](https://github.com/alexbrillant/react-native-d
 }
 ```
 
-### Swipe back animation props
+### Swipe back to previous card props
+
+Make sure you set showSecondCard={false} for smoother and proper transitions while going back to previous card.
+
 
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| previousCardInitialPositionX | number | initial x position of the swipe back card | 0 |
-| previousCardInitialPositionY | number | initial y position of the swipe back card | -height |
-| swipeBackAnimationDuration | number | swipe back animation duration | 600 |
-| swipeBackFriction | number | swipe back spring animation friction | 11 |
+|goBackToPreviousCardOnSwipeLeft | bool | previous card is rendered on left swipe | false 
+|goBackToPreviousCardOnSwipeRight| bool | previous card is rendered on right swipe | false 
+|goBackToPreviousCardOnSwipeTop| bool | previous card is rendered on top swipe | false
+|goBackToPreviousCardOnSwipeBottom | bool |previous card is rendered on bottom swipe  | false
 
 ### Style props
 
@@ -127,7 +138,6 @@ Demo inside the [Exemples Folder](https://github.com/alexbrillant/react-native-d
 | marginBottom | number | marginBottom for the swiper container | 0 |
 | cardVerticalMargin | number | card vertical margin | 60 |
 | cardHorizontalMargin | number | card horizontal margin | 20 |
-| cardHorizontalMargin | number | card horizontal margin | 20 |
 | childrenOnTop | bool | render children on top or not | false |
 | cardStyle | node | override swipable card style | {} |
 
@@ -137,7 +147,10 @@ To trigger imperative animations, you can use a reference to the Swiper componen
 
 | Props    | arguments   | description                                                                                             |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|
-| swipeBack | callback(previousCardIndex) | swipe to the previous card |
+| swipeLeft | mustDecrementCardIndex = false | swipe left to the next card |
+| swipeRight | mustDecrementCardIndex = false  | swipe right to the next card |
+| swipeTop | mustDecrementCardIndex = false | swipe top to the next card |
+| swipeBottom | mustDecrementCardIndex = false  | swipe bottom to the next card |
 | jumpToCardIndex | cardIndex | set the current card index |
 
 ## Usage example
