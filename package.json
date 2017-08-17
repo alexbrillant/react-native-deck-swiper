@@ -36,7 +36,6 @@
     "eslint": "^4.4.1",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-react": "^5.0.0",
-    "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-json": "^1.2.0",
     "eslint-plugin-node": "^5.1.1",
@@ -63,20 +62,11 @@
     "parser": "babel-eslint",
     "extends": [
       "standard",
-      "standard-react",
-      "plugin:flowtype/recommended"
-    ],
-    "plugins": [
-      "flowtype"
+      "standard-react"
     ],
     "parserOptions": {
       "ecmaFeatures": {
         "jsx": true
-      }
-    },
-    "settings": {
-      "flowtype": {
-        "onlyFilesWithFlowAnnotation": true
       }
     }
   }
