@@ -1,12 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    position: "absolute"
+    position: 'absolute'
   },
   container: {
-    alignItems: "stretch",
+    alignItems: 'stretch',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -38,6 +38,6 @@ const styles = StyleSheet.create({
     padding: 10,
     overflow: 'hidden'
   }
-});
+})
 
-export default styles;
+export default styles
