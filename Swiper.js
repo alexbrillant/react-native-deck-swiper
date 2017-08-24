@@ -15,7 +15,7 @@ const LABEL_TYPES = {
 class Swiper extends React.Component {
   componentWillReceiveProps (newProps) {
     this.setState({
-      firstCardIndex: 0,
+      firstCardIndex: newProps.cardIndex || 0,
       cards: newProps.cards,
       previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
       previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
