@@ -39,8 +39,10 @@
         "react-native": "0.41.2"
     },
     "devDependencies": {
-        "babel-eslint": "^7.1.1",
-        "eslint": "^4.4.1",
+        "babel-eslint": "^7.2.3",
+        "babel-jest": "18.0.0",
+        "babel-preset-react-native": "1.9.1",
+        "eslint": "^3.19.0",
         "eslint-config-standard": "^10.2.1",
         "eslint-config-standard-react": "^5.0.0",
         "eslint-plugin-import": "^2.7.0",
@@ -49,12 +51,10 @@
         "eslint-plugin-promise": "^3.5.0",
         "eslint-plugin-react": "^7.2.1",
         "eslint-plugin-standard": "^3.0.1",
+        "jest": "18.1.0",
         "jest-cli": "^18.1.0",
         "prettier-eslint": "^6.4.2",
         "prettier-eslint-cli": "^4.1.1",
-        "babel-jest": "18.0.0",
-        "babel-preset-react-native": "1.9.1",
-        "jest": "18.1.0",
         "react-test-renderer": "15.4.2"
     },
     "jest": {
