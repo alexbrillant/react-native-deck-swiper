@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import Swiper from "react-native-deck-swiper";
-import { StyleSheet, View, Text, Image, Button } from "react-native";
+import React, { Component } from 'react'
+import Swiper from 'react-native-deck-swiper'
+import { StyleSheet, View, Text, Button } from 'react-native'
 
 export default class Exemple extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-      cards: ["1", "2", "3"],
+      cards: ['1', '2', '3'],
       swipedAllCards: false,
-      swipeDirection: "",
+      swipeDirection: '',
       isSwipingBack: false,
       cardIndex: 0
-    };
+    }
   }
 
   renderCard = card => {
@@ -19,22 +19,22 @@ export default class Exemple extends Component {
       <View style={styles.card}>
         <Text style={styles.text}>{card}</Text>
       </View>
-    );
+    )
   };
 
   onSwipedAllCards = () => {
     this.setState({
       swipedAllCards: true
-    });
+    })
   };
 
   swipeBack = () => {
     if (!this.state.isSwipingBack) {
       this.setIsSwipingBack(true, () => {
         this.swiper.swipeBack(() => {
-          this.setIsSwipingBack(false);
-        });
-      });
+          this.setIsSwipingBack(false)
+        })
+      })
     }
   };
 
@@ -44,19 +44,19 @@ export default class Exemple extends Component {
         isSwipingBack: isSwipingBack
       },
       cb
-    );
+    )
   };
 
   jumpTo = () => {
-    this.swiper.jumpToCardIndex(2);
+    this.swiper.jumpToCardIndex(2)
   };
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <Swiper
           ref={swiper => {
-            this.swiper = swiper;
+            this.swiper = swiper
           }}
           onSwiped={this.onSwiped}
           cards={this.state.cards}
@@ -94,11 +94,11 @@ export default class Exemple extends Component {
           animateOverlayLabelsOpacity
           animateCardOpacity
         >
-          <Button onPress={this.swipeBack} title="Swipe Back" />
-          <Button onPress={this.jumpTo} title="Jump to last index" />
+          <Button onPress={this.swipeBack} title='Swipe Back' />
+          <Button onPress={this.jumpTo} title='Jump to last index' />
         </Swiper>
-      </View >
-    );
+      </View>
+    )
   }
 }
 
@@ -108,25 +108,25 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF"
+    backgroundColor: '#F5FCFF'
   },
   card: {
     flex: 1,
     borderRadius: 4,
     borderWidth: 2,
-    borderColor: "#E8E8E8",
-    justifyContent: "center",
-    backgroundColor: "white"
+    borderColor: '#E8E8E8',
+    justifyContent: 'center',
+    backgroundColor: 'white'
   },
   text: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 50,
-    backgroundColor: "transparent"
+    backgroundColor: 'transparent'
   },
   done: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 30,
-    color: "white",
-    backgroundColor: "transparent"
+    color: 'white',
+    backgroundColor: 'transparent'
   }
-});
+})

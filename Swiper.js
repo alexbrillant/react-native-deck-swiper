@@ -13,7 +13,7 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends React.Component {
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     this.setState({
       firstCardIndex: newProps.cardIndex || 0,
       cards: newProps.cards,
@@ -27,7 +27,7 @@ class Swiper extends React.Component {
     })
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -66,7 +66,7 @@ class Swiper extends React.Component {
     return atFirstIndex ? this.state.cards.length - 1 : firstCardIndex - 1
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this._animatedValueX = 0
     this._animatedValueY = 0
 
@@ -77,7 +77,7 @@ class Swiper extends React.Component {
     this.initializePanResponder()
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.state.pan.x.removeAllListeners()
     this.state.pan.y.removeAllListeners()
   }
@@ -254,7 +254,7 @@ class Swiper extends React.Component {
     }
   }
 
-  mustDecrementCardIndex(animatedValueX, animatedValueY) {
+  mustDecrementCardIndex (animatedValueX, animatedValueY) {
     const {
       isSwipingLeft,
       isSwipingRight,
@@ -270,7 +270,7 @@ class Swiper extends React.Component {
     )
   }
 
-  getSwipeDirection(animatedValueX, animatedValueY) {
+  getSwipeDirection (animatedValueX, animatedValueY) {
     const isSwipingLeft = animatedValueX < -this.props.horizontalThreshold
     const isSwipingRight = animatedValueX > this.props.horizontalThreshold
     const isSwipingTop = animatedValueY < -this.props.verticalThreshold
@@ -309,7 +309,6 @@ class Swiper extends React.Component {
       0,
       mustDecrementCardIndex
     )
-
   }
 
   swipeRight = (mustDecrementCardIndex = false) => {
@@ -321,7 +320,6 @@ class Swiper extends React.Component {
       0,
       mustDecrementCardIndex
     )
-
   }
 
   swipeTop = (mustDecrementCardIndex = false) => {
@@ -605,7 +603,7 @@ class Swiper extends React.Component {
       outputRange: this.props.outputRotationRange
     })
 
-  render() {
+  render () {
     return (
       <View
         style={[
@@ -625,7 +623,7 @@ class Swiper extends React.Component {
     )
   }
 
-  renderChildren() {
+  renderChildren = () => {
     const { childrenOnTop, children } = this.props
 
     let zIndex = 1
