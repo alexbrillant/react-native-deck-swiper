@@ -48,7 +48,7 @@ export default class Exemple extends Component {
   };
 
   jumpTo = () => {
-    this.swiper.jumpToCardIndex(2)
+    this.swiper.swipeLeft()
   };
 
   render () {
@@ -59,12 +59,12 @@ export default class Exemple extends Component {
             this.swiper = swiper
           }}
           onSwiped={this.onSwiped}
+          onTapCard={this.jumpTo}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={80}
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}
-          showSecondCard={false}
           overlayLabels={{
             bottom: {
               title: 'BLEAH',
