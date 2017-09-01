@@ -23,7 +23,8 @@ class Swiper extends React.Component {
       secondCardIndex: newProps.cards.length === 1 ? 0 : 1,
       previousCardIndex:
       newProps.cards.length === 1 ? 0 : newProps.cards.length - 1,
-      panResponderLocked: newProps.cards && newProps.cards.length === 0
+      panResponderLocked: newProps.cards && newProps.cards.length === 0,
+      slideGesture: false,
     })
   }
 
@@ -39,7 +40,8 @@ class Swiper extends React.Component {
       previousCardY: new Animated.Value(props.previousCardInitialPositionY),
       swipedAllCards: false,
       panResponderLocked: false,
-      labelType: LABEL_TYPES.NONE
+      labelType: LABEL_TYPES.NONE,
+      slideGesture: false,
     }
 
     this.state.secondCardIndex = this.calculateSecondCardIndex(props.cardIndex)
@@ -146,6 +148,10 @@ class Swiper extends React.Component {
       this.setState({ labelType: LABEL_TYPES.NONE })
     }
 
+    this.setState({
+      slideGesture:true
+    })
+
     return Animated.event([null, this.createAnimatedEvent()])(
       event,
       gestureState
@@ -164,6 +170,7 @@ class Swiper extends React.Component {
       x: 0,
       y: 0
     })
+
   }
 
   validPanResponderRelease = () => {
@@ -225,7 +232,14 @@ class Swiper extends React.Component {
       this.resetTopCard()
     }
 
-    this.setState({ labelType: LABEL_TYPES.NONE })
+    if (!this.state.slideGesture) {
+      this.props.onTapCard(this.state.firstCardIndex);
+    }
+
+    this.setState({
+      labelType: LABEL_TYPES.NONE,
+      slideGesture: false
+    })
   }
 
   getOnSwipeDirectionCallback = (animatedValueX, animatedValueY) => {
@@ -767,6 +781,7 @@ Swiper.propTypes = {
   onSwipedLeft: PropTypes.func,
   onSwipedRight: PropTypes.func,
   onSwipedTop: PropTypes.func,
+  onTapCard: PropTypes.func,
   outputCardOpacityRangeX: PropTypes.array,
   outputCardOpacityRangeY: PropTypes.array,
   outputOverlayLabelsOpacityRangeX: PropTypes.array,
@@ -844,6 +859,9 @@ Swiper.defaultProps = {
   },
   onSwipedAll: () => {
     console.log('onSwipedAll')
+  },
+  onTapCard: (cardIndex) => {
+    console.log('Tapped card at ' + cardIndex)
   },
   outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
   outputCardOpacityRangeY: [0.8, 1, 1, 1, 0.8],

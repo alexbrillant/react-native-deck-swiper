@@ -32,6 +32,7 @@ Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-i
 | onSwipedRight | func | function to be called when a card is swiped right. it receives the swiped card index |  | (cardIndex) => {} |
 | onSwipedTop | func | function to be called when a card is swiped top. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | | (cardIndex) => {} |
+| onTapCard | func | function to be called when tapping a card. it receives the tapped card index | | (cardIndex) => {} |
 | cardIndex | number | cardIndex to start with | | 0 |
 | infinite | bool | keep swiping indefinitely | | false |
 | horizontalSwipe | bool | enable/disable horizontal swiping | | true |
