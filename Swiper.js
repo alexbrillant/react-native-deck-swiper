@@ -24,7 +24,7 @@ class Swiper extends React.Component {
       previousCardIndex:
       newProps.cards.length === 1 ? 0 : newProps.cards.length - 1,
       panResponderLocked: newProps.cards && newProps.cards.length === 0,
-      slideGesture: false,
+      slideGesture: false
     })
   }
 
@@ -41,7 +41,7 @@ class Swiper extends React.Component {
       swipedAllCards: false,
       panResponderLocked: false,
       labelType: LABEL_TYPES.NONE,
-      slideGesture: false,
+      slideGesture: false
     }
 
     this.state.secondCardIndex = this.calculateSecondCardIndex(props.cardIndex)
@@ -149,7 +149,7 @@ class Swiper extends React.Component {
     }
 
     this.setState({
-      slideGesture:true
+      slideGesture: true
     })
 
     return Animated.event([null, this.createAnimatedEvent()])(
@@ -170,7 +170,6 @@ class Swiper extends React.Component {
       x: 0,
       y: 0
     })
-
   }
 
   validPanResponderRelease = () => {
@@ -233,7 +232,7 @@ class Swiper extends React.Component {
     }
 
     if (!this.state.slideGesture) {
-      this.props.onTapCard(this.state.firstCardIndex);
+      this.props.onTapCard(this.state.firstCardIndex)
     }
 
     this.setState({
@@ -669,6 +668,7 @@ class Swiper extends React.Component {
     return (
       <Animated.View
         style={swipableCardStyle}
+        key={firstCardIndex}
         {...this._panResponder.panHandlers}
       >
         {renderOverlayLabel}
@@ -689,7 +689,7 @@ class Swiper extends React.Component {
     const lastCardOrSwipedAllCards =
       secondCardIndex === 0 || this.state.swipedAllCards
     if (notInfinite && lastCardOrSwipedAllCards) {
-      return <Animated.View />
+      return <Animated.View key={secondCardIndex} />
     }
 
     return (
@@ -706,7 +706,7 @@ class Swiper extends React.Component {
     const previousCardStyle = this.calculateSwipeBackCardStyle()
     const previousCard = this.props.renderCard(previousCardContent)
     return (
-      <Animated.View style={previousCardStyle}>
+      <Animated.View key={previousCardIndex} style={previousCardStyle}>
         {previousCard}
       </Animated.View>
     )
