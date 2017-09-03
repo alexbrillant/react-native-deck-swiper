@@ -26,6 +26,15 @@ Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-i
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|:------------|
 | cards    | array | array of data for the cards to be rendered | required |
 | renderCard    | func(cardData) | function to render the card based on the data | required |
+| cardIndex | number | cardIndex to start with | | 0 |
+| infinite | bool | keep swiping indefinitely | | false |
+| horizontalSwipe | bool | enable/disable horizontal swiping | | true |
+| verticalSwipe | bool | enable/disable vertical swiping | | true |
+| showSecondCard | bool | enable/disable second card while swiping | | true |
+
+### Event callbacks
+| Props    | type   | description                                                                                             | default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | onSwipedAll| func | function to be called when all cards have been swiped | | () => {} |
 | onSwiped | func | function to be called when a card is swiped. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedLeft | func | function to be called when a card is swiped left. it receives the swiped card index | | (cardIndex) => {} |
@@ -33,11 +42,6 @@ Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-i
 | onSwipedTop | func | function to be called when a card is swiped top. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | | (cardIndex) => {} |
 | onTapCard | func | function to be called when tapping a card. it receives the tapped card index | | (cardIndex) => {} |
-| cardIndex | number | cardIndex to start with | | 0 |
-| infinite | bool | keep swiping indefinitely | | false |
-| horizontalSwipe | bool | enable/disable horizontal swiping | | true |
-| verticalSwipe | bool | enable/disable vertical swiping | | true |
-| showSecondCard | bool | enable/disable second card while swiping | | true |
 
 ### Swipe animation props
 
