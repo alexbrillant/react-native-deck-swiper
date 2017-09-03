@@ -6,6 +6,20 @@
 npm install react-native-deck-swiper --save
 ```
 
+## Overview
+
+- [x] Rotation animation
+- [x] Opacity animation 
+- [x] Zoom animation
+- [x] Overlay labels
+- [x] Show next card while swiping
+- [x] Swipe event callbacks
+- [x] Trigger swipe animations programmatically
+- [x] Jump to a card index
+- [x] Swipe to the previous card
+- [ ] Swipe back to the previous card with a custom animation
+- [ ] Underlaying cards offset
+
 ## Preview
 
 ![App preview](/animation.gif)
