@@ -631,7 +631,7 @@ class Swiper extends React.Component {
         {this.renderChildren()}
         {this.renderFirstCard()}
         {this.props.showSecondCard ? this.renderSecondCard() : null}
-        {this.renderSwipeBackCard()}
+        {this.props.swipeBackCard ? this.renderSwipeBackCard() : null}
       </View>
     )
   }
@@ -796,6 +796,7 @@ Swiper.propTypes = {
   showSecondCard: PropTypes.bool,
   swipeAnimationDuration: PropTypes.number,
   swipeBackAnimationDuration: PropTypes.number,
+  swipeBackCard: PropTypes.bool,
   swipeBackFriction: PropTypes.number,
   verticalSwipe: PropTypes.bool,
   verticalThreshold: PropTypes.number,
@@ -875,6 +876,7 @@ Swiper.defaultProps = {
   showSecondCard: true,
   swipeAnimationDuration: 350,
   swipeBackAnimationDuration: 600,
+  swipeBackCard: false,
   swipeBackFriction: 11,
   verticalSwipe: true,
   verticalThreshold: height / 5,
