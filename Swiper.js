@@ -693,7 +693,7 @@ class Swiper extends React.Component {
     }
 
     return (
-      <Animated.View style={secondCardZoomStyle}>
+      <Animated.View key={secondCardIndex} style={secondCardZoomStyle}>
         {secondCard}
       </Animated.View>
     )
