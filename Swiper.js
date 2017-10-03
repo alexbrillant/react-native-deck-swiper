@@ -148,9 +148,17 @@ class Swiper extends React.Component {
       this.setState({ labelType: LABEL_TYPES.NONE })
     }
 
-    this.setState({
-      slideGesture: true
-    })
+    const { onTapCardDeadZone } = this.props;
+    if (
+      this._animatedValueX < -onTapCardDeadZone ||
+      this._animatedValueX > onTapCardDeadZone ||
+      this._animatedValueY < -onTapCardDeadZone ||
+      this._animatedValueY > onTapCardDeadZone
+    ) {
+      this.setState({
+        slideGesture: true
+      })
+    }
 
     return Animated.event([null, this.createAnimatedEvent()])(
       event,
@@ -782,6 +790,7 @@ Swiper.propTypes = {
   onSwipedRight: PropTypes.func,
   onSwipedTop: PropTypes.func,
   onTapCard: PropTypes.func,
+  onTapCardDeadZone: PropTypes.number,
   outputCardOpacityRangeX: PropTypes.array,
   outputCardOpacityRangeY: PropTypes.array,
   outputOverlayLabelsOpacityRangeX: PropTypes.array,
@@ -864,6 +873,7 @@ Swiper.defaultProps = {
   onTapCard: (cardIndex) => {
     console.log('Tapped card at ' + cardIndex)
   },
+  onTapCardDeadZone: 5,
   outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
   outputCardOpacityRangeY: [0.8, 1, 1, 1, 0.8],
   outputOverlayLabelsOpacityRangeX: [1, 0, 0, 0, 1],
