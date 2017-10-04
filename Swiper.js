@@ -458,71 +458,22 @@ class Swiper extends React.Component {
   }
 
   calculateOverlayLabelStyle = () => {
-    let externalStyles = styles.overlayLabel
-    let dynamicStyles = {}
-    const labelProps = this.props.overlayLabels[this.state.labelType]
+    let overlayLabelStyle = this.props.overlayLabels[this.state.labelType].style.label
 
-    if (labelProps && this.state.labelType !== LABEL_TYPES.NONE) {
-      dynamicStyles = {
-        backgroundColor: this.hex2rgba(
-          labelProps.swipeColor,
-          labelProps.backgroundOpacity
-        ),
-        borderColor: labelProps.swipeColor,
-        color: labelProps.fontColor,
-        borderWidth: 1
-      }
-    } else {
-      externalStyles = styles.hideOverlayLabel
+    if (this.state.labelType === LABEL_TYPES.NONE) {
+      overlayLabelStyle = styles.hideOverlayLabel
     }
 
-    return [externalStyles, dynamicStyles]
+    return [this.props.overlayLabelStyle, overlayLabelStyle]
   }
 
   calculateOverlayLabelWrapperStyle = () => {
-    let dynamicStyles = {}
-    switch (this.state.labelType) {
-      case LABEL_TYPES.BOTTOM:
-        dynamicStyles = {
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }
-        break
-
-      case LABEL_TYPES.LEFT:
-        dynamicStyles = {
-          flexDirection: 'column',
-          alignItems: 'flex-end',
-          justifyContent: 'flex-start',
-          marginTop: 30,
-          marginLeft: -30
-        }
-        break
-
-      case LABEL_TYPES.RIGHT:
-        dynamicStyles = {
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          justifyContent: 'flex-start',
-          marginTop: 30,
-          marginLeft: 30
-        }
-        break
-
-      case LABEL_TYPES.TOP:
-        dynamicStyles = {
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }
-        break
-    }
+    let dynamicStyles = this.props.overlayLabels[this.state.labelType].style.wrapper
 
     const opacity = this.props.animateOverlayLabelsOpacity
       ? this.interpolateOverlayLabelsOpacity()
       : 1
-    return [styles.overlayLabelWrapper, dynamicStyles, { opacity }]
+    return [this.props.overlayLabelWrapperStyle, dynamicStyles, { opacity }]
   }
 
   calculateSwipableCardStyle = () => {
@@ -789,6 +740,8 @@ Swiper.propTypes = {
   outputRotationRange: PropTypes.array,
   outputCardOpacityRange: PropTypes.array,
   overlayLabels: PropTypes.object,
+  overlayLabelStyle: PropTypes.object,
+  overlayLabelWrapperStyle: PropTypes.object,
   previousCardInitialPositionX: PropTypes.number,
   previousCardInitialPositionY: PropTypes.number,
   renderCard: PropTypes.func.isRequired,
@@ -870,6 +823,8 @@ Swiper.defaultProps = {
   outputOverlayLabelsOpacityRangeY: [1, 0, 0, 0, 1],
   outputRotationRange: ['-10deg', '0deg', '10deg'],
   overlayLabels: null,
+  overlayLabelStyle: styles.overlayLabel,
+  overlayLabelWrapperStyle: styles.overlayLabelWrapper,
   previousCardInitialPositionX: 0,
   previousCardInitialPositionY: -height,
   secondCardZoom: 0.97,

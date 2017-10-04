@@ -96,35 +96,104 @@ npm install react-native-deck-swiper --save
 ### Swipe overlay labels
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| overlayLabels| object | swipe labels info | null, see below for format |
+| overlayLabels| object | swipe labels title and style | null, see below for format |
+| overlayLabelStyle | object | swipe labels style | null, see below for format |
+| overlayLabelWrapperStyle | object   | overlay label wrapper style | see below for default | 
 
-Demo inside the [Exemples Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Exemples)
+### overlayLabelStyle
+```javascript
+{
+  fontSize: 45,
+  fontWeight: 'bold',
+  borderRadius: 10,
+  padding: 10,
+  overflow: 'hidden'
+}
+```
+
+### overlayLabelWrapperStyle default props: 
+```javascript
+{
+  position: 'absolute',
+  backgroundColor: 'transparent',
+  zIndex: 2,
+  flex: 1,
+  width: '100%',
+  height: '100%'
+} 
+```
+
+### overlayLabels default props : 
 
 ```javascript
 {
   bottom: {
     title: 'BLEAH',
-    swipeColor: '#946C8C',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }
   },
   left: {
     title: 'NOPE',
-    swipeColor: '#4A2359',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-start',
+        marginTop: 30,
+        marginLeft: -30
+      }
+    }
   },
   right: {
     title: 'LIKE',
-    swipeColor: '#FA9F8C',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        marginTop: 30,
+        marginLeft: 30
+      }
+    }
   },
   top: {
     title: 'SUPER LIKE',
-    swipeColor: '#FFC37B',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }
   }
 }
 ```
