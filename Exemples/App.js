@@ -68,27 +68,71 @@ export default class Exemple extends Component {
           overlayLabels={{
             bottom: {
               title: 'BLEAH',
-              swipeColor: '#9262C2',
-              backgroundOpacity: '0.75',
-              fontColor: '#FFF'
+              style: {
+                label: {
+                  backgroundColor: 'black',
+                  borderColor: 'black',
+                  color: 'white',
+                  borderWidth: 1
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
             },
             left: {
               title: 'NOPE',
-              swipeColor: '#FF6C6C',
-              backgroundOpacity: '0.75',
-              fontColor: '#FFF'
+              style: {
+                label: {
+                  backgroundColor: 'black',
+                  borderColor: 'black',
+                  color: 'white',
+                  borderWidth: 1
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  justifyContent: 'flex-start',
+                  marginTop: 30,
+                  marginLeft: -30
+                }
+              }
             },
             right: {
               title: 'LIKE',
-              swipeColor: '#4CCC93',
-              backgroundOpacity: '0.75',
-              fontColor: '#FFF'
+              style: {
+                label: {
+                  backgroundColor: 'black',
+                  borderColor: 'black',
+                  color: 'white',
+                  borderWidth: 1
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  justifyContent: 'flex-start',
+                  marginTop: 30,
+                  marginLeft: 30
+                }
+              }
             },
             top: {
               title: 'SUPER LIKE',
-              swipeColor: '#4EB8B7',
-              backgroundOpacity: '0.75',
-              fontColor: '#FFF'
+              style: {
+                label: {
+                  backgroundColor: 'black',
+                  borderColor: 'black',
+                  color: 'white',
+                  borderWidth: 1
+                },
+                wrapper: {
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }
+              }
             }
           }}
           animateOverlayLabelsOpacity
