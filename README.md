@@ -49,6 +49,7 @@ npm install react-native-deck-swiper --save
 | onSwipedTop | func | function to be called when a card is swiped top. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | | (cardIndex) => {} |
 | onTapCard | func | function to be called when tapping a card. it receives the tapped card index | | (cardIndex) => {} |
+| onTapCardDeadZone | number | maximum amount of movement before a tap is no longer recognized as a tap | 5 |
 
 ### Swipe animation props
 
