@@ -214,7 +214,7 @@ Make sure you set showSecondCard={false} for smoother and proper transitions whi
 
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| backgroundColor | number | background color for the view containing the cards | '#4FD0E9' |
+| backgroundColor | string | background color for the view containing the cards | '#4FD0E9' |
 | marginTop | number | marginTop for the swiper container | 0 |
 | marginBottom | number | marginBottom for the swiper container | 0 |
 | cardVerticalMargin | number | card vertical margin | 60 |
