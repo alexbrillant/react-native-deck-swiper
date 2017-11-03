@@ -129,7 +129,8 @@ npm install react-native-deck-swiper --save
 ```javascript
 {
   bottom: {
-    title: 'BLEAH',
+	element: <Text>BLEAH</Text> /* Optional */
+	title: 'BLEAH',
     style: {
       label: {
         backgroundColor: 'black',
@@ -145,7 +146,8 @@ npm install react-native-deck-swiper --save
     }
   },
   left: {
-    title: 'NOPE',
+	element: <Text>NOPE</Text> /* Optional */
+	title: 'NOPE',
     style: {
       label: {
         backgroundColor: 'black',
@@ -163,7 +165,8 @@ npm install react-native-deck-swiper --save
     }
   },
   right: {
-    title: 'LIKE',
+	element: <Text>LIKE</Text> /* Optional */
+	title: 'LIKE',
     style: {
       label: {
         backgroundColor: 'black',
@@ -181,7 +184,8 @@ npm install react-native-deck-swiper --save
     }
   },
   top: {
-    title: 'SUPER LIKE',
+	element: <Text>SUPER</Text> /* Optional */
+	title: 'SUPER LIKE',
     style: {
       label: {
         backgroundColor: 'black',
