@@ -20,11 +20,14 @@ class Swiper extends React.Component {
       previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
       previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
       swipedAllCards: false,
-      secondCardIndex: this.calculateSecondCardIndex(newProps.cardIndex || 0),
-      previousCardIndex: this.calculatePreviousCardIndex(newProps.cardIndex || 0),
       panResponderLocked: newProps.cards && newProps.cards.length === 0,
       slideGesture: false
-    })
+    },() => {
+      this.setState({
+        secondCardIndex: this.calculateSecondCardIndex(newProps.cardIndex || 0),
+        previousCardIndex: this.calculatePreviousCardIndex(newProps.cardIndex || 0)
+      })
+    });
   }
 
   constructor (props) {
