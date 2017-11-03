@@ -6,17 +6,24 @@
 npm install react-native-deck-swiper --save
 ```
 
-## Usage with images (workaround)
+## Overview
 
-Rendering images in a card causes flickering. React Native's Image component handles image caching like browsers for the most part. This causes flickering. 
-
-Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) solves these issues.
+- [x] Rotation animation
+- [x] Opacity animation 
+- [x] Zoom animation
+- [x] Overlay labels
+- [x] Show next card while swiping
+- [x] Swipe event callbacks
+- [x] Trigger swipe animations programmatically
+- [x] Jump to a card index
+- [x] Swipe to the previous card
+- [ ] Swipe back to the previous card with a custom animation
+- [ ] Underlaying cards offset
 
 ## Preview
 
 ![App preview](/animation.gif)
 ![App preview2](/animation2.gif)
-
 
 ## Props
 
@@ -26,17 +33,23 @@ Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-i
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|:------------|
 | cards    | array | array of data for the cards to be rendered | required |
 | renderCard    | func(cardData) | function to render the card based on the data | required |
+| cardIndex | number | cardIndex to start with | | 0 |
+| infinite | bool | keep swiping indefinitely | | false |
+| horizontalSwipe | bool | enable/disable horizontal swiping | | true |
+| verticalSwipe | bool | enable/disable vertical swiping | | true |
+| showSecondCard | bool | enable/disable second card while swiping | | true |
+
+### Event callbacks
+| Props    | type   | description                                                                                             | default                          |
+|:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
 | onSwipedAll| func | function to be called when all cards have been swiped | | () => {} |
 | onSwiped | func | function to be called when a card is swiped. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedLeft | func | function to be called when a card is swiped left. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedRight | func | function to be called when a card is swiped right. it receives the swiped card index |  | (cardIndex) => {} |
 | onSwipedTop | func | function to be called when a card is swiped top. it receives the swiped card index | | (cardIndex) => {} |
 | onSwipedBottom | func | function to be called when a card is swiped bottom. it receives the swiped card index | | (cardIndex) => {} |
-| cardIndex | number | cardIndex to start with | | 0 |
-| infinite | bool | keep swiping indefinitely | | false |
-| horizontalSwipe | bool | enable/disable horizontal swiping | | true |
-| verticalSwipe | bool | enable/disable vertical swiping | | true |
-| showSecondCard | bool | enable/disable second card while swiping | | true |
+| onTapCard | func | function to be called when tapping a card. it receives the tapped card index | | (cardIndex) => {} |
+| onTapCardDeadZone | number | maximum amount of movement before a tap is no longer recognized as a tap | 5 |
 
 ### Swipe animation props
 
@@ -84,57 +97,128 @@ Using [react-native-fast-image](https://github.com/DylanVann/react-native-fast-i
 ### Swipe overlay labels
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| overlayLabels| object | swipe labels info | null, see below for format |
+| overlayLabels| object | swipe labels title and style | null, see below for format |
+| overlayLabelStyle | object | swipe labels style | null, see below for format |
+| overlayLabelWrapperStyle | object   | overlay label wrapper style | see below for default | 
 
-Demo inside the [Exemples Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Exemples)
+### overlayLabelStyle
+```javascript
+{
+  fontSize: 45,
+  fontWeight: 'bold',
+  borderRadius: 10,
+  padding: 10,
+  overflow: 'hidden'
+}
+```
+
+### overlayLabelWrapperStyle default props: 
+```javascript
+{
+  position: 'absolute',
+  backgroundColor: 'transparent',
+  zIndex: 2,
+  flex: 1,
+  width: '100%',
+  height: '100%'
+} 
+```
+
+### overlayLabels default props : 
 
 ```javascript
 {
   bottom: {
     title: 'BLEAH',
-    swipeColor: '#946C8C',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }
   },
   left: {
     title: 'NOPE',
-    swipeColor: '#4A2359',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-start',
+        marginTop: 30,
+        marginLeft: -30
+      }
+    }
   },
   right: {
     title: 'LIKE',
-    swipeColor: '#FA9F8C',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
+        marginTop: 30,
+        marginLeft: 30
+      }
+    }
   },
   top: {
     title: 'SUPER LIKE',
-    swipeColor: '#FFC37B',
-    backgroundOpacity: '0.75',
-    fontColor: '#FFF'
+    style: {
+      label: {
+        backgroundColor: 'black',
+        borderColor: 'black',
+        color: 'white',
+        borderWidth: 1
+      },
+      wrapper: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }
+    }
   }
 }
 ```
 
-### Swipe back animation props
+### Swipe back to previous card props
+
+Make sure you set showSecondCard={false} for smoother and proper transitions while going back to previous card.
+
 
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| previousCardInitialPositionX | number | initial x position of the swipe back card | 0 |
-| previousCardInitialPositionY | number | initial y position of the swipe back card | -height |
-| swipeBackAnimationDuration | number | swipe back animation duration | 600 |
-| swipeBackFriction | number | swipe back spring animation friction | 11 |
+|goBackToPreviousCardOnSwipeLeft | bool | previous card is rendered on left swipe | false 
+|goBackToPreviousCardOnSwipeRight| bool | previous card is rendered on right swipe | false 
+|goBackToPreviousCardOnSwipeTop| bool | previous card is rendered on top swipe | false
+|goBackToPreviousCardOnSwipeBottom | bool |previous card is rendered on bottom swipe  | false
 
 ### Style props
 
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| backgroundColor | number | background color for the view containing the cards | '#4FD0E9' |
+| backgroundColor | string | background color for the view containing the cards | '#4FD0E9' |
 | marginTop | number | marginTop for the swiper container | 0 |
 | marginBottom | number | marginBottom for the swiper container | 0 |
 | cardVerticalMargin | number | card vertical margin | 60 |
-| cardHorizontalMargin | number | card horizontal margin | 20 |
 | cardHorizontalMargin | number | card horizontal margin | 20 |
 | childrenOnTop | bool | render children on top or not | false |
 | cardStyle | node | override swipable card style | {} |
@@ -145,11 +229,10 @@ To trigger imperative animations, you can use a reference to the Swiper componen
 
 | Props    | arguments   | description                                                                                             |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|
-| swipeLeft |  | swipe left to the next card |
-| swipeRight |  | swipe right to the next card |
-| swipeTop |  | swipe top to the next card |
-| swipeBottom |  | swipe bottom to the next card |
-| swipeBack | callback(previousCardIndex) | swipe to the previous card |
+| swipeLeft | mustDecrementCardIndex = false | swipe left to the next card |
+| swipeRight | mustDecrementCardIndex = false  | swipe right to the next card |
+| swipeTop | mustDecrementCardIndex = false | swipe top to the next card |
+| swipeBottom | mustDecrementCardIndex = false  | swipe bottom to the next card |
 | jumpToCardIndex | cardIndex | set the current card index |
 
 ## Usage example
