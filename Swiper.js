@@ -694,9 +694,15 @@ class Swiper extends React.Component {
 
     return (
       <Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
-        <Text style={this.calculateOverlayLabelStyle()}>
-          {overlayLabels[labelType].title}
-        </Text>
+		{ !overlayLabels[labelType].element &&
+			<Text style={this.calculateOverlayLabelStyle()}>
+				{overlayLabels[labelType].title}
+			</Text>		
+		}
+
+		{ overlayLabels[labelType].element &&
+			overlayLabels[labelType].element	
+		}	
       </Animated.View>
     )
   }
