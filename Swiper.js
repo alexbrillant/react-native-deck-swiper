@@ -13,23 +13,6 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends React.Component {
-  componentWillReceiveProps (newProps) {
-    this.setState({
-      firstCardIndex: newProps.cardIndex || 0,
-      cards: newProps.cards,
-      previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
-      previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
-      swipedAllCards: false,
-      panResponderLocked: newProps.cards && newProps.cards.length === 0,
-      slideGesture: false
-    },() => {
-      this.setState({
-        secondCardIndex: this.calculateSecondCardIndex(newProps.cardIndex || 0),
-        previousCardIndex: this.calculatePreviousCardIndex(newProps.cardIndex || 0)
-      })
-    });
-  }
-
   constructor (props) {
     super(props)
 
@@ -50,6 +33,23 @@ class Swiper extends React.Component {
     this.state.previousCardIndex = this.calculatePreviousCardIndex(
       props.cardIndex
     )
+  }
+
+  componentWillReceiveProps (newProps) {
+    this.setState({
+      firstCardIndex: newProps.cardIndex || 0,
+      cards: newProps.cards,
+      previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
+      previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
+      swipedAllCards: false,
+      panResponderLocked: newProps.cards && newProps.cards.length === 0,
+      slideGesture: false
+    }, () => {
+      this.setState({
+        secondCardIndex: this.calculateSecondCardIndex(newProps.cardIndex || 0),
+        previousCardIndex: this.calculatePreviousCardIndex(newProps.cardIndex || 0)
+      })
+    })
   }
 
   calculateSecondCardIndex = firstCardIndex => {
@@ -694,15 +694,15 @@ class Swiper extends React.Component {
 
     return (
       <Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
-		{ !overlayLabels[labelType].element &&
-			<Text style={this.calculateOverlayLabelStyle()}>
-				{overlayLabels[labelType].title}
-			</Text>		
+        { !overlayLabels[labelType].element &&
+        <Text style={this.calculateOverlayLabelStyle()}>
+  {overlayLabels[labelType].title}
+			</Text>
 		}
 
-		{ overlayLabels[labelType].element &&
-			overlayLabels[labelType].element	
-		}	
+        { overlayLabels[labelType].element &&
+			overlayLabels[labelType].element
+		}
       </Animated.View>
     )
   }
