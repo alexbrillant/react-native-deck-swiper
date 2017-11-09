@@ -13,21 +13,6 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends React.Component {
-  componentWillReceiveProps (newProps) {
-    this.setState({
-      firstCardIndex: newProps.cardIndex || 0,
-      cards: newProps.cards,
-      previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
-      previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
-      swipedAllCards: false,
-      secondCardIndex: newProps.cards.length === 1 ? 0 : 1,
-      previousCardIndex:
-      newProps.cards.length === 1 ? 0 : newProps.cards.length - 1,
-      panResponderLocked: newProps.cards && newProps.cards.length === 0,
-      slideGesture: false
-    })
-  }
-
   constructor (props) {
     super(props)
 
@@ -48,6 +33,23 @@ class Swiper extends React.Component {
     this.state.previousCardIndex = this.calculatePreviousCardIndex(
       props.cardIndex
     )
+  }
+
+  componentWillReceiveProps (newProps) {
+    this.setState({
+      firstCardIndex: newProps.cardIndex || 0,
+      cards: newProps.cards,
+      previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
+      previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
+      swipedAllCards: false,
+      panResponderLocked: newProps.cards && newProps.cards.length === 0,
+      slideGesture: false
+    }, () => {
+      this.setState({
+        secondCardIndex: this.calculateSecondCardIndex(newProps.cardIndex || 0),
+        previousCardIndex: this.calculatePreviousCardIndex(newProps.cardIndex || 0)
+      })
+    })
   }
 
   calculateSecondCardIndex = firstCardIndex => {
@@ -715,7 +717,7 @@ class Swiper extends React.Component {
         }
 
         { overlayLabels[labelType].element &&
-          overlayLabels[labelType].element	
+          overlayLabels[labelType].element
         }	
       </Animated.View>
     )
