@@ -122,11 +122,27 @@ class Swiper extends React.Component {
   }
 
   onPanResponderMove = (event, gestureState) => {
-    const { horizontalThreshold, verticalThreshold } = this.props
-    const isSwipingLeft = this._animatedValueX < -horizontalThreshold
-    const isSwipingRight = this._animatedValueX > horizontalThreshold
-    const isSwipingTop = this._animatedValueY < -verticalThreshold
-    const isSwipingBottom = this._animatedValueY > verticalThreshold
+		let { overlayOpacityHorizontalThreshold, overlayOpacityVerticalThreshold } = this.props
+		if (!overlayOpacityHorizontalThreshold) overlayOpacityHorizontalThreshold = this.props.horizontalThreshold;
+		if (!overlayOpacityVerticalThreshold) overlayOpacityVerticalThreshold = this.props.verticalThreshold;
+
+		let isSwipingLeft,
+			isSwipingRight,
+			isSwipingTop,
+			isSwipingBottom;
+
+		if (Math.abs(this._animatedValueX) > Math.abs(this._animatedValueY) && Math.abs(this._animatedValueX) > overlayOpacityHorizontalThreshold) {
+			if (this._animatedValueX > 0)
+				isSwipingRight = true;
+			else
+				isSwipingLeft = true;	
+		}
+		else if (Math.abs(this._animatedValueY) > Math.abs(this._animatedValueX) && Math.abs(this._animatedValueY) > overlayOpacityVerticalThreshold) {
+			if (this._animatedValueY > 0)
+				isSwipingBottom = true;
+			else
+				isSwipingTop = true;	
+		}
 
     if (isSwipingRight) {
       this.setState({ labelType: LABEL_TYPES.RIGHT })
@@ -692,15 +708,15 @@ class Swiper extends React.Component {
 
     return (
       <Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
-		{ !overlayLabels[labelType].element &&
-			<Text style={this.calculateOverlayLabelStyle()}>
-				{overlayLabels[labelType].title}
-			</Text>		
-		}
+        { !overlayLabels[labelType].element &&
+          <Text style={this.calculateOverlayLabelStyle()}>
+            {overlayLabels[labelType].title}
+          </Text>		
+        }
 
-		{ overlayLabels[labelType].element &&
-			overlayLabels[labelType].element	
-		}	
+        { overlayLabels[labelType].element &&
+          overlayLabels[labelType].element	
+        }	
       </Animated.View>
     )
   }
@@ -749,6 +765,8 @@ Swiper.propTypes = {
   overlayLabels: PropTypes.object,
   overlayLabelStyle: PropTypes.object,
   overlayLabelWrapperStyle: PropTypes.object,
+	overlayOpacityHorizontalThreshold: PropTypes.number,
+	overlayOpacityVerticalThreshold: PropTypes.number,
   previousCardInitialPositionX: PropTypes.number,
   previousCardInitialPositionY: PropTypes.number,
   renderCard: PropTypes.func.isRequired,
@@ -846,6 +864,8 @@ Swiper.defaultProps = {
     width: '100%',
     height: '100%'
   },
+	overlayOpacityHorizontalThreshold: width / 4,
+	overlayOpacityVerticalThreshold: height / 5,
   previousCardInitialPositionX: 0,
   previousCardInitialPositionY: -height,
   secondCardZoom: 0.97,
