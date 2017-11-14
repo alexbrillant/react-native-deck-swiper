@@ -125,25 +125,20 @@ class Swiper extends React.Component {
 
   onPanResponderMove = (event, gestureState) => {
     let { overlayOpacityHorizontalThreshold, overlayOpacityVerticalThreshold } = this.props
-    if (!overlayOpacityHorizontalThreshold) overlayOpacityHorizontalThreshold = this.props.horizontalThreshold;
-        if (!overlayOpacityVerticalThreshold) overlayOpacityVerticalThreshold = this.props.verticalThreshold;
+    if (!overlayOpacityHorizontalThreshold) overlayOpacityHorizontalThreshold = this.props.horizontalThreshold
+    if (!overlayOpacityVerticalThreshold) overlayOpacityVerticalThreshold = this.props.verticalThreshold
 
-        let isSwipingLeft,
-            isSwipingRight,
-            isSwipingTop,
-            isSwipingBottom;
-    
+    let isSwipingLeft,
+      isSwipingRight,
+      isSwipingTop,
+      isSwipingBottom
+
     if (Math.abs(this._animatedValueX) > Math.abs(this._animatedValueY) && Math.abs(this._animatedValueX) > overlayOpacityHorizontalThreshold) {
-        if (this._animatedValueX > 0)
-            isSwipingRight = true;
-        else
-            isSwipingLeft = true;	
-    }
-    else if (Math.abs(this._animatedValueY) > Math.abs(this._animatedValueX) && Math.abs(this._animatedValueY) > overlayOpacityVerticalThreshold) {
-        if (this._animatedValueY > 0)
-            isSwipingBottom = true;
-        else
-            isSwipingTop = true;	
+      if (this._animatedValueX > 0) isSwipingRight = true
+      else isSwipingLeft = true
+    } else if (Math.abs(this._animatedValueY) > Math.abs(this._animatedValueX) && Math.abs(this._animatedValueY) > overlayOpacityVerticalThreshold) {
+      if (this._animatedValueY > 0) isSwipingBottom = true
+      else isSwipingTop = true
     }
 
     if (isSwipingRight) {
@@ -711,14 +706,14 @@ class Swiper extends React.Component {
     return (
       <Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
         { !overlayLabels[labelType].element &&
-        <Text style={this.calculateOverlayLabelStyle()}>
-  {overlayLabels[labelType].title}
-			</Text>
-		}
+          <Text style={this.calculateOverlayLabelStyle()}>
+            {overlayLabels[labelType].title}
+          </Text>
+        }
 
         { overlayLabels[labelType].element &&
-			overlayLabels[labelType].element
-		}
+          overlayLabels[labelType].element
+        }
       </Animated.View>
     )
   }
