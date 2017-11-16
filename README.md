@@ -91,6 +91,8 @@ npm install react-native-deck-swiper --save
 | outputOverlayLabelsOpacityRangeX | array | opacity values for the values in inputOverlayLabelsOpacityRangeX | [1, 0, 0, 0, 1] |
 | inputOverlayLabelsOpacityRangeY | array | pan x overlay labels opacity input range | [-height / 4, -height / 5, 0, height / 5, height / 4] |
 | outputOverlayLabelsOpacityRangeY | array | opacity values for the values in inputOverlayLabelsOpacityRangeY | [1, 0, 0, 0, 1] |
+| overlayOpacityVerticalThreshold | number | vertical threshold for overlay label  | height / 5 |
+| overlayOpacityHorizontalThreshold | number | horizontal threshold for overlay label  | width / 4 |
 
 2 steps of inputOverlayLabelsOpacityRangeX and inputOverlayLabelsOpacityRangeY should match horizontalThreshold and verticalThreshold, respectively.
 
