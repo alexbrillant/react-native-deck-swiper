@@ -105,9 +105,15 @@ class Swiper extends React.Component {
       onStartShouldSetPanResponder: (event, gestureState) => true,
       onMoveShouldSetPanResponder: (event, gestureState) => false,
 
-      onMoveShouldSetPanResponderCapture: (evt, gestureState) =>
-        Math.sqrt(Math.pow(gestureState.dx, 2) + Math.pow(gestureState.dy, 2)) > 10,
-
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
+        const isVerticalSwipe = Math.sqrt(
+          Math.pow(gestureState.dx, 2) < Math.pow(gestureState.dy, 2)
+        );
+        if (!this.props.verticalSwipe && isVerticalSwipe) {
+          return false;
+        }
+        return Math.sqrt(Math.pow(gestureState.dx, 2) + Math.pow(gestureState.dy, 2)) > 10
+      },
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: this.onPanResponderMove,
       onPanResponderRelease: this.onPanResponderRelease,
