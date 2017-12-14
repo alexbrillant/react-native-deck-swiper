@@ -36,6 +36,16 @@ class Swiper extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
+    if (
+      newProps.cardIndex === this.props.cardIndex &&
+      newProps.cards.length === this.props.cards.length &&
+      newProps.previousCardInitialPositionX ===
+      this.props.previousCardInitialPositionX &&
+      newProps.previousCardInitialPositionY ===
+      this.props.previousCardInitialPositionY
+    ) {
+      return;
+    }
     this.setState({
       firstCardIndex: newProps.cardIndex || 0,
       cards: newProps.cards,
