@@ -17,9 +17,9 @@ class Swiper extends React.Component {
     super(props)
 
     this.state = {
+      ...this.calculateCardIndexes(props.cardIndex, props.cards),
       pan: new Animated.ValueXY(),
       scale: new Animated.Value(props.secondCardZoom),
-      firstCardIndex: props.cardIndex,
       cards: props.cards,
       previousCardX: new Animated.Value(props.previousCardInitialPositionX),
       previousCardY: new Animated.Value(props.previousCardInitialPositionY),
@@ -28,38 +28,25 @@ class Swiper extends React.Component {
       labelType: LABEL_TYPES.NONE,
       slideGesture: false
     }
-
-    this.state.secondCardIndex = this.calculateSecondCardIndex(props.cardIndex)
-    this.state.previousCardIndex = this.calculatePreviousCardIndex(
-      props.cardIndex
-    )
   }
 
   componentWillReceiveProps (newProps) {
     this.setState({
-      firstCardIndex: newProps.cardIndex || 0,
+      ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
       cards: newProps.cards,
       previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
       previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
       swipedAllCards: false,
       panResponderLocked: newProps.cards && newProps.cards.length === 0,
       slideGesture: false
-    }, () => {
-      this.setState({
-        secondCardIndex: this.calculateSecondCardIndex(newProps.cardIndex || 0),
-        previousCardIndex: this.calculatePreviousCardIndex(newProps.cardIndex || 0)
-      })
     })
   }
 
-  calculateSecondCardIndex = firstCardIndex => {
-    const cardIndexAtLastIndex = firstCardIndex === this.state.cards.length - 1
-    return cardIndexAtLastIndex ? 0 : firstCardIndex + 1
-  }
-
-  calculatePreviousCardIndex = firstCardIndex => {
-    const atFirstIndex = firstCardIndex === 0
-    return atFirstIndex ? this.state.cards.length - 1 : firstCardIndex - 1
+  calculateCardIndexes = (firstCardIndex, cards) => {
+    firstCardIndex = firstCardIndex || 0
+    const previousCardIndex = firstCardIndex === 0 ? cards.length - 1 : firstCardIndex - 1
+    const secondCardIndex = firstCardIndex === cards.length - 1 ? 0 : firstCardIndex + 1
+    return {firstCardIndex, secondCardIndex, previousCardIndex}
   }
 
   componentWillMount () {
@@ -462,9 +449,7 @@ class Swiper extends React.Component {
   setCardIndex = (newCardIndex, swipedAllCards) => {
     this.setState(
       {
-        firstCardIndex: newCardIndex,
-        secondCardIndex: this.calculateSecondCardIndex(newCardIndex),
-        previousCardIndex: this.calculatePreviousCardIndex(newCardIndex),
+        ...this.calculateCardIndexes(newCardIndex, this.state.cards),
         swipedAllCards: swipedAllCards,
         panResponderLocked: false
       },
