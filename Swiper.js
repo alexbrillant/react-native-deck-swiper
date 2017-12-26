@@ -1,6 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { PanResponder, Text, View, Dimensions, Animated } from 'react-native'
+import PropTypes from 'prop-types'
+
+import isEqual from 'lodash.isequal'
+
 import styles from './styles'
 
 const { height, width } = Dimensions.get('window')
@@ -12,7 +15,7 @@ const LABEL_TYPES = {
   BOTTOM: 'bottom'
 }
 
-class Swiper extends React.Component {
+class Swiper extends Component {
   constructor (props) {
     super(props)
 
@@ -31,6 +34,10 @@ class Swiper extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
+    if (isEqual(newProps, this.props)) {
+      return
+    }
+
     this.setState({
       ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
       cards: newProps.cards,
@@ -95,9 +102,9 @@ class Swiper extends React.Component {
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => {
         const isVerticalSwipe = Math.sqrt(
           Math.pow(gestureState.dx, 2) < Math.pow(gestureState.dy, 2)
-        );
+        )
         if (!this.props.verticalSwipe && isVerticalSwipe) {
-          return false;
+          return false
         }
         return Math.sqrt(Math.pow(gestureState.dx, 2) + Math.pow(gestureState.dy, 2)) > 10
       },
@@ -268,11 +275,17 @@ class Swiper extends React.Component {
 
     if (isSwipingRight) {
       return onSwipedRight
-    } else if (isSwipingLeft) {
+    }
+
+    if (isSwipingLeft) {
       return onSwipedLeft
-    } else if (isSwipingTop) {
+    }
+
+    if (isSwipingTop) {
       return onSwipedTop
-    } else if (isSwipingBottom) {
+    }
+
+    if (isSwipingBottom) {
       return onSwipedBottom
     }
   }
@@ -664,6 +677,7 @@ class Swiper extends React.Component {
     const previousCardContent = cards[previousCardIndex]
     const previousCardStyle = this.calculateSwipeBackCardStyle()
     const previousCard = this.props.renderCard(previousCardContent)
+
     return (
       <Animated.View key={previousCardIndex} style={previousCardStyle}>
         {previousCard}

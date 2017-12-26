@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Swiper from 'react-native-deck-swiper'
-import { StyleSheet, View, Text, Button } from 'react-native'
+import {Button, StyleSheet, Text, View} from 'react-native'
 
 export default class Exemple extends Component {
   constructor (props) {
@@ -47,7 +47,7 @@ export default class Exemple extends Component {
     )
   };
 
-  jumpTo = () => {
+  swipeLeft = () => {
     this.swiper.swipeLeft()
   };
 
@@ -59,7 +59,7 @@ export default class Exemple extends Component {
             this.swiper = swiper
           }}
           onSwiped={this.onSwiped}
-          onTapCard={this.jumpTo}
+          onTapCard={this.swipeLeft}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={80}
@@ -138,8 +138,7 @@ export default class Exemple extends Component {
           animateOverlayLabelsOpacity
           animateCardOpacity
         >
-          <Button onPress={this.swipeBack} title='Swipe Back' />
-          <Button onPress={this.jumpTo} title='Jump to last index' />
+          <Button onPress={this.swipeLeft} title='Swipe Left' />
         </Swiper>
       </View>
     )
