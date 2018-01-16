@@ -146,9 +146,6 @@ export default class Exemple extends Component {
 }
 
 const styles = StyleSheet.create({
-  box1: {
-    flex: 1
-  },
   container: {
     flex: 1,
     backgroundColor: '#F5FCFF'
