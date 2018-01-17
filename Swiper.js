@@ -666,6 +666,7 @@ class Swiper extends Component {
 
     return (
       <Animated.View key={secondCardIndex} style={secondCardZoomStyle}>
+        {null}
         {secondCard}
       </Animated.View>
     )
@@ -680,6 +681,7 @@ class Swiper extends Component {
 
     return (
       <Animated.View key={previousCardIndex} style={previousCardStyle}>
+        {null}
         {previousCard}
       </Animated.View>
     )
