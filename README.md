@@ -1,3 +1,7 @@
+This is a clone of [react-native-deck-swiper](https://github.com/alexbrillant/react-native-deck-swiper) for the Debenhams project. It fixes a bug where the card image would flash between swipes. You can see the fix under `Swiper.js` in the `renderSecondCard` and `renderSwipeBackCard` functions.
+
+---
+
 ## react-native-deck-swiper
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 [![npm version](https://badge.fury.io/js/react-native-deck-swiper.svg)](https://badge.fury.io/js/react-native-deck-swiper)

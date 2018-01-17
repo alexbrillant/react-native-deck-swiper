@@ -666,6 +666,15 @@ class Swiper extends Component {
 
     return (
       <Animated.View key={secondCardIndex} style={secondCardZoomStyle}>
+        {/*
+        Quick fix - If there's an image on the card,
+        that image would flash white for a splitsecond when transitioning from
+        the "second card" to the "first card" (ie. after swiping).
+        Adding `null` here solves the issue. I am assuming this is because it
+        helps out the react differ, since `renderOverlayLabel` is rendered in
+        the `renderFirstCard` function above.
+        */}
+        {null}
         {secondCard}
       </Animated.View>
     )
@@ -680,6 +689,15 @@ class Swiper extends Component {
 
     return (
       <Animated.View key={previousCardIndex} style={previousCardStyle}>
+        {/*
+        Quick fix - If there's an image on the card,
+        that image would flash white for a splitsecond when transitioning from
+        the "second card" to the "first card" (ie. after swiping).
+        Adding `null` here solves the issue. I am assuming this is because it
+        helps out the react differ, since `renderOverlayLabel` is rendered in
+        the `renderFirstCard` function above.
+        */}
+        {null}
         {previousCard}
       </Animated.View>
     )
