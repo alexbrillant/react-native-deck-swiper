@@ -34,10 +34,6 @@ class Swiper extends Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (isEqual(newProps, this.props)) {
-      return
-    }
-
     this.setState({
       ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
       cards: newProps.cards,

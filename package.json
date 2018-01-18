@@ -1,6 +1,6 @@
 {
     "name": "react-native-deck-swiper",
-    "version": "1.4.8",
+    "version": "1.4.7",
     "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
     "main": "index.js",
     "scripts": {
@@ -32,7 +32,6 @@
     },
     "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
     "dependencies": {
-        "lodash.isequal": "^4.5.0",
         "prop-types": "15.5.10"
     },
     "peerDependencies": {
