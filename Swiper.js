@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { PanResponder, Text, View, Dimensions, Animated } from 'react-native'
 import PropTypes from 'prop-types'
 
-import isEqual from 'lodash.isequal'
-
 import styles from './styles'
 
 const { height, width } = Dimensions.get('window')
