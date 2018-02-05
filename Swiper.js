@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { PanResponder, Text, View, Dimensions, Animated } from 'react-native'
 import PropTypes from 'prop-types'
+import _ from 'lodash';
 
 import styles from './styles'
 
@@ -32,15 +33,17 @@ class Swiper extends Component {
   }
 
   componentWillReceiveProps (newProps) {
-    this.setState({
-      ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
-      cards: newProps.cards,
-      previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
-      previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
-      swipedAllCards: false,
-      panResponderLocked: newProps.cards && newProps.cards.length === 0,
-      slideGesture: false
-    })
+    if(!_.isEqual(this.props.cards, newProps.cards) || this.props.cardIndex !== newProps.cardIndex) {
+      this.setState({
+        ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
+        cards: newProps.cards,
+        previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
+        previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
+        swipedAllCards: false,
+        panResponderLocked: newProps.cards && newProps.cards.length === 0,
+        slideGesture: false
+      })
+    }
   }
 
   calculateCardIndexes = (firstCardIndex, cards) => {
