@@ -53,6 +53,7 @@
         "eslint-plugin-standard": "^3.0.1",
         "jest": "18.1.0",
         "jest-cli": "^18.1.0",
+        "lodash": "^4.17.5",
         "prettier-eslint": "^6.4.2",
         "prettier-eslint-cli": "^4.1.1",
         "react-test-renderer": "15.4.2"
