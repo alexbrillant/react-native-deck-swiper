@@ -735,7 +735,7 @@ Swiper.propTypes = {
   cardIndex: PropTypes.number,
   cardStyle: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   cardVerticalMargin: PropTypes.number,
-  cards: PropTypes.array.isRequired,
+  cards: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   children: PropTypes.any,
   childrenOnTop: PropTypes.bool,
   disableBottomSwipe: PropTypes.bool,
