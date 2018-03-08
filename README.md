@@ -1,9 +1,9 @@
 ## react-native-deck-swiper
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
-[![npm version](https://badge.fury.io/js/react-native-deck-swiper.svg)](https://badge.fury.io/js/react-native-deck-swiper)
+Fork to add stack effect
+
 ## Installation
 ```
-npm install react-native-deck-swiper --save
+npm install gonzaloriestra/react-native-deck-swiper --save
 ```
 
 ## Overview
@@ -17,8 +17,8 @@ npm install react-native-deck-swiper --save
 - [x] Trigger swipe animations programmatically
 - [x] Jump to a card index
 - [x] Swipe to the previous card
+- [X] Underlaying cards offset
 - [ ] Swipe back to the previous card with a custom animation
-- [ ] Underlaying cards offset
 
 ## Preview
 
@@ -38,6 +38,7 @@ npm install react-native-deck-swiper --save
 | horizontalSwipe | bool | enable/disable horizontal swiping | | true |
 | verticalSwipe | bool | enable/disable vertical swiping | | true |
 | showSecondCard | bool | enable/disable second card while swiping | | true |
+| stackSize | number | number of underlaying cards to show (showSecondCard must be enabled)  | | 0 |
 
 ### Event callbacks
 | Props    | type   | description                                                                                             | default                          |
@@ -63,13 +64,14 @@ npm install react-native-deck-swiper --save
 | disableRightSwipe | bool | disable right swipe | false |
 | disableTopSwipe | bool | disable top swipe | false |
 
-### Zoom animation props
+### Stack props
 
 | Props    | type   | description                                                                                             | default                          |
 |:----------|:--------|:---------------------------------------------------------------------------------------------------------|:----------------------------------|
-| secondCardZoom | number | second card zoom | 0.97 |
-| zoomAnimationDuration | number | duration of the zoom animation | 100 |
-| zoomFriction | number | zoom spring animation friction | 7 |
+| stackSeparation | number | vertical separation between underlaying cards | 10 |
+| stackScale | number | percentage to reduce the size of each underlaying card | 3 |
+| stackAnimationFriction | number | spring animation friction (bounciness) | 7 |
+| stackAnimationTension | number | spring animation tension (speed) | 40 |
 
 ### Rotation animation props
 
@@ -259,7 +261,8 @@ render () {
             onSwiped={(cardIndex) => {console.log(cardIndex)}}
             onSwipedAll={() => {console.log('onSwipedAll')}}
             cardIndex={0}
-            backgroundColor={'#4FD0E9'}>
+            backgroundColor={'#4FD0E9'}
+            stackSize= {3}>
             <Button
                 onPress={() => {console.log('oulala')}}
                 title="Press me">
@@ -295,6 +298,3 @@ const styles = StyleSheet.create({
   }
 })
 ```
-## Todo(contributions are welcome)
-
-Underlaying card offset to achieve a stack effect
