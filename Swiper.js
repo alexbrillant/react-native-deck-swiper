@@ -500,7 +500,6 @@ class Swiper extends Component {
 
   resetPanAndScale = () => {
     this.state.pan.setValue({ x: 0, y: 0 })
-    this.state.scale.setValue(this.props.secondCardZoom)
 
     this.state.previousCardX.setValue(this.props.previousCardInitialPositionX)
     this.state.previousCardY.setValue(this.props.previousCardInitialPositionY)
