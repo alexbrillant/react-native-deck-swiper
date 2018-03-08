@@ -21,7 +21,6 @@ class Swiper extends Component {
     this.state = {
       ...this.calculateCardIndexes(props.cardIndex, props.cards),
       pan: new Animated.ValueXY(),
-      scale: new Animated.Value(props.secondCardZoom),
       cards: props.cards,
       previousCardX: new Animated.Value(props.previousCardInitialPositionX),
       previousCardY: new Animated.Value(props.previousCardInitialPositionY),
@@ -548,16 +547,6 @@ class Swiper extends Component {
     ]
   }
 
-  calculateSecondCardZoomStyle = () => [
-    styles.card,
-    this.cardStyle,
-    {
-      zIndex: 1,
-      transform: [{ scale: this.state.scale }]
-    },
-    this.customCardStyle
-  ]
-
   calculateStackCardZoomStyle = (index) => [
     styles.card,
     this.cardStyle,
@@ -641,7 +630,7 @@ class Swiper extends Component {
       >
         {this.renderChildren()}
         {this.renderFirstCard()}
-        {this.renderStack()}
+        {this.props.showSecondCard ? this.renderStack() : null} 
         {this.props.swipeBackCard ? this.renderSwipeBackCard() : null}
       </View>
     )
@@ -684,29 +673,6 @@ class Swiper extends Component {
       >
         {renderOverlayLabel}
         {firstCard}
-      </Animated.View>
-    )
-  }
-
-  renderSecondCard = () => {
-    const { secondCardIndex } = this.state
-    const { cards, renderCard } = this.props
-
-    const secondCardZoomStyle = this.calculateSecondCardZoomStyle()
-    const secondCardContent = cards[secondCardIndex]
-    const secondCard = renderCard(secondCardContent)
-
-    const notInfinite = !this.props.infinite
-    const lastCardOrSwipedAllCards =
-      secondCardIndex === 0 || this.state.swipedAllCards
-    if (notInfinite && lastCardOrSwipedAllCards) {
-      return <Animated.View key={secondCardIndex} />
-    }
-
-    return (
-      <Animated.View key={secondCardIndex} style={secondCardZoomStyle}>
-        {null}
-        {secondCard}
       </Animated.View>
     )
   }
@@ -966,8 +932,8 @@ Swiper.defaultProps = {
   goBackToPreviousCardOnSwipeTop: false,
   goBackToPreviousCardOnSwipeBottom: false,
   stackSeparation: 10,
-  stackScale: 5,
-  stackSize: 2,
+  stackScale: 3,
+  stackSize: 0,
   stackAnimationFriction: 7,
   stackAnimationTension: 40
 }
