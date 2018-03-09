@@ -131,6 +131,8 @@ class Swiper extends Component {
   }
 
   onPanResponderMove = (event, gestureState) => {
+    this.props.onSwiping(this._animatedValueX, this._animatedValueY);
+
     let { overlayOpacityHorizontalThreshold, overlayOpacityVerticalThreshold } = this.props
     if (!overlayOpacityHorizontalThreshold) {
       overlayOpacityHorizontalThreshold = this.props.horizontalThreshold
@@ -331,6 +333,8 @@ class Swiper extends Component {
       x: 0,
       y: 0
     })
+
+    this.props.onSwipedAborted();
   }
 
   swipeBack = cb => {
@@ -792,11 +796,13 @@ Swiper.propTypes = {
   marginBottom: PropTypes.number,
   marginTop: PropTypes.number,
   onSwiped: PropTypes.func,
+  onSwipedAborted: PropTypes.func,
   onSwipedAll: PropTypes.func,
   onSwipedBottom: PropTypes.func,
   onSwipedLeft: PropTypes.func,
   onSwipedRight: PropTypes.func,
   onSwipedTop: PropTypes.func,
+  onSwiping: PropTypes.func,
   onTapCard: PropTypes.func,
   onTapCardDeadZone: PropTypes.number,
   outputCardOpacityRangeX: PropTypes.array,
