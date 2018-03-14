@@ -28,7 +28,9 @@ class Swiper extends Component {
       swipedAllCards: false,
       panResponderLocked: false,
       labelType: LABEL_TYPES.NONE,
-      slideGesture: false
+      slideGesture: false,
+      nextCardYOffset: new Animated.Value(props.nextCardYOffset),
+      nextCardXOffset: new Animated.Value(props.nextCardXOffset)
     }
   }
 
@@ -411,6 +413,16 @@ class Swiper extends Component {
       friction: this.props.zoomFriction,
       duration: this.props.zoomAnimationDuration
     }).start()
+    Animated.spring(this.state.nextCardYOffset, {
+      toValue: 0,
+      friction: this.props.zoomFriction,
+      duration: this.props.zoomAnimationDuration
+    }).start()
+    Animated.spring(this.state.nextCardXOffset, {
+      toValue: 0,
+      friction: this.props.zoomFriction,
+      duration: this.props.zoomAnimationDuration
+    }).start()
   }
 
   incrementCardIndex = onSwiped => {
@@ -470,6 +482,8 @@ class Swiper extends Component {
   resetPanAndScale = () => {
     this.state.pan.setValue({ x: 0, y: 0 })
     this.state.scale.setValue(this.props.secondCardZoom)
+    this.state.nextCardYOffset.setValue(this.props.nextCardYOffset)
+    this.state.nextCardXOffset.setValue(this.props.nextCardXOffset)
 
     this.state.previousCardX.setValue(this.props.previousCardInitialPositionX)
     this.state.previousCardY.setValue(this.props.previousCardInitialPositionY)
@@ -521,7 +535,11 @@ class Swiper extends Component {
     this.cardStyle,
     {
       zIndex: 1,
-      transform: [{ scale: this.state.scale }]
+      transform: [
+        { scale: this.state.scale },
+        { translateY: this.state.nextCardYOffset },
+        { translateX: this.state.nextCardXOffset }
+      ]
     },
     this.customCardStyle
   ]
@@ -753,6 +771,8 @@ Swiper.propTypes = {
   inputRotationRange: PropTypes.array,
   marginBottom: PropTypes.number,
   marginTop: PropTypes.number,
+  nextCardYOffset: PropTypes.number,
+  nextCardXOffset: PropTypes.number,
   onSwiped: PropTypes.func,
   onSwipedAll: PropTypes.func,
   onSwipedBottom: PropTypes.func,
@@ -826,6 +846,8 @@ Swiper.defaultProps = {
   inputRotationRange: [-width / 2, 0, width / 2],
   marginBottom: 0,
   marginTop: 0,
+  nextCardYOffset: 0,
+  nextCardXOffset: 0,
   onSwiped: cardIndex => {
     console.log(cardIndex)
   },
