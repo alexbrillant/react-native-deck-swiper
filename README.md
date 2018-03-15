@@ -18,7 +18,7 @@ npm install react-native-deck-swiper --save
 - [x] Jump to a card index
 - [x] Swipe to the previous card
 - [ ] Swipe back to the previous card with a custom animation
-- [ ] Underlaying cards offset
+- [x] Underlaying cards offset
 
 ## Preview
 
@@ -228,6 +228,8 @@ Make sure you set showSecondCard={false} for smoother and proper transitions whi
 | cardHorizontalMargin | number | card horizontal margin | 20 |
 | childrenOnTop | bool | render children on top or not | false |
 | cardStyle | node | override swipable card style | {} |
+| nextCardYOffset | number | Y offset for the card rendered beneath the top card | 0
+| nextCardXOffset | number | X offset for the card rendered beneath the top card | 0
 
 ### Methods
 
