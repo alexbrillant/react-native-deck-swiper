@@ -836,8 +836,8 @@ Swiper.propTypes = {
   stackSeparation: PropTypes.number,
   stackScale: PropTypes.number,
   stackSize: PropTypes.number,
-  stackAnimationFriction: 7,
-  stackAnimationTension: 40  
+  stackAnimationFriction: PropTypes.number,
+  stackAnimationTension: PropTypes.number  
 }
 
 Swiper.defaultProps = {
