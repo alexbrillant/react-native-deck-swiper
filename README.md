@@ -27,6 +27,7 @@ npm install react-native-deck-swiper --save
 
 ![App preview](/animation.gif)
 ![App preview2](/animation2.gif)
+![App preview3](/animation3.gif)
 
 ## Props
 
