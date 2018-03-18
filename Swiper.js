@@ -875,6 +875,12 @@ Swiper.defaultProps = {
   inputRotationRange: [-width / 2, 0, width / 2],
   marginBottom: 0,
   marginTop: 0,
+  onSwiping: () => {
+    console.log('swiped')
+  },
+  onSwipedAborted: () => {
+    console.log('onSwipeAborted')
+  },
   onSwiped: cardIndex => {
     console.log(cardIndex)
   },

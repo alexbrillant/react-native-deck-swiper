@@ -6,7 +6,7 @@ export default class Exemple extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cards: ['1', '2', '3'],
+      cards: ['HELL', 'FUCKING', 'YESS'],
       swipedAllCards: false,
       swipeDirection: '',
       isSwipingBack: false,
@@ -65,6 +65,8 @@ export default class Exemple extends Component {
           cardVerticalMargin={80}
           renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}
+          stackSize={3}
+          stackSeparation={15}
           overlayLabels={{
             bottom: {
               title: 'BLEAH',
