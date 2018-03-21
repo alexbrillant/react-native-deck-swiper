@@ -1,6 +1,6 @@
 {
     "name": "react-native-deck-swiper",
-    "version": "1.4.7",
+    "version": "1.4.9",
     "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
     "main": "index.js",
     "scripts": {
@@ -32,12 +32,11 @@
     },
     "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
     "dependencies": {
-        "lodash.isequal": "^4.5.0",
         "prop-types": "15.5.10"
     },
     "peerDependencies": {
-        "react-native": "^0.49.1",
-        "react": "^16.0.0-beta.5"
+        "react": "^16.0.0-beta.5",
+        "react-native": "^0.49.1"
     },
     "devDependencies": {
         "babel-eslint": "^7.2.3",
@@ -54,6 +53,7 @@
         "eslint-plugin-standard": "^3.0.1",
         "jest": "18.1.0",
         "jest-cli": "^18.1.0",
+        "lodash": "^4.17.5",
         "prettier-eslint": "^6.4.2",
         "prettier-eslint-cli": "^4.1.1",
         "react-test-renderer": "15.4.2"
