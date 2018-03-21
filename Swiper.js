@@ -623,6 +623,16 @@ class Swiper extends Component {
     )
   }
 
+  getCardKey = (cardContent, cardIndex) => {
+    const { keyExtractor } = this.props
+
+    if (keyExtractor) {
+      return keyExtractor(cardContent)
+    }
+
+    return cardIndex
+  }
+
   renderFirstCard = () => {
     const { firstCardIndex } = this.state
     const { cards } = this.props
@@ -640,7 +650,7 @@ class Swiper extends Component {
     return (
       <Animated.View
         style={swipableCardStyle}
-        key={firstCardIndex}
+        key={this.getCardKey(firstCardContent, firstCardIndex)}
         {...this._panResponder.panHandlers}
       >
         {renderOverlayLabel}
@@ -660,12 +670,14 @@ class Swiper extends Component {
     const notInfinite = !this.props.infinite
     const lastCardOrSwipedAllCards =
       secondCardIndex === 0 || this.state.swipedAllCards
+    const key = this.getCardKey(secondCardContent, secondCardIndex)
+
     if (notInfinite && lastCardOrSwipedAllCards) {
-      return <Animated.View key={secondCardIndex} />
+      return <Animated.View key={key} />
     }
 
     return (
-      <Animated.View key={secondCardIndex} style={secondCardZoomStyle}>
+      <Animated.View key={key} style={secondCardZoomStyle}>
         {secondCard}
       </Animated.View>
     )
@@ -677,9 +689,14 @@ class Swiper extends Component {
     const previousCardContent = cards[previousCardIndex]
     const previousCardStyle = this.calculateSwipeBackCardStyle()
     const previousCard = this.props.renderCard(previousCardContent)
+    const key = this.getCardKey(previousCardContent, previousCardIndex)
+
+    if (notInfinite && lastCardOrSwipedAllCards) {
+      return <Animated.View key={key} />
+    }
 
     return (
-      <Animated.View key={previousCardIndex} style={previousCardStyle}>
+      <Animated.View key={key} style={previousCardStyle}>
         {previousCard}
       </Animated.View>
     )
@@ -789,7 +806,8 @@ Swiper.propTypes = {
   goBackToPreviousCardOnSwipeLeft: PropTypes.bool,
   goBackToPreviousCardOnSwipeRight: PropTypes.bool,
   goBackToPreviousCardOnSwipeTop: PropTypes.bool,
-  goBackToPreviousCardOnSwipeBottom: PropTypes.bool
+  goBackToPreviousCardOnSwipeBottom: PropTypes.bool,
+  keyExtractor: PropTypes.func
 }
 
 Swiper.defaultProps = {
@@ -887,7 +905,8 @@ Swiper.defaultProps = {
   goBackToPreviousCardOnSwipeLeft: false,
   goBackToPreviousCardOnSwipeRight: false,
   goBackToPreviousCardOnSwipeTop: false,
-  goBackToPreviousCardOnSwipeBottom: false
+  goBackToPreviousCardOnSwipeBottom: false,
+  keyExtractor: null
 }
 
 export default Swiper
