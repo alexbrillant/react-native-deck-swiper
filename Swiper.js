@@ -15,7 +15,7 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends Component {
-  constructor (props) {
+  constructor(props){
     super(props)
 
     this.state = {
@@ -33,14 +33,14 @@ class Swiper extends Component {
     this.initializeStack();
   }
 
-  shouldComponentUpdate(nextProps){
+  shouldComponentUpdate = (nextProps) => {
     return (
       !_.isEqual(this.props.cards, nextProps.cards) ||
       this.props.cardIndex !== nextProps.cardIndex
     );
   }
 
-  initializeStack() {
+  initializeStack = () => {
     this.props.cards.forEach((card, index) => {
       const factor = index < this.props.stackSize ? index : this.props.stackSize;
 
@@ -49,7 +49,7 @@ class Swiper extends Component {
     });
   }
 
-  componentWillReceiveProps (newProps) {
+  componentWillReceiveProps = (newProps) => {
     this.setState({
       ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
       cards: newProps.cards,
@@ -68,7 +68,7 @@ class Swiper extends Component {
     return {firstCardIndex, secondCardIndex, previousCardIndex}
   }
 
-  componentWillMount () {
+  componentWillMount = () => {
     this._animatedValueX = 0
     this._animatedValueY = 0
 
@@ -79,7 +79,7 @@ class Swiper extends Component {
     this.initializePanResponder()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount = () => {
     this.state.pan.x.removeAllListeners()
     this.state.pan.y.removeAllListeners()
   }
@@ -303,7 +303,7 @@ class Swiper extends Component {
     }
   }
 
-  mustDecrementCardIndex (animatedValueX, animatedValueY) {
+  mustDecrementCardIndex = (animatedValueX, animatedValueY) => {
     const {
       isSwipingLeft,
       isSwipingRight,
@@ -319,7 +319,7 @@ class Swiper extends Component {
     )
   }
 
-  getSwipeDirection (animatedValueX, animatedValueY) {
+  getSwipeDirection = (animatedValueX, animatedValueY) => {
     const isSwipingLeft = animatedValueX < -this.props.horizontalThreshold
     const isSwipingRight = animatedValueX > this.props.horizontalThreshold
     const isSwipingTop = animatedValueY < -this.props.verticalThreshold
@@ -616,7 +616,7 @@ class Swiper extends Component {
       outputRange: this.props.outputRotationRange
     })
 
-  render () {
+  render = () => {
     return (
       <View
         style={[
