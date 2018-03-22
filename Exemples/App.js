@@ -6,7 +6,7 @@ export default class Exemple extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cards: ['HELL', 'FUCKING', 'YESS'],
+      cards: ['1', '2', '3'],
       swipedAllCards: false,
       swipeDirection: '',
       isSwipingBack: false,
