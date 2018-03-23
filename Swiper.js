@@ -476,7 +476,7 @@ class Swiper extends Component {
       newCardIndex = 0
       swipedAllCards = true
     }
-    console.log('inc', newCardIndex);
+
     this.onSwipedCallbacks(onSwiped, swipedAllCards)
     this.setCardIndex(newCardIndex, swipedAllCards)
   }
@@ -491,7 +491,6 @@ class Swiper extends Component {
 
     const swipedAllCards = false
     this.onSwipedCallbacks(cb, swipedAllCards)
-    console.log('dind', newCardIndex);
     this.setCardIndex(newCardIndex, swipedAllCards)
   }
 
