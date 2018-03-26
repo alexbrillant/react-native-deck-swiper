@@ -27,20 +27,10 @@ class Swiper extends Component {
       swipedAllCards: false,
       panResponderLocked: false,
       labelType: LABEL_TYPES.NONE,
-      slideGesture: false,
-      generatedCards: this.generateCards(props.cards)
+      slideGesture: false
     }
 
     this.initializeStack();
-  }
-
-  generateCards = (cards) => {
-    let index = 0;
-    const generatedCards = [];
-    for ( index; index <= cards.length; index++) {
-      generatedCards.push(this.props.renderCard(cards[index]))
-    }
-    return generatedCards;
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -75,12 +65,7 @@ class Swiper extends Component {
       swipedAllCards: false,
       panResponderLocked: newProps.cards && newProps.cards.length === 0,
       slideGesture: false
-    })
-    if (!_.isEqual(this.props.cards, newProps.cards)){
-      this.setState({
-        generatedCards: this.generateCards(newProps.cards)
-      })
-    }
+    });
   }
 
   calculateCardIndexes = (firstCardIndex, cards) => {
@@ -683,9 +668,9 @@ class Swiper extends Component {
   }
 
   pushCardToStack(renderedCards, index, key, firstCard){
-    const { generatedCards } = this.state;
+    const { cards } = this.props;
     const stackCardZoomStyle = this.calculateStackCardZoomStyle(index);
-    const stackCard = generatedCards[index];
+    const stackCard = this.props.renderCard(cards[index]);
     const swipableCardStyle = this.calculateSwipableCardStyle();
     const renderOverlayLabel = this.renderOverlayLabel();
 
@@ -729,10 +714,10 @@ class Swiper extends Component {
   };
 
   renderSwipeBackCard = () => {
-    const { previousCardIndex, generatedCards } = this.state
+    const { previousCardIndex } = this.state
     const { cards } = this.props
     const previousCardStyle = this.calculateSwipeBackCardStyle()
-    const previousCard = generatedCards[previousCardIndex]
+    const previousCard = this.props.renderCard(cards[previousCardIndex]);
     const key = this.getCardKey(cards[previousCardIndex], previousCardIndex)
 
     return (
