@@ -42,7 +42,8 @@ class Swiper extends Component {
     const stateChanged = (
       nextState.firstCardIndex !== state.firstCardIndex ||
       nextState.secondCardIndex !== state.secondCardIndex ||
-      nextState.previousCardIndex !== state.previousCardIndex
+      nextState.previousCardIndex !== state.previousCardIndex ||
+      nextState.labelType !== state.labelType
     );
     return propsChanged || stateChanged;
   }
