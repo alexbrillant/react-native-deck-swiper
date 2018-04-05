@@ -648,7 +648,7 @@ class Swiper extends Component {
     }
 
     return (
-      <View style={[styles.childrenViewStyle, { zIndex: zIndex }]}>
+      <View pointerEvents="box-none" style={[styles.childrenViewStyle, { zIndex: zIndex }]}>
         {children}
       </View>
     )
