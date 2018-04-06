@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { PanResponder, Text, View, Dimensions, Animated } from 'react-native'
 import PropTypes from 'prop-types'
-import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 import styles from './styles'
 
@@ -43,7 +43,7 @@ class Swiper extends Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if(!_.isEqual(this.props.cards, newProps.cards) || this.props.cardIndex !== newProps.cardIndex) {
+    if(!isEqual(this.props.cards, newProps.cards) || this.props.cardIndex !== newProps.cardIndex) {
       this.setState({
         ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
         cards: newProps.cards,
@@ -648,7 +648,7 @@ class Swiper extends Component {
     }
 
     return (
-      <View style={[styles.childrenViewStyle, { zIndex: zIndex }]}>
+      <View pointerEvents="box-none" style={[styles.childrenViewStyle, { zIndex: zIndex }]}>
         {children}
       </View>
     )
