@@ -888,33 +888,15 @@ Swiper.defaultProps = {
   inputRotationRange: [-width / 2, 0, width / 2],
   marginBottom: 0,
   marginTop: 0,
-  onSwiping: () => {
-    console.log('swiped')
-  },
-  onSwipedAborted: () => {
-    console.log('onSwipeAborted')
-  },
-  onSwiped: cardIndex => {
-    console.log(cardIndex)
-  },
-  onSwipedLeft: cardIndex => {
-    console.log('onSwipedLeft')
-  },
-  onSwipedRight: cardIndex => {
-    console.log('onSwipedRight')
-  },
-  onSwipedTop: cardIndex => {
-    console.log('onSwipedTop')
-  },
-  onSwipedBottom: cardIndex => {
-    console.log('onSwipedBottom')
-  },
-  onSwipedAll: () => {
-    console.log('onSwipedAll')
-  },
-  onTapCard: (cardIndex) => {
-    console.log('Tapped card at ' + cardIndex)
-  },
+  onSwiping: () => {},
+  onSwipedAborted: () => {},
+  onSwiped: cardIndex => {},
+  onSwipedLeft: cardIndex => {},
+  onSwipedRight: cardIndex => {},
+  onSwipedTop: cardIndex => {},
+  onSwipedBottom: cardIndex => {},
+  onSwipedAll: () => {},
+  onTapCard: (cardIndex) => {},
   onTapCardDeadZone: 5,
   outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
   outputCardOpacityRangeY: [0.8, 1, 1, 1, 0.8],
