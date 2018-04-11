@@ -30,7 +30,7 @@ class Swiper extends Component {
       slideGesture: false
     }
 
-    this.initializeStack()
+    this.rebuildStackAnimatedValues()
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -48,8 +48,8 @@ class Swiper extends Component {
     return propsChanged || stateChanged
   }
 
-  initializeStack = () => {
-    this.props.cards.forEach((card, index) => {
+  rebuildStackAnimatedValues = () => {
+    this.state.cards.forEach((card, index) => {
       const factor = index < this.props.stackSize ? index : this.props.stackSize
 
       this.state[`stackPosition${index}`] = new Animated.Value(this.props.stackSeparation * factor)
@@ -66,6 +66,8 @@ class Swiper extends Component {
       swipedAllCards: false,
       panResponderLocked: newProps.cards && newProps.cards.length === 0,
       slideGesture: false
+    }, () => {
+      this.rebuildStackAnimatedValues()
     })
   }
 
