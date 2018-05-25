@@ -321,6 +321,7 @@ return (<Swiper
 ref={swiper => {
   {...customSwiperProps}
   cardIndex={cardIndex}
+}}
 />
 ```
 
