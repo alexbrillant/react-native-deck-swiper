@@ -251,6 +251,7 @@ To trigger imperative animations, you can use a reference to the Swiper componen
 | swipeRight      | mustDecrementCardIndex = false | swipe right to the next card  |
 | swipeTop        | mustDecrementCardIndex = false | swipe top to the next card    |
 | swipeBottom     | mustDecrementCardIndex = false | swipe bottom to the next card |
+| swipeBack       | callback                       | swipe back into deck last swiped card |
 | jumpToCardIndex | cardIndex                      | set the current card index    |
 
 ## Usage example
