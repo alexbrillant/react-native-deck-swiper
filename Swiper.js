@@ -27,10 +27,9 @@ class Swiper extends Component {
       swipedAllCards: false,
       panResponderLocked: false,
       labelType: LABEL_TYPES.NONE,
-      slideGesture: false
+      slideGesture: false,
+      ...this.rebuildStackAnimatedValues(props.cards)
     }
-
-    this.rebuildStackAnimatedValues()
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -48,13 +47,16 @@ class Swiper extends Component {
     return propsChanged || stateChanged
   }
 
-  rebuildStackAnimatedValues = () => {
-    this.state.cards.forEach((card, index) => {
-      const factor = index < this.props.stackSize ? index : this.props.stackSize
+  rebuildStackAnimatedValues = (cards) => {
+    const stackPositionsAndScales = {}
 
-      this.state[`stackPosition${index}`] = new Animated.Value(this.props.stackSeparation * factor)
-      this.state[`stackScale${index}`] = new Animated.Value((100 - this.props.stackScale * factor) * 0.01)
+    cards.forEach((card, index) => {
+      const factor = index < this.props.stackSize ? index : this.props.stackSize
+      stackPositionsAndScales[`stackPosition${index}`] = new Animated.Value(this.props.stackSeparation * factor)
+      stackPositionsAndScales[`stackScale${index}`] = new Animated.Value((100 - this.props.stackScale * factor) * 0.01)
     })
+
+    return stackPositionsAndScales
   }
 
   componentWillReceiveProps = (newProps) => {
@@ -65,9 +67,8 @@ class Swiper extends Component {
       previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
       swipedAllCards: false,
       panResponderLocked: newProps.cards && newProps.cards.length === 0,
-      slideGesture: false
-    }, () => {
-      this.rebuildStackAnimatedValues()
+      slideGesture: false,
+      ...this.rebuildStackAnimatedValues(newProps.cards)
     })
   }
 
