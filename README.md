@@ -35,7 +35,7 @@ npm install react-native-deck-swiper --save
 | Props           | type           | description                                                          | required | default |
 | :-------------- | :------------- | :------------------------------------------------------------------- | :------- | :------ |
 | cards           | array          | array of data for the cards to be rendered                           | required |
-| renderCard      | func(cardData) | function to render the card based on the data                        | required |
+| renderCard      | func(cardData, cardIndex) | function to render the card based on the data                        | required |
 | keyExtractor    | func(cardData) | function to get the card's react key                                 |          | null    |
 | cardIndex       | number         | cardIndex to start with                                              |          | 0       |
 | infinite        | bool           | keep swiping indefinitely                                            |          | false   |
