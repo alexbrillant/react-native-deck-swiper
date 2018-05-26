@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Swiper from 'react-native-deck-swiper'
-import {Button, StyleSheet, Text, View} from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 
 export default class Exemple extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       cards: ['1', '2', '3'],
@@ -14,10 +14,10 @@ export default class Exemple extends Component {
     }
   }
 
-  renderCard = card => {
+  renderCard = (card, index) => {
     return (
       <View style={styles.card}>
-        <Text style={styles.text}>{card}</Text>
+        <Text style={styles.text}>{card} - {index}</Text>
       </View>
     )
   };
@@ -51,7 +51,7 @@ export default class Exemple extends Component {
     this.swiper.swipeLeft()
   };
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <Swiper
