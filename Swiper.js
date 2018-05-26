@@ -15,7 +15,7 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -76,7 +76,7 @@ class Swiper extends Component {
     firstCardIndex = firstCardIndex || 0
     const previousCardIndex = firstCardIndex === 0 ? cards.length - 1 : firstCardIndex - 1
     const secondCardIndex = firstCardIndex === cards.length - 1 ? 0 : firstCardIndex + 1
-    return {firstCardIndex, secondCardIndex, previousCardIndex}
+    return { firstCardIndex, secondCardIndex, previousCardIndex }
   }
 
   componentWillMount = () => {
@@ -265,9 +265,7 @@ class Swiper extends Component {
         this._animatedValueY
       )
 
-      this.setState({ panResponderLocked: true }, () => {
-        this.swipeCard(onSwipeDirectionCallback)
-      })
+      this.swipeCard(onSwipeDirectionCallback)
     } else {
       this.resetTopCard()
     }
@@ -404,6 +402,7 @@ class Swiper extends Component {
     y = this._animatedValueY,
     mustDecrementCardIndex = false
   ) => {
+    this.setState({ panResponderLocked: true })
     this.animateStack()
     Animated.timing(this.state.pan, {
       toValue: {
@@ -493,7 +492,9 @@ class Swiper extends Component {
     const previousCardIndex = this.state.firstCardIndex
     this.props.onSwiped(previousCardIndex)
 
-    swipeDirectionCallback(previousCardIndex)
+    if (swipeDirectionCallback) {
+      swipeDirectionCallback(previousCardIndex)
+    }
     if (swipedAllCards) {
       this.props.onSwipedAll()
     }
@@ -671,7 +672,7 @@ class Swiper extends Component {
     return cardIndex
   }
 
-  pushCardToStack (renderedCards, index, key, firstCard) {
+  pushCardToStack(renderedCards, index, key, firstCard) {
     const { cards } = this.props
     const stackCardZoomStyle = this.calculateStackCardZoomStyle(index)
     const stackCard = this.props.renderCard(cards[index], index)
@@ -760,13 +761,13 @@ class Swiper extends Component {
 
     return (
       <Animated.View style={this.calculateOverlayLabelWrapperStyle()}>
-        { !overlayLabels[labelType].element &&
+        {!overlayLabels[labelType].element &&
           <Text style={this.calculateOverlayLabelStyle()}>
             {overlayLabels[labelType].title}
           </Text>
         }
 
-        { overlayLabels[labelType].element &&
+        {overlayLabels[labelType].element &&
           overlayLabels[labelType].element
         }
       </Animated.View>
@@ -881,15 +882,15 @@ Swiper.defaultProps = {
   inputRotationRange: [-width / 2, 0, width / 2],
   marginBottom: 0,
   marginTop: 0,
-  onSwiping: () => {},
-  onSwipedAborted: () => {},
-  onSwiped: cardIndex => {},
-  onSwipedLeft: cardIndex => {},
-  onSwipedRight: cardIndex => {},
-  onSwipedTop: cardIndex => {},
-  onSwipedBottom: cardIndex => {},
-  onSwipedAll: () => {},
-  onTapCard: (cardIndex) => {},
+  onSwiping: () => { },
+  onSwipedAborted: () => { },
+  onSwiped: cardIndex => { },
+  onSwipedLeft: cardIndex => { },
+  onSwipedRight: cardIndex => { },
+  onSwipedTop: cardIndex => { },
+  onSwipedBottom: cardIndex => { },
+  onSwipedAll: () => { },
+  onTapCard: (cardIndex) => { },
   onTapCardDeadZone: 5,
   outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
   outputCardOpacityRangeY: [0.8, 1, 1, 1, 0.8],
