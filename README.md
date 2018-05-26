@@ -308,3 +308,23 @@ const styles = StyleSheet.create({
   }
 });
 ```
+
+## Updating props on card content? (dynamic card content)
+
+Card properties may change, including on already swiped cards, which would yield no effects to users as the cards would no longer be displayed [based on [initial issue](https://github.com/alexbrillant/react-native-deck-swiper/issues/153)].
+
+A possible fix for the situation is setting the _cardIndex_ on the parent component whenever deck re-renders are needed.
+
+```
+const { cardIndex } = this.props;
+return (<Swiper
+ref={swiper => {
+  {...customSwiperProps}
+  cardIndex={cardIndex}
+}}
+/>
+```
+
+Passing along the _cardIndex_ to the swiper will allow external changes on the property, thus triggering a re-render of the deck of cards. All _onSwipe_ callbacks return the _cardIndex_ that can be used to push the updated _cardIndex_ to app state (redux or something else).
+
+By making sure that external changes on the cardIndex match those the swiper performs (increment on swipes, decrement on swipeBack) one can ensure no re-renders occur when not needed.
