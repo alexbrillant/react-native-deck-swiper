@@ -648,9 +648,12 @@ class Swiper extends Component {
   }
 
   renderChildren = () => {
-    const { childrenOnTop, children } = this.props
+    const { childrenOnTop, children, stackSize, showSecondCard } = this.props
 
-    let zIndex = 1
+    let zIndex = (stackSize && showSecondCard)
+      ? stackSize * -1
+      : 1
+
     if (childrenOnTop) {
       zIndex = 5
     }
@@ -715,6 +718,7 @@ class Swiper extends Component {
         firstCard = false
       }
     }
+
     return renderedCards
   };
 
