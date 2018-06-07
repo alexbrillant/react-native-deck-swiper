@@ -318,10 +318,11 @@ A possible fix for the situation is setting the _cardIndex_ on the parent compon
 ```
 const { cardIndex } = this.props;
 return (<Swiper
-ref={swiper => {
+  ref={swiper => {
+    this.swiper = swiper;
+  }}
   {...customSwiperProps}
   cardIndex={cardIndex}
-}}
 />
 ```
 
