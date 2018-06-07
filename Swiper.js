@@ -15,7 +15,7 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -28,7 +28,7 @@ class Swiper extends Component {
       panResponderLocked: false,
       labelType: LABEL_TYPES.NONE,
       slideGesture: false,
-      ...this.rebuildStackAnimatedValues(props.cards)
+      ...this.rebuildStackAnimatedValues(props.cards, props.cardIndex)
     }
   }
 
@@ -47,13 +47,14 @@ class Swiper extends Component {
     return propsChanged || stateChanged
   }
 
-  rebuildStackAnimatedValues = (cards) => {
+  rebuildStackAnimatedValues = (cards, cardIndex) => {
     const stackPositionsAndScales = {}
 
-    cards.forEach((card, index) => {
+    cards.slice(cardIndex).forEach((card, index) => {
+      const dIndex = cardIndex + index
       const factor = index < this.props.stackSize ? index : this.props.stackSize
-      stackPositionsAndScales[`stackPosition${index}`] = new Animated.Value(this.props.stackSeparation * factor)
-      stackPositionsAndScales[`stackScale${index}`] = new Animated.Value((100 - this.props.stackScale * factor) * 0.01)
+      stackPositionsAndScales[`stackPosition${dIndex}`] = new Animated.Value(this.props.stackSeparation * factor)
+      stackPositionsAndScales[`stackScale${dIndex}`] = new Animated.Value((100 - this.props.stackScale * factor) * 0.01)
     })
 
     return stackPositionsAndScales
@@ -68,7 +69,7 @@ class Swiper extends Component {
       swipedAllCards: false,
       panResponderLocked: newProps.cards && newProps.cards.length === 0,
       slideGesture: false,
-      ...this.rebuildStackAnimatedValues(newProps.cards)
+      ...this.rebuildStackAnimatedValues(newProps.cards, newProps.cardIndex)
     })
   }
 
@@ -675,7 +676,7 @@ class Swiper extends Component {
     return cardIndex
   }
 
-  pushCardToStack(renderedCards, index, key, firstCard) {
+  pushCardToStack = (renderedCards, index, key, firstCard) => {
     const { cards } = this.props
     const stackCardZoomStyle = this.calculateStackCardZoomStyle(index)
     const stackCard = this.props.renderCard(cards[index], index)

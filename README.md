@@ -318,11 +318,12 @@ A possible fix for the situation is setting the _cardIndex_ on the parent compon
 ```
 const { cardIndex } = this.props;
 return (<Swiper
-ref={swiper => {
+  ref={swiper => {
+    this.swiper = swiper;
+  }}
   {...customSwiperProps}
   cardIndex={cardIndex}
-}}
-/>
+/>)
 ```
 
 Passing along the _cardIndex_ to the swiper will allow external changes on the property, thus triggering a re-render of the deck of cards. All _onSwipe_ callbacks return the _cardIndex_ that can be used to push the updated _cardIndex_ to app state (redux or something else).
