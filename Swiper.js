@@ -436,23 +436,25 @@ class Swiper extends Component {
     let cardPosition = 0
 
     for (var index = secondCardIndex; index <= lastCardIndex; index++) {
-      const newSeparation = this.props.stackSeparation * cardPosition
-      Animated.spring(this.state[`stackPosition${index}`], {
-        toValue: newSeparation,
-        friction: this.props.stackAnimationFriction,
-        tension: this.props.stackAnimationTension,
-        useNativeDriver: true
-      }).start()
+      if (this.state[`stackPosition${index}`] && this.state[`stackScale${index}`]) {
+        const newSeparation = this.props.stackSeparation * cardPosition
+        Animated.spring(this.state[`stackPosition${index}`], {
+          toValue: newSeparation,
+          friction: this.props.stackAnimationFriction,
+          tension: this.props.stackAnimationTension,
+          useNativeDriver: true
+        }).start()
 
-      const newScale = (100 - this.props.stackScale * cardPosition) * 0.01
-      Animated.spring(this.state[`stackScale${index}`], {
-        toValue: newScale,
-        friction: this.props.stackAnimationFriction,
-        tension: this.props.stackAnimationTension,
-        useNativeDriver: true
-      }).start()
+        const newScale = (100 - this.props.stackScale * cardPosition) * 0.01
+        Animated.spring(this.state[`stackScale${index}`], {
+          toValue: newScale,
+          friction: this.props.stackAnimationFriction,
+          tension: this.props.stackAnimationTension,
+          useNativeDriver: true
+        }).start()
 
-      cardPosition++
+        cardPosition++
+      }
     }
   }
 
