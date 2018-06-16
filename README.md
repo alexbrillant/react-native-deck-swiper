@@ -22,6 +22,7 @@ npm install react-native-deck-swiper --save
 * [x] Swipe to the previous card
 * [x] Underlaying cards offset
 * [ ] Swipe back to the previous card with a custom animation
+* [ ] Never-ending, animated deck when infinite property is true
 
 ## Preview
 
