@@ -36,7 +36,7 @@ class Swiper extends Component {
     this.mounted = true;
   }
   
-  componentWillUnMount(){
+  componentWillUnmount(){
     this.mounted = false;
   }
   
