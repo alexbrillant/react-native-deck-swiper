@@ -31,7 +31,15 @@ class Swiper extends Component {
       ...this.rebuildStackAnimatedValues(props.cards, props.cardIndex)
     }
   }
-
+  
+  componentDidMount() {
+    this.mounted = true;
+  }
+  
+  componentWillUnmount(){
+    this.mounted = false;
+  }
+  
   shouldComponentUpdate = (nextProps, nextState) => {
     const { props, state } = this
     const propsChanged = (
@@ -61,7 +69,7 @@ class Swiper extends Component {
   }
 
   componentWillReceiveProps = (newProps) => {
-    this.setState({
+    this.mounted && this.setState({
       ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
       cards: newProps.cards,
       previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
@@ -161,7 +169,8 @@ class Swiper extends Component {
     let isSwipingLeft,
       isSwipingRight,
       isSwipingTop,
-      isSwipingBottom
+      isSwipingBottom,
+      labelType
 
     if (Math.abs(this._animatedValueX) > Math.abs(this._animatedValueY) && Math.abs(this._animatedValueX) > overlayOpacityHorizontalThreshold) {
       if (this._animatedValueX > 0) isSwipingRight = true
@@ -170,18 +179,20 @@ class Swiper extends Component {
       if (this._animatedValueY > 0) isSwipingBottom = true
       else isSwipingTop = true
     }
-
+  
     if (isSwipingRight) {
-      this.setState({ labelType: LABEL_TYPES.RIGHT })
+      labelType = LABEL_TYPES.RIGHT
     } else if (isSwipingLeft) {
-      this.setState({ labelType: LABEL_TYPES.LEFT })
+      labelType = LABEL_TYPES.LEFT
     } else if (isSwipingTop) {
-      this.setState({ labelType: LABEL_TYPES.TOP })
+      labelType = LABEL_TYPES.TOP
     } else if (isSwipingBottom) {
-      this.setState({ labelType: LABEL_TYPES.BOTTOM })
+      labelType = LABEL_TYPES.BOTTOM
     } else {
-      this.setState({ labelType: LABEL_TYPES.NONE })
+      labelType = LABEL_TYPES.NONE
     }
+    
+    this.mounted && this.setState({ labelType: labelType });
 
     const { onTapCardDeadZone } = this.props
     if (
@@ -190,7 +201,7 @@ class Swiper extends Component {
       this._animatedValueY < -onTapCardDeadZone ||
       this._animatedValueY > onTapCardDeadZone
     ) {
-      this.setState({
+      this.mounted && this.setState({
         slideGesture: true
       })
     }
@@ -504,7 +515,7 @@ class Swiper extends Component {
   }
 
   setCardIndex = (newCardIndex, swipedAllCards) => {
-    this.setState(
+    this.mounted && this.setState(
       {
         ...this.calculateCardIndexes(newCardIndex, this.state.cards),
         swipedAllCards: swipedAllCards,
