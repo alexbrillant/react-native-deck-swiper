@@ -187,9 +187,9 @@ class Swiper extends Component {
     } else if (isSwipingTop) {
       labelType = LABEL_TYPES.TOP
     } else if (isSwipingBottom) {
-      labelType = labelType: LABEL_TYPES.BOTTOM
+      labelType = LABEL_TYPES.BOTTOM
     } else {
-      labelType = labelType: LABEL_TYPES.NONE
+      labelType = LABEL_TYPES.NONE
     }
     
     this.mounted && this.setState({ labelType: labelType });
