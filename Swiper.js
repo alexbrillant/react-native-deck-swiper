@@ -640,7 +640,8 @@ class Swiper extends Component {
             backgroundColor: this.props.backgroundColor,
             marginTop: this.props.marginTop,
             marginBottom: this.props.marginBottom
-          }
+          },
+          this.props.containerStyle
         ]}
       >
         {this.renderChildren()}
@@ -863,6 +864,7 @@ Swiper.defaultProps = {
   cardStyle: {},
   cardVerticalMargin: 60,
   childrenOnTop: false,
+  containerStyle: {},
   disableBottomSwipe: false,
   disableLeftSwipe: false,
   disableRightSwipe: false,
