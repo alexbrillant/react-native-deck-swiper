@@ -241,6 +241,7 @@ Make sure you set showSecondCard={false} for smoother and proper transitions whi
 | cardHorizontalMargin | number | card horizontal margin                             | 20        |
 | childrenOnTop        | bool   | render children on top or not                      | false     |
 | cardStyle            | node   | override swipable card style                       | {}        |
+| containerStyle            | node   |  overrides for the containing <View> style                       | {}        |
 
 ### Methods
 
