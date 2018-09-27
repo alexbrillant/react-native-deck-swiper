@@ -96,7 +96,8 @@ class Swiper extends Component {
     this.state.pan.y.removeAllListeners()
   }
 
-  initializeCardStyle = () => {
+  computeCardStyle = () => {
+    const { height, width } = Dimensions.get('window')
     const {
       cardVerticalMargin,
       cardHorizontalMargin,
@@ -116,6 +117,14 @@ class Swiper extends Component {
     }
 
     this.customCardStyle = this.props.cardStyle
+    this.forceUpdate()
+  }
+
+  initializeCardStyle = () => {
+    this.computeCardStyle()
+    Dimensions.addEventListener('change', () => {
+      this.computeCardStyle()
+    })
   }
 
   initializePanResponder = () => {
