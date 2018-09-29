@@ -42,7 +42,8 @@ class Swiper extends Component {
       nextState.firstCardIndex !== state.firstCardIndex ||
       nextState.secondCardIndex !== state.secondCardIndex ||
       nextState.previousCardIndex !== state.previousCardIndex ||
-      nextState.labelType !== state.labelType
+      nextState.labelType !== state.labelType ||
+      nextState.swipedAllCards !== state.swipedAllCards
     )
     return propsChanged || stateChanged
   }
@@ -96,7 +97,8 @@ class Swiper extends Component {
     this.state.pan.y.removeAllListeners()
   }
 
-  initializeCardStyle = () => {
+  computeCardStyle = () => {
+    const { height, width } = Dimensions.get('window')
     const {
       cardVerticalMargin,
       cardHorizontalMargin,
@@ -116,6 +118,14 @@ class Swiper extends Component {
     }
 
     this.customCardStyle = this.props.cardStyle
+    this.forceUpdate()
+  }
+
+  initializeCardStyle = () => {
+    this.computeCardStyle()
+    Dimensions.addEventListener('change', () => {
+      this.computeCardStyle()
+    })
   }
 
   initializePanResponder = () => {

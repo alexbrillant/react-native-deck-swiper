@@ -21,8 +21,8 @@ npm install react-native-deck-swiper --save
 * [x] Jump to a card index
 * [x] Swipe to the previous card
 * [x] Underlaying cards offset
+* [x] Never-ending, animated deck when infinite property is true
 * [ ] Swipe back to the previous card with a custom animation
-* [ ] Never-ending, animated deck when infinite property is true
 
 ## Preview
 
@@ -285,7 +285,7 @@ render () {
 }
 ```
 
-Demo inside the [Exemples Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Exemples)
+Demo inside the [Example Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Example)
 
 ## Stylesheet example
 
@@ -331,3 +331,26 @@ return (<Swiper
 Passing along the _cardIndex_ to the swiper will allow external changes on the property, thus triggering a re-render of the deck of cards. All _onSwipe_ callbacks return the _cardIndex_ that can be used to push the updated _cardIndex_ to app state (redux or something else).
 
 By making sure that external changes on the cardIndex match those the swiper performs (increment on swipes, decrement on swipeBack) one can ensure no re-renders occur when not needed.
+
+## Development
+
+If you've encountered issues while running the example app located in the _Example_ folder, try the following steps:
+
+**If you're using yarn**
+1. rm -rf node_modules && rm yarn.lock
+2. yarn cache clean
+3. yarn
+4. react-native run-ios
+5. react-native run-android
+
+**If you're using npm**
+1. rm -rf node_modules && rm package-lock.json
+2. npm cache clean --force
+3. npm install
+4. react-native run-ios
+5. react-native run-android
+
+**If bundler doesn't automatically start**
+Simply run _yarn start_ or _npm start_ in the Example folder.
+
+Don't forget to bump project and example versions in package.json whenever you submit a PR.
