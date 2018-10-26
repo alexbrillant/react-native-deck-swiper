@@ -15,6 +15,20 @@ const LABEL_TYPES = {
 }
 
 class Swiper extends Component {
+  static getDerivedStateFromProps(props, state) {
+    return {
+      ...state,
+      ...this.calculateCardIndexes(props.cardIndex, props.cards),
+      cards: props.cards,
+      previousCardX: new Animated.Value(props.previousCardInitialPositionX),
+      previousCardY: new Animated.Value(props.previousCardInitialPositionY),
+      swipedAllCards: false,
+      panResponderLocked: props.cards && props.cards.length === 0,
+      slideGesture: false,
+      ...this.rebuildStackAnimatedValues(props.cards, props.cardIndex)
+    };
+  }
+
   constructor (props) {
     super(props)
 
@@ -59,19 +73,6 @@ class Swiper extends Component {
     })
 
     return stackPositionsAndScales
-  }
-
-  componentWillReceiveProps = (newProps) => {
-    this.setState({
-      ...this.calculateCardIndexes(newProps.cardIndex, newProps.cards),
-      cards: newProps.cards,
-      previousCardX: new Animated.Value(newProps.previousCardInitialPositionX),
-      previousCardY: new Animated.Value(newProps.previousCardInitialPositionY),
-      swipedAllCards: false,
-      panResponderLocked: newProps.cards && newProps.cards.length === 0,
-      slideGesture: false,
-      ...this.rebuildStackAnimatedValues(newProps.cards, newProps.cardIndex)
-    })
   }
 
   calculateCardIndexes = (firstCardIndex, cards) => {
