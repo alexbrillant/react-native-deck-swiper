@@ -212,6 +212,7 @@ class Swiper extends Component {
   }
 
   onPanResponderGrant = (event, gestureState) => {
+    this.props.onSwipeStart()
     if (!this.state.panResponderLocked) {
       this.state.pan.setOffset({
         x: this._animatedValueX,
@@ -249,6 +250,7 @@ class Swiper extends Component {
   }
 
   onPanResponderRelease = (e, gestureState) => {
+    this.props.onSwipeEnd()
     if (this.state.panResponderLocked) {
       this.state.pan.setValue({
         x: 0,
@@ -828,6 +830,8 @@ Swiper.propTypes = {
   onSwipedRight: PropTypes.func,
   onSwipedTop: PropTypes.func,
   onSwiping: PropTypes.func,
+  onSwipeStart: PropTypes.func,
+  onSwipeEnd: PropTypes.func,
   onTapCard: PropTypes.func,
   onTapCardDeadZone: PropTypes.number,
   outputCardOpacityRangeX: PropTypes.array,
@@ -910,6 +914,8 @@ Swiper.defaultProps = {
   onSwipedTop: cardIndex => { },
   onSwipedBottom: cardIndex => { },
   onSwipedAll: () => { },
+  onSwipeStart: () => { },
+  onSwipeEnd: () => { },
   onTapCard: (cardIndex) => { },
   onTapCardDeadZone: 5,
   outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
