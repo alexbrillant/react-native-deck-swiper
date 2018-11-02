@@ -916,8 +916,6 @@ Swiper.defaultProps = {
   onSwipedAll: () => { },
   onTapCard: (cardIndex) => { },
   onTapCardDeadZone: 5,
-  dragStart: () => { },
-  dragEnd: () => { },
   outputCardOpacityRangeX: [0.8, 1, 1, 1, 0.8],
   outputCardOpacityRangeY: [0.8, 1, 1, 1, 0.8],
   outputOverlayLabelsOpacityRangeX: [1, 0, 0, 0, 1],
