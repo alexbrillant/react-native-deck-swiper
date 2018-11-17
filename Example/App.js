@@ -22,6 +22,10 @@ export default class Exemple extends Component {
     )
   };
 
+  onSwiped = (type) => {
+    console.log(`on swiped ${type}`);
+  }
+
   onSwipedAllCards = () => {
     this.setState({
       swipedAllCards: true
@@ -58,7 +62,11 @@ export default class Exemple extends Component {
           ref={swiper => {
             this.swiper = swiper
           }}
-          onSwiped={this.onSwiped}
+          onSwiped={() => this.onSwiped('general')}
+          onSwipedLeft={() => this.onSwiped('left')}
+          onSwipedRight={() => this.onSwiped('right')}
+          onSwipedTop={() => this.onSwiped('top')}
+          onSwipedBottom={() => this.onSwiped('bottom')}
           onTapCard={this.swipeLeft}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
