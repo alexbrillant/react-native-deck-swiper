@@ -1,6 +1,6 @@
 {
     "name": "react-native-deck-swiper",
-    "version": "1.5.24",
+    "version": "1.5.25",
     "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
     "main": "index.js",
     "scripts": {
