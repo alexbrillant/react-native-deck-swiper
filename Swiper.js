@@ -366,7 +366,7 @@ class Swiper extends Component {
 
   swipeBack = cb => {
     const { swipeBackXYPositions, previousCardX, previousCardY, isSwipingBack } = this.state
-    const { infinite, previousCardDefaultPositionX, previousCardDefaultPositionY} = this.props
+    const { infinite, previousCardDefaultPositionX, previousCardDefaultPositionY } = this.props
     if (!isSwipingBack && (swipeBackXYPositions.length > 0 || infinite)) {
       const {x, y} = swipeBackXYPositions.splice(-1, 1)[0] || {x: previousCardDefaultPositionX, y: previousCardDefaultPositionY}
       this.setState({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
