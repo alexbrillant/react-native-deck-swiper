@@ -64,6 +64,15 @@ class Swiper extends Component {
       isSwipingBack: false,
       ...rebuildStackAnimatedValues(props)
     }
+
+    this._animatedValueX = 0
+    this._animatedValueY = 0
+
+    this.state.pan.x.addListener(value => (this._animatedValueX = value.value))
+    this.state.pan.y.addListener(value => (this._animatedValueY = value.value))
+
+    this.initializeCardStyle()
+    this.initializePanResponder()
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
@@ -80,17 +89,6 @@ class Swiper extends Component {
       nextState.swipedAllCards !== state.swipedAllCards
     )
     return propsChanged || stateChanged
-  }
-
-  componentWillMount = () => {
-    this._animatedValueX = 0
-    this._animatedValueY = 0
-
-    this.state.pan.x.addListener(value => (this._animatedValueX = value.value))
-    this.state.pan.y.addListener(value => (this._animatedValueY = value.value))
-
-    this.initializeCardStyle()
-    this.initializePanResponder()
   }
 
   componentWillUnmount = () => {
