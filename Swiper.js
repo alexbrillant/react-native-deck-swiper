@@ -646,6 +646,7 @@ class Swiper extends Component {
   render = () => {
     return (
       <View
+        pointerEvents="box-none"
         style={[
           styles.container,
           {
