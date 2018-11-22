@@ -646,7 +646,7 @@ class Swiper extends Component {
   render = () => {
     return (
       <View
-        pointerEvents="box-none"
+        pointerEvents={this.props.pointerEvents}
         style={[
           styles.container,
           {
@@ -846,6 +846,7 @@ Swiper.propTypes = {
   overlayLabelWrapperStyle: PropTypes.object,
   overlayOpacityHorizontalThreshold: PropTypes.number,
   overlayOpacityVerticalThreshold: PropTypes.number,
+  pointerEvents: PropTypes.oneOf('box-none', 'none', 'box-only', 'auto'),
   previousCardInitialPositionX: PropTypes.number,
   previousCardInitialPositionY: PropTypes.number,
   renderCard: PropTypes.func.isRequired,
@@ -940,6 +941,7 @@ Swiper.defaultProps = {
   },
   overlayOpacityHorizontalThreshold: width / 4,
   overlayOpacityVerticalThreshold: height / 5,
+  pointerEvents: 'auto',
   previousCardInitialPositionX: 0,
   previousCardInitialPositionY: -height,
   secondCardZoom: 0.97,
