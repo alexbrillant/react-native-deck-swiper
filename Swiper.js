@@ -673,20 +673,22 @@ class Swiper extends Component {
     })
 
   render = () => {
+    const { pointerEvents, backgroundColor, marginTop, marginBottom, containerStyle, swipeBackCard } = this.props
     return (
       <View
+        pointerEvents={pointerEvents}
         style={[
           styles.container,
           {
-            backgroundColor: this.props.backgroundColor,
-            marginTop: this.props.marginTop,
-            marginBottom: this.props.marginBottom
+            backgroundColor: backgroundColor,
+            marginTop: marginTop,
+            marginBottom: marginBottom
           },
-          this.props.containerStyle
+          containerStyle
         ]}
       >
         {this.renderChildren()}
-        {this.props.swipeBackCard ? this.renderSwipeBackCard() : null}
+        {swipeBackCard ? this.renderSwipeBackCard() : null}
         {this.renderStack()}
       </View>
     )
@@ -875,6 +877,7 @@ Swiper.propTypes = {
   overlayLabelWrapperStyle: PropTypes.object,
   overlayOpacityHorizontalThreshold: PropTypes.number,
   overlayOpacityVerticalThreshold: PropTypes.number,
+  pointerEvents: PropTypes.oneOf(['box-none', 'none', 'box-only', 'auto']),
   previousCardDefaultPositionX: PropTypes.number,
   previousCardDefaultPositionY: PropTypes.number,
   renderCard: PropTypes.func.isRequired,
@@ -967,6 +970,7 @@ Swiper.defaultProps = {
   },
   overlayOpacityHorizontalThreshold: width / 4,
   overlayOpacityVerticalThreshold: height / 5,
+  pointerEvents: 'auto',
   previousCardDefaultPositionX: -width,
   previousCardDefaultPositionY: -height,
   secondCardZoom: 0.97,
