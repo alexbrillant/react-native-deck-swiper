@@ -846,7 +846,7 @@ Swiper.propTypes = {
   overlayLabelWrapperStyle: PropTypes.object,
   overlayOpacityHorizontalThreshold: PropTypes.number,
   overlayOpacityVerticalThreshold: PropTypes.number,
-  pointerEvents: PropTypes.oneOf('box-none', 'none', 'box-only', 'auto'),
+  pointerEvents: PropTypes.oneOf(['box-none', 'none', 'box-only', 'auto']),
   previousCardInitialPositionX: PropTypes.number,
   previousCardInitialPositionY: PropTypes.number,
   renderCard: PropTypes.func.isRequired,
