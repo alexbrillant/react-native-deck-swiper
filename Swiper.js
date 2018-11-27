@@ -363,32 +363,15 @@ class Swiper extends Component {
   }
 
   swipeBack = cb => {
-    const { swipeBackXYPositions, previousCardX, previousCardY, isSwipingBack } = this.state
-    const { infinite, previousCardDefaultPositionX, previousCardDefaultPositionY } = this.props
-    if (!isSwipingBack && (swipeBackXYPositions.length > 0 || infinite)) {
-      const {x, y} = swipeBackXYPositions.splice(-1, 1)[0] || {x: previousCardDefaultPositionX, y: previousCardDefaultPositionY}
-      this.setState({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
-        previousCardX.setValue(x * SWIPE_MULTIPLY_FACTOR)
-        previousCardY.setValue(y * SWIPE_MULTIPLY_FACTOR)
-        Animated.parallel([
-          Animated.spring(this.state.previousCardX, {
-            toValue: 0,
-            friction: this.props.stackAnimationFriction,
-            tension: this.props.stackAnimationTension,
-            useNativeDriver: true
-          }),
-          Animated.spring(this.state.previousCardY, {
-            toValue: 0,
-            friction: this.props.stackAnimationFriction,
-            tension: this.props.stackAnimationTension,
-            useNativeDriver: true
-          })
-        ]).start(() => {
-          this.setState({isSwipingBack: false})
-          this.decrementCardIndex(cb)
-        })
-      })
+    const { swipeBackXYPositions, isSwipingBack } = this.state
+    const { infinite } = this.props
+    const canSwipeBack = !isSwipingBack && (swipeBackXYPositions.length > 0 || infinite)
+    if (!canSwipeBack) {
+      return
     }
+    this.setState({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
+      this.animatePreviousCard(this.calculateNextPreviousCardPosition(), cb)
+    })
   }
 
   swipeLeft = (mustDecrementCardIndex = false) => {
@@ -460,6 +443,29 @@ class Swiper extends Component {
 
   setSwipeBackCardXY = (x = -width, y = 0) => {
     this.setState({swipeBackXYPositions: [...this.state.swipeBackXYPositions, {x, y}]})
+  }
+
+  animatePreviousCard = ({x, y}, cb) => {
+    const { previousCardX, previousCardY } = this.state
+    previousCardX.setValue(x * SWIPE_MULTIPLY_FACTOR)
+    previousCardY.setValue(y * SWIPE_MULTIPLY_FACTOR)
+    Animated.parallel([
+      Animated.spring(this.state.previousCardX, {
+        toValue: 0,
+        friction: this.props.stackAnimationFriction,
+        tension: this.props.stackAnimationTension,
+        useNativeDriver: true
+      }),
+      Animated.spring(this.state.previousCardY, {
+        toValue: 0,
+        friction: this.props.stackAnimationFriction,
+        tension: this.props.stackAnimationTension,
+        useNativeDriver: true
+      })
+    ]).start(() => {
+      this.setState({isSwipingBack: false})
+      this.decrementCardIndex(cb)
+    })
   }
 
   animateStack = () => {
@@ -560,6 +566,17 @@ class Swiper extends Component {
     this.state.pan.setValue({ x: 0, y: 0 })
     this.state.previousCardX.setValue(previousCardDefaultPositionX)
     this.state.previousCardY.setValue(previousCardDefaultPositionY)
+  }
+
+  calculateNextPreviousCardPosition = () => {
+    const { swipeBackXYPositions } = this.state
+    let { previousCardDefaultPositionX: x, previousCardDefaultPositionY: y } = this.props
+    const swipeBackPosition = swipeBackXYPositions.splice(-1, 1)
+    if (swipeBackPosition[0]) {
+      x = swipeBackPosition[0].x
+      y = swipeBackPosition[0].y
+    }
+    return { x, y }
   }
 
   calculateOverlayLabelStyle = () => {
