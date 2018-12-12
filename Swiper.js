@@ -64,7 +64,8 @@ class Swiper extends Component {
       isSwipingBack: false,
       ...rebuildStackAnimatedValues(props)
     }
-
+    
+    this._mounted = true
     this._animatedValueX = 0
     this._animatedValueY = 0
 
@@ -92,6 +93,7 @@ class Swiper extends Component {
   }
 
   componentWillUnmount = () => {
+    this._mounted = false
     this.state.pan.x.removeAllListeners()
     this.state.pan.y.removeAllListeners()
   }
@@ -551,14 +553,16 @@ class Swiper extends Component {
   }
 
   setCardIndex = (newCardIndex, swipedAllCards) => {
-    this.setState(
-      {
-        ...calculateCardIndexes(newCardIndex, this.state.cards),
-        swipedAllCards: swipedAllCards,
-        panResponderLocked: false
-      },
-      this.resetPanAndScale
-    )
+    if (this._mounted) {
+      this.setState(
+        {
+          ...calculateCardIndexes(newCardIndex, this.state.cards),
+          swipedAllCards: swipedAllCards,
+          panResponderLocked: false
+        },
+        this.resetPanAndScale
+      )
+    }
   }
 
   resetPanAndScale = () => {
