@@ -64,7 +64,7 @@ class Swiper extends Component {
       isSwipingBack: false,
       ...rebuildStackAnimatedValues(props)
     }
-    
+
     this._mounted = true
     this._animatedValueX = 0
     this._animatedValueY = 0
@@ -584,7 +584,8 @@ class Swiper extends Component {
   }
 
   calculateOverlayLabelStyle = () => {
-    let overlayLabelStyle = this.props.overlayLabels[this.state.labelType].style.label
+    const dynamicStyle = this.props.overlayLabels[this.state.labelType].style
+    let overlayLabelStyle = dynamicStyle ? dynamicStyle.label : {};
 
     if (this.state.labelType === LABEL_TYPES.NONE) {
       overlayLabelStyle = styles.hideOverlayLabel
@@ -594,12 +595,13 @@ class Swiper extends Component {
   }
 
   calculateOverlayLabelWrapperStyle = () => {
-    let dynamicStyles = this.props.overlayLabels[this.state.labelType].style.wrapper
+    const dynamicStyle = this.props.overlayLabels[this.state.labelType].style
+    const dynamicWrapperStyle = dynamicStyle ? dynamicStyle.wrapper : {};
 
     const opacity = this.props.animateOverlayLabelsOpacity
       ? this.interpolateOverlayLabelsOpacity()
       : 1
-    return [this.props.overlayLabelWrapperStyle, dynamicStyles, { opacity }]
+    return [this.props.overlayLabelWrapperStyle, dynamicWrapperStyle, { opacity }]
   }
 
   calculateSwipableCardStyle = () => {
