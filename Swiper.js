@@ -913,6 +913,8 @@ Swiper.propTypes = {
   stackSize: PropTypes.number,
   swipeAnimationDuration: PropTypes.number,
   swipeBackCard: PropTypes.bool,
+  topCardResetAnimationFriction: PropTypes.number,
+  topCardResetAnimationTension: PropTypes.number,
   verticalSwipe: PropTypes.bool,
   verticalThreshold: PropTypes.number,
   zoomAnimationDuration: PropTypes.number,
