@@ -353,7 +353,9 @@ class Swiper extends Component {
 
   resetTopCard = cb => {
     Animated.spring(this.state.pan, {
-      toValue: 0
+      toValue: 0,
+      friction: this.props.topCardResetAnimationFriction,
+      tension: this.props.topCardResetAnimationTension
     }).start(cb)
 
     this.state.pan.setOffset({
@@ -1003,6 +1005,8 @@ Swiper.defaultProps = {
   stackSize: 1,
   swipeAnimationDuration: 350,
   swipeBackCard: false,
+  topCardResetAnimationFriction: 7,
+  topCardResetAnimationTension: 40,
   verticalSwipe: true,
   verticalThreshold: height / 5,
   zoomAnimationDuration: 100,
