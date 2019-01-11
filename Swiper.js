@@ -505,7 +505,7 @@ class Swiper extends Component {
 
   onSwipedCallbacks = (swipeDirectionCallback, swipedAllCards) => {
     const previousCardIndex = this.state.firstCardIndex
-    this.props.onSwiped(previousCardIndex)
+    this.props.onSwiped(previousCardIndex, this.state.cards[previousCardIndex])
 
     if (swipeDirectionCallback) {
       swipeDirectionCallback(previousCardIndex)
