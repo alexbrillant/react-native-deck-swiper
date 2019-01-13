@@ -98,7 +98,7 @@ class Swiper extends Component {
     this.state.pan.y.removeAllListeners()
   }
 
-  computeCardStyle = () => {
+  getCardStyle = () => {
     const { height, width } = Dimensions.get('window')
     const {
       cardVerticalMargin,
@@ -111,21 +111,18 @@ class Swiper extends Component {
     const cardHeight =
       height - cardVerticalMargin * 2 - marginTop - marginBottom
 
-    this.cardStyle = {
+    return {
       top: cardVerticalMargin,
       left: cardHorizontalMargin,
       width: cardWidth,
       height: cardHeight
     }
-
-    this.customCardStyle = this.props.cardStyle
-    this.forceUpdate()
   }
 
   initializeCardStyle = () => {
-    this.computeCardStyle()
+    this.forceUpdate();
     Dimensions.addEventListener('change', () => {
-      this.computeCardStyle()
+      this.forceUpdate();
     })
   }
 
@@ -614,7 +611,7 @@ class Swiper extends Component {
 
     return [
       styles.card,
-      this.cardStyle,
+      this.getCardStyle(),
       {
         zIndex: 1,
         opacity: opacity,
@@ -624,23 +621,23 @@ class Swiper extends Component {
           { rotate: rotation }
         ]
       },
-      this.customCardStyle
+      this.props.cardStyle
     ]
   }
 
   calculateStackCardZoomStyle = (position) => [
     styles.card,
-    this.cardStyle,
+    this.getCardStyle(),
     {
       zIndex: position * -1,
       transform: [{ scale: this.state[`stackScale${position}`] }, { translateY: this.state[`stackPosition${position}`] }]
     },
-    this.customCardStyle
+    this.props.cardStyle
   ]
 
   calculateSwipeBackCardStyle = () => [
     styles.card,
-    this.cardStyle,
+    this.getCardStyle(),
     {
       zIndex: 4,
       transform: [
@@ -648,7 +645,7 @@ class Swiper extends Component {
         { translateY: this.state.previousCardY }
       ]
     },
-    this.customCardStyle
+    this.props.cardStyle
   ]
 
   interpolateCardOpacity = () => {
