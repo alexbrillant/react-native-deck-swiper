@@ -509,14 +509,20 @@ class Swiper extends Component {
     let newCardIndex = firstCardIndex + 1
     let swipedAllCards = false
 
-    if (newCardIndex === this.state.cards.length) {
-      newCardIndex = 0
+    this.onSwipedCallbacks(onSwiped)
+
+    allSwipedCheck = () => newCardIndex === this.state.cards.length;
+
+    if (allSwipedCheck()) {
       if (!infinite) {
-        swipedAllCards = true
+        this.props.onSwipedAll()
+        // onSwipeAll may have added cards
+        if (allSwipedCheck()) {
+          swipedAllCards = true
+        }
       }
     }
 
-    this.onSwipedCallbacks(onSwiped, swipedAllCards)
     this.setCardIndex(newCardIndex, swipedAllCards)
   }
 
@@ -528,9 +534,8 @@ class Swiper extends Component {
     const newCardIndex =
       firstCardIndex === 0 ? lastCardIndex : previousCardIndex
 
-    const swipedAllCards = false
-    this.onSwipedCallbacks(cb, swipedAllCards)
-    this.setCardIndex(newCardIndex, swipedAllCards)
+    this.onSwipedCallbacks(cb)
+    this.setCardIndex(newCardIndex, false)
   }
 
   jumpToCardIndex = newCardIndex => {
@@ -539,15 +544,12 @@ class Swiper extends Component {
     }
   }
 
-  onSwipedCallbacks = (swipeDirectionCallback, swipedAllCards) => {
+  onSwipedCallbacks = (swipeDirectionCallback) => {
     const previousCardIndex = this.state.firstCardIndex
     this.props.onSwiped(previousCardIndex, this.state.cards[previousCardIndex])
 
     if (swipeDirectionCallback) {
       swipeDirectionCallback(previousCardIndex, this.state.cards[previousCardIndex])
-    }
-    if (swipedAllCards) {
-      this.props.onSwipedAll()
     }
   }
 
