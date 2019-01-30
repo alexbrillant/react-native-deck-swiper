@@ -2,11 +2,18 @@ import React, { Component } from 'react'
 import Swiper from 'react-native-deck-swiper'
 import { Button, StyleSheet, Text, View } from 'react-native'
 
+// demo purposes only
+function * range (start, end) {
+  for (let i = start; i <= end; i++) {
+    yield i
+  }
+}
+
 export default class Exemple extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      cards: ['1', '2', '3'],
+      cards: [...range(1, 50)],
       swipedAllCards: false,
       swipeDirection: '',
       cardIndex: 0
