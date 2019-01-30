@@ -35,18 +35,6 @@ const rebuildStackAnimatedValues = (props) => {
 }
 
 class Swiper extends Component {
-  static getDerivedStateFromProps (props, state) {
-    return {
-      ...state,
-      ...calculateCardIndexes(props.cardIndex, props.cards),
-      cards: props.cards,
-      swipedAllCards: false,
-      panResponderLocked: props.cards && props.cards.length === 0,
-      slideGesture: false,
-      ...rebuildStackAnimatedValues(props)
-    }
-  }
-
   constructor (props) {
     super(props)
 
@@ -120,9 +108,9 @@ class Swiper extends Component {
   }
 
   initializeCardStyle = () => {
-    this.forceUpdate();
+    this.forceUpdate()
     Dimensions.addEventListener('change', () => {
-      this.forceUpdate();
+      this.forceUpdate()
     })
   }
 
@@ -511,7 +499,7 @@ class Swiper extends Component {
 
     this.onSwipedCallbacks(onSwiped)
 
-    allSwipedCheck = () => newCardIndex === this.state.cards.length;
+    allSwipedCheck = () => newCardIndex === this.state.cards.length
 
     if (allSwipedCheck()) {
       if (!infinite) {
@@ -586,7 +574,7 @@ class Swiper extends Component {
 
   calculateOverlayLabelStyle = () => {
     const dynamicStyle = this.props.overlayLabels[this.state.labelType].style
-    let overlayLabelStyle = dynamicStyle ? dynamicStyle.label : {};
+    let overlayLabelStyle = dynamicStyle ? dynamicStyle.label : {}
 
     if (this.state.labelType === LABEL_TYPES.NONE) {
       overlayLabelStyle = styles.hideOverlayLabel
@@ -597,7 +585,7 @@ class Swiper extends Component {
 
   calculateOverlayLabelWrapperStyle = () => {
     const dynamicStyle = this.props.overlayLabels[this.state.labelType].style
-    const dynamicWrapperStyle = dynamicStyle ? dynamicStyle.wrapper : {};
+    const dynamicWrapperStyle = dynamicStyle ? dynamicStyle.wrapper : {}
 
     const opacity = this.props.animateOverlayLabelsOpacity
       ? this.interpolateOverlayLabelsOpacity()
