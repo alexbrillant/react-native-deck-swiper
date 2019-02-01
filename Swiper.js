@@ -414,24 +414,25 @@ class Swiper extends Component {
       },
       duration: this.props.swipeAnimationDuration
     }).start(() => {
-      mustDecrementCardIndex = mustDecrementCardIndex
-        ? true
-        : this.mustDecrementCardIndex(
-          this._animatedValueX,
-          this._animatedValueY
-        )
+      this.setSwipeBackCardXY(x, y, () => {
+        mustDecrementCardIndex = mustDecrementCardIndex
+          ? true
+          : this.mustDecrementCardIndex(
+            this._animatedValueX,
+            this._animatedValueY
+          )
 
-      if (mustDecrementCardIndex) {
-        this.decrementCardIndex(onSwiped)
-      } else {
-        this.incrementCardIndex(onSwiped)
-      }
-      this.setSwipeBackCardXY(x, y)
+        if (mustDecrementCardIndex) {
+          this.decrementCardIndex(onSwiped)
+        } else {
+          this.incrementCardIndex(onSwiped)
+        }
+      })
     })
   }
 
-  setSwipeBackCardXY = (x = -width, y = 0) => {
-    this.setState({swipeBackXYPositions: [...this.state.swipeBackXYPositions, {x, y}]})
+  setSwipeBackCardXY = (x = -width, y = 0, cb) => {
+    this.setState({swipeBackXYPositions: [...this.state.swipeBackXYPositions, {x, y}]}, cb)
   }
 
   animatePreviousCard = ({x, y}, cb) => {
