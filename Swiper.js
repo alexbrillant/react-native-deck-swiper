@@ -520,6 +520,8 @@ class Swiper extends Component {
         if (allSwipedCheck()) {
           swipedAllCards = true
         }
+      } else {
+        newCardIndex = 0; 
       }
     }
 
