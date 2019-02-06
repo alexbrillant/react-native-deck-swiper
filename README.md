@@ -245,6 +245,7 @@ Make sure you set showSecondCard={false} for smoother and proper transitions whi
 | cardStyle            | node   | override swipable card style                       | {}        |
 | containerStyle       | node   | overrides for the containing <View> style          | {}        |
 | pointerEvents        | string | pointerEvents prop for the containing <View>       | 'auto'    |
+| useViewOverflow      | bool   | use ViewOverflow instead of View for the Swiper component |  true     |
 
 ### Swipe back method info
 ## Method
