@@ -909,11 +909,11 @@ Swiper.propTypes = {
   swipeBackCard: PropTypes.bool,
   topCardResetAnimationFriction: PropTypes.number,
   topCardResetAnimationTension: PropTypes.number,
+  useViewOverflow: PropTypes.bool,
   verticalSwipe: PropTypes.bool,
   verticalThreshold: PropTypes.number,
   zoomAnimationDuration: PropTypes.number,
-  zoomFriction: PropTypes.number,
-  useViewOverflow: PropTypes.bool
+  zoomFriction: PropTypes.number
 }
 
 Swiper.defaultProps = {
@@ -1004,11 +1004,11 @@ Swiper.defaultProps = {
   swipeBackCard: false,
   topCardResetAnimationFriction: 7,
   topCardResetAnimationTension: 40,
+  useViewOverflow: true,
   verticalSwipe: true,
   verticalThreshold: height / 5,
   zoomAnimationDuration: 100,
-  zoomFriction: 7,
-  useViewOverflow: true
+  zoomFriction: 7
 }
 
 export default Swiper
