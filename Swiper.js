@@ -60,8 +60,7 @@ class Swiper extends Component {
 
     this.state.pan.x.addListener(value => (this._animatedValueX = value.value))
     this.state.pan.y.addListener(value => (this._animatedValueY = value.value))
-
-    this.initializeCardStyle()
+    
     this.initializePanResponder()
   }
 
@@ -69,7 +68,9 @@ class Swiper extends Component {
     const { props, state } = this
     const propsChanged = (
       !isEqual(props.cards, nextProps.cards) ||
-      props.cardIndex !== nextProps.cardIndex
+      props.cardIndex !== nextProps.cardIndex ||
+      props.cardHorizontalMargin !== nextProps.cardHorizontalMargin ||
+      props.cardVerticalMargin !== nextProps.cardVerticalMargin
     )
     const stateChanged = (
       nextState.firstCardIndex !== state.firstCardIndex ||
@@ -106,13 +107,6 @@ class Swiper extends Component {
       width: cardWidth,
       height: cardHeight
     }
-  }
-
-  initializeCardStyle = () => {
-    this.forceUpdate()
-    Dimensions.addEventListener('change', () => {
-      this.forceUpdate()
-    })
   }
 
   initializePanResponder = () => {
