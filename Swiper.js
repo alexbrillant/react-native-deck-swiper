@@ -94,8 +94,11 @@ class Swiper extends Component {
       cardVerticalMargin,
       cardHorizontalMargin,
       marginTop,
-      marginBottom
+      marginBottom,
+      responsive
     } = this.props
+
+    if (responsive) return styles.maxSize;
 
     const cardWidth = width - cardHorizontalMargin * 2
     const cardHeight =
