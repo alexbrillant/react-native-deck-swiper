@@ -5,10 +5,6 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
   },
-  maxSize: {
-    height: '100%',
-    aspectRatio: 1
-  },
   container: {
     alignItems: 'stretch',
     position: 'absolute',
