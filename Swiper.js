@@ -98,7 +98,7 @@ class Swiper extends Component {
       responsive
     } = this.props
 
-    if (responsive) return styles.maxSize;
+    if (responsive) return;
 
     const cardWidth = width - cardHorizontalMargin * 2
     const cardHeight =
