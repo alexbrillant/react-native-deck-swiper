@@ -88,6 +88,14 @@ class Swiper extends Component {
     Dimensions.removeEventListener('change', this.onDimensionsChange)
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    return nextProps.cards === prevState.cards
+      ? {}
+      : {
+          cards: nextProps.cards
+        };
+  }  
+
   getCardStyle = () => {
     const { height, width } = Dimensions.get('window')
     const {
