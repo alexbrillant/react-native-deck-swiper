@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { PanResponder, Text, View, Dimensions, Animated } from 'react-native'
 import PropTypes from 'prop-types'
-import ViewOverflow from 'react-native-view-overflow'
 
 import styles from './styles'
 
@@ -707,11 +706,11 @@ class Swiper extends Component {
 
   render = () => {
     const { pointerEvents, backgroundColor, marginTop, marginBottom, containerStyle, swipeBackCard, useViewOverflow } = this.props
-    const ViewComponent = useViewOverflow ? ViewOverflow : View
     return (
-      <ViewComponent
+      <View
         pointerEvents={pointerEvents}
         style={[
+          {overflow:useViewOverflow ? 'visible' : 'hidden'},
           styles.container,
           {
             backgroundColor: backgroundColor,
@@ -724,7 +723,7 @@ class Swiper extends Component {
         {this.renderChildren()}
         {swipeBackCard ? this.renderSwipeBackCard() : null}
         {this.renderStack()}
-      </ViewComponent>
+      </View>
     )
   }
 
