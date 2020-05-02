@@ -1,1 +1,8 @@
 Example/
+.babelrc
+.buckconfig
+.flowconfig
+.watchmanconfig
+animation.gif
+animation2.gif
+animation3.gif
