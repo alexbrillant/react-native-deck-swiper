@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { PanResponder, Text, View, Dimensions, Animated } from 'react-native'
 import PropTypes from 'prop-types'
-import isEqual from 'lodash/isEqual'
 import ViewOverflow from 'react-native-view-overflow'
 
 import styles from './styles'
@@ -64,10 +63,22 @@ class Swiper extends Component {
     this.initializePanResponder()
   }
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.cards != prevProps.cards) {
+      this.setState({
+        ...calculateCardIndexes(this.props.cardIndex, this.props.cards),
+        swipedAllCards: false,
+        panResponderLocked: false,
+        labelType: LABEL_TYPES.NONE,
+        ...rebuildStackAnimatedValues(this.props)
+      });
+    }
+  }
+
   shouldComponentUpdate = (nextProps, nextState) => {
     const { props, state } = this
     const propsChanged = (
-      !isEqual(props.cards, nextProps.cards) ||
+      props.cards != nextProps.cards ||
       props.cardIndex !== nextProps.cardIndex
     )
     const stateChanged = (
@@ -553,9 +564,10 @@ class Swiper extends Component {
         {
           ...calculateCardIndexes(newCardIndex, this.props.cards),
           swipedAllCards: swipedAllCards,
-          panResponderLocked: false
+          panResponderLocked: false,
+          ...rebuildStackAnimatedValues(this.props)
         },
-        this.resetPanAndScale
+        this.resetPanAndScale()
       )
     }
   }
