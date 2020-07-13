@@ -36,7 +36,7 @@ const rebuildStackAnimatedValues = (props) => {
 }
 
 class Swiper extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -362,7 +362,7 @@ class Swiper extends Component {
     if (!canSwipeBack) {
       return
     }
-    this.setState({ isSwipingBack: !isSwipingBack, swipeBackXYPositions }, () => {
+    this.setState({isSwipingBack: !isSwipingBack, swipeBackXYPositions}, () => {
       this.animatePreviousCard(this.calculateNextPreviousCardPosition(), cb)
     })
   }
@@ -436,10 +436,10 @@ class Swiper extends Component {
   }
 
   setSwipeBackCardXY = (x = -width, y = 0, cb) => {
-    this.setState({ swipeBackXYPositions: [...this.state.swipeBackXYPositions, { x, y }] }, cb)
+    this.setState({swipeBackXYPositions: [...this.state.swipeBackXYPositions, {x, y}]}, cb)
   }
 
-  animatePreviousCard = ({ x, y }, cb) => {
+  animatePreviousCard = ({x, y}, cb) => {
     const { previousCardX, previousCardY } = this.state
     previousCardX.setValue(x * SWIPE_MULTIPLY_FACTOR)
     previousCardY.setValue(y * SWIPE_MULTIPLY_FACTOR)
@@ -457,7 +457,7 @@ class Swiper extends Component {
         useNativeDriver: true
       })
     ]).start(() => {
-      this.setState({ isSwipingBack: false })
+      this.setState({isSwipingBack: false})
       this.decrementCardIndex(cb)
     })
   }
@@ -562,7 +562,7 @@ class Swiper extends Component {
   }
 
   resetPanAndScale = () => {
-    const { previousCardDefaultPositionX, previousCardDefaultPositionY } = this.props
+    const {previousCardDefaultPositionX, previousCardDefaultPositionY} = this.props
     this.state.pan.setValue({ x: 0, y: 0 })
     this.state.previousCardX.setValue(previousCardDefaultPositionX)
     this.state.previousCardY.setValue(previousCardDefaultPositionY)
@@ -768,8 +768,8 @@ class Swiper extends Component {
     let firstCard = true
     let cardPosition = 0
 
-    // If cards is array and is empty
-    if (Array.isArray(cards) && !cards.length) {
+    // If cards is empty
+    if (!cards.length) {
       return [];
     }
 
