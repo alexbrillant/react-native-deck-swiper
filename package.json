@@ -1,77 +1,77 @@
 {
-    "name": "react-native-deck-swiper",
-    "version": "1.6.7",
-    "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
-    "main": "index.js",
-    "scripts": {
-        "test": "jest --coverage",
-        "lint": "standard --verbose | snazzy",
-        "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
-        "format": "prettier-eslint \"./**/*.js\" --ignore \"./node_modules/**\" --write",
-        "lint:fix": "eslint --fix Swiper.js index.js styles.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/alexbrillant/react-native-deck-swiper.git"
-    },
-    "keywords": [
-        "react-native",
-        "react-native-component",
-        "tinder",
-        "cards",
-        "card",
-        "swipe",
-        "swiper",
-        "deck",
-        "animation"
+  "name": "@nafplann/react-native-deck-swiper",
+  "version": "1.6.7",
+  "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "lint": "standard --verbose | snazzy",
+    "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
+    "format": "prettier-eslint \"./**/*.js\" --ignore \"./node_modules/**\" --write",
+    "lint:fix": "eslint --fix Swiper.js index.js styles.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexbrillant/react-native-deck-swiper.git"
+  },
+  "keywords": [
+    "react-native",
+    "react-native-component",
+    "tinder",
+    "cards",
+    "card",
+    "swipe",
+    "swiper",
+    "deck",
+    "animation"
+  ],
+  "author": "Alexandre Brillant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexbrillant/react-native-deck-swiper/issues"
+  },
+  "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
+  "dependencies": {
+    "prop-types": "15.5.10"
+  },
+  "peerDependencies": {
+    "react-native-view-overflow": "0.0.4",
+    "react": "^16.0.0-beta.5",
+    "react-native": "^0.49.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "18.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.2.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "18.1.0",
+    "jest-cli": "^18.1.0",
+    "lodash": "^4.17.5",
+    "prettier-eslint": "^6.4.2",
+    "prettier-eslint-cli": "^4.1.1",
+    "react-test-renderer": "15.4.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "standard",
+      "standard-react"
     ],
-    "author": "Alexandre Brillant",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/alexbrillant/react-native-deck-swiper/issues"
-    },
-    "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
-    "dependencies": {
-        "prop-types": "15.5.10"
-    },
-    "peerDependencies": {
-        "react-native-view-overflow": "0.0.4",
-        "react": "^16.0.0-beta.5",
-        "react-native": "^0.49.1"
-    },
-    "devDependencies": {
-        "babel-eslint": "^7.2.3",
-        "babel-jest": "18.0.0",
-        "babel-preset-react-native": "1.9.1",
-        "eslint": "^3.19.0",
-        "eslint-config-standard": "^10.2.1",
-        "eslint-config-standard-react": "^5.0.0",
-        "eslint-plugin-import": "^2.7.0",
-        "eslint-plugin-json": "^1.2.0",
-        "eslint-plugin-node": "^5.1.1",
-        "eslint-plugin-promise": "^3.5.0",
-        "eslint-plugin-react": "^7.2.1",
-        "eslint-plugin-standard": "^3.0.1",
-        "jest": "18.1.0",
-        "jest-cli": "^18.1.0",
-        "lodash": "^4.17.5",
-        "prettier-eslint": "^6.4.2",
-        "prettier-eslint-cli": "^4.1.1",
-        "react-test-renderer": "15.4.2"
-    },
-    "jest": {
-        "preset": "react-native"
-    },
-    "eslintConfig": {
-        "parser": "babel-eslint",
-        "extends": [
-            "standard",
-            "standard-react"
-        ],
-        "parserOptions": {
-            "ecmaFeatures": {
-                "jsx": true
-            }
-        }
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      }
     }
+  }
 }
