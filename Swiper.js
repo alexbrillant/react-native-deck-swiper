@@ -137,9 +137,10 @@ class Swiper extends Component {
 
   createAnimatedEvent = () => {
     const { horizontalSwipe, verticalSwipe } = this.props
+    const defaultAnimatedVal = new Animated.ValueXY()
     const { x, y } = this.state.pan
-    const dx = horizontalSwipe ? x : 0
-    const dy = verticalSwipe ? y : 0
+    const dx = horizontalSwipe ? x : defaultAnimatedVal.x
+    const dy = verticalSwipe ? y : defaultAnimatedVal.y
     return { dx, dy }
   }
 
