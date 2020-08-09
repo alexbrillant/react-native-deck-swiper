@@ -65,6 +65,12 @@ class Swiper extends Component {
     this.initializePanResponder()
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.cards !== prevProps.cards) {
+      this.setState({cards:this.props.cards})
+    }
+  }
+
   shouldComponentUpdate = (nextProps, nextState) => {
     const { props, state } = this
     const propsChanged = (
@@ -195,7 +201,9 @@ class Swiper extends Component {
       })
     }
 
-    return Animated.event([null, this.createAnimatedEvent()])(
+    return Animated.event([null, this.createAnimatedEvent()], {
+      useNativeDriver: false
+    })(
       event,
       gestureState
     )
@@ -342,6 +350,7 @@ class Swiper extends Component {
 
   resetTopCard = cb => {
     Animated.spring(this.state.pan, {
+			useNativeDriver: false,
       toValue: 0,
       friction: this.props.topCardResetAnimationFriction,
       tension: this.props.topCardResetAnimationTension
@@ -412,6 +421,7 @@ class Swiper extends Component {
     this.setState({ panResponderLocked: true })
     this.animateStack()
     Animated.timing(this.state.pan, {
+			useNativeDriver: false,
       toValue: {
         x: x * SWIPE_MULTIPLY_FACTOR,
         y: y * SWIPE_MULTIPLY_FACTOR
@@ -514,7 +524,7 @@ class Swiper extends Component {
           swipedAllCards = true
         }
       } else {
-        newCardIndex = 0;
+        newCardIndex = 0
       }
     }
 
