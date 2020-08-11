@@ -56,7 +56,7 @@ npm install react-native-deck-swiper --save
 | onSwipedRight     | func   | function to be called when a card is swiped right. it receives the swiped card index  |         | (cardIndex) => {} |
 | onSwipedTop       | func   | function to be called when a card is swiped top. it receives the swiped card index    |         | (cardIndex) => {} |
 | onSwipedBottom    | func   | function to be called when a card is swiped bottom. it receives the swiped card index |         | (cardIndex) => {} |
-| onSwiping         | func   | function to be called when a card is being moved. it receives X and Y positions       |         | (x, y) => {} |
+| onSwiping         | func   | function to be called when a card is being moved. it receives X and Y positions and `index` of the current card as the third argument       |         | (x, y) => {} |
 | dragStart         | func   | function to be called when drag start                                       |        |
 | dragEnd           | func   | function to be called when drag end
 | onTapCard         | func   | function to be called when tapping a card. it receives the tapped card index          |         | (cardIndex) => {} |
