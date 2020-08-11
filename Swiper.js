@@ -63,7 +63,7 @@ class Swiper extends Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (this.props.cards != prevProps.cards) {
+    if (this.props.cards !== prevProps.cards) {
       this.setState({
         ...calculateCardIndexes(this.props.cardIndex, this.props.cards),
         swipedAllCards: false,
@@ -77,7 +77,7 @@ class Swiper extends Component {
   shouldComponentUpdate = (nextProps, nextState) => {
     const { props, state } = this
     const propsChanged = (
-      props.cards != nextProps.cards ||
+      props.cards !== nextProps.cards ||
       props.cardIndex !== nextProps.cardIndex
     )
     const stateChanged = (
