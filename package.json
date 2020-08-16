@@ -1,6 +1,6 @@
 {
     "name": "react-native-deck-swiper",
-    "version": "1.6.7",
+    "version": "1.7.1",
     "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
     "main": "index.js",
     "scripts": {
@@ -8,7 +8,10 @@
         "lint": "standard --verbose | snazzy",
         "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
         "format": "prettier-eslint \"./**/*.js\" --ignore \"./node_modules/**\" --write",
-        "lint:fix": "eslint --fix Swiper.js index.js styles.js"
+        "lint:fix": "eslint --fix Swiper.js index.js styles.js",
+        "clean-example": "cd example && rm -rf node_modules && yarn cache clean && yarn",
+        "run-ios-example": "cd example && npx react-native run-ios",
+        "run-android-example": "cd example && npx react-native run-android"
     },
     "repository": {
         "type": "git",

@@ -6,8 +6,17 @@
 ## Installation
 
 ```
+yarn add react-native-deck-swiper
+```
+OR
+```
 npm install react-native-deck-swiper --save
 ```
+
+## Issues
+
+Before submitting a new issue please check if it hasn't [already been reported yet](https://github.com/webraptor/react-native-deck-swiper/issues).
+With respect to bugfixes and further developments, please check the [To Do](https://github.com/webraptor/react-native-deck-swiper/projects/1) board.
 
 ## Overview
 
@@ -355,7 +364,7 @@ By making sure that external changes on the cardIndex match those the swiper per
 
 ## Development
 
-If you've encountered issues while running the example app located in the _Example_ folder, try the following steps:
+If you've encountered issues while running the example app located in the _example_ folder, try the following steps:
 
 **If you're using yarn**
 1. rm -rf node_modules && rm yarn.lock
