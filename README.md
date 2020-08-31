@@ -13,6 +13,10 @@ OR
 npm install react-native-deck-swiper --save
 ```
 
+## Important 2.0.0-beta
+
+Version 2.0.0-beta is technically version 1.7.2 of the package. However, npm recommended that due to the change in ownership the version be bumped.
+
 ## Issues
 
 Before submitting a new issue please check if it hasn't [already been reported yet](https://github.com/webraptor/react-native-deck-swiper/issues).

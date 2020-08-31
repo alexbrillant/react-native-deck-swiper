@@ -1,9 +1,8 @@
 {
     "name": "react-native-deck-swiper",
-    "version": "1.7.2",
+    "version": "2.0.0-beta",
     "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
     "main": "index.js",
-    "types": "index.d.ts",
     "scripts": {
         "test": "jest --coverage",
         "lint": "standard --verbose | snazzy",
@@ -29,7 +28,7 @@
         "deck",
         "animation"
     ],
-    "author": "Alexandre Brillant",
+    "author": "Bogdan Pop / WebRaptor",
     "license": "ISC",
     "bugs": {
         "url": "https://github.com/alexbrillant/react-native-deck-swiper/issues"
