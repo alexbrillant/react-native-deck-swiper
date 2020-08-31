@@ -319,7 +319,7 @@ render () {
 }
 ```
 
-Demo inside the [Example Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Example)
+Demo inside the [Example Folder](https://github.com/webraptor/react-native-deck-swiper/tree/master/example)
 
 ## Stylesheet example
 
