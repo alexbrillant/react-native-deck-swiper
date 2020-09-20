@@ -61,7 +61,7 @@ With respect to bugfixes and further developments, please check the [To Do](http
 | horizontalSwipe | bool           | enable/disable horizontal swiping                                    |          | true    |
 | verticalSwipe   | bool           | enable/disable vertical swiping                                      |          | true    |
 | showSecondCard  | bool           | enable/disable second card while swiping                             |          | true    |
-| stackSize       | number         | number of underlaying cards to show (showSecondCard must be enabled) |          | 0       |
+| stackSize       | number         | number of underlaying cards to show (showSecondCard must be enabled) |          | 1       |
 
 ### Event callbacks
 
@@ -270,7 +270,7 @@ Make sure you set showSecondCard={false} for smoother and proper transitions whi
 
 | Name                | type   | description                                        |
 | :------------------- | :----- | :------------------------------------------------- |
-| swipeBack       | callback                       | swipe back into deck last swiped card |
+| swipeBack       | callback                       | swipe back into deck last swiped card. stacksize should be 2 cards or more |
 
 ## Props
 
