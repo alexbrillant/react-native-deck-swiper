@@ -147,6 +147,7 @@ class Swiper extends Component {
   }
 
   onPanResponderMove = (event, gestureState) => {
+    if (!this.props.horizontalSwipe && !this.props.verticalSwipe) return
     this.props.onSwiping(this._animatedValueX, this._animatedValueY)
 
     let { overlayOpacityHorizontalThreshold, overlayOpacityVerticalThreshold } = this.props
@@ -201,6 +202,7 @@ class Swiper extends Component {
   }
 
   onPanResponderGrant = (event, gestureState) => {
+    if (!this.props.horizontalSwipe && !this.props.verticalSwipe) return
     this.props.dragStart && this.props.dragStart()
     if (!this.state.panResponderLocked) {
       this.state.pan.setOffset({
@@ -216,6 +218,7 @@ class Swiper extends Component {
   }
 
   validPanResponderRelease = () => {
+    if (!this.props.horizontalSwipe && !this.props.verticalSwipe) return true
     const {
       disableBottomSwipe,
       disableLeftSwipe,
