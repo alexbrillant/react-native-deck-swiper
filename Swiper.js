@@ -84,7 +84,7 @@ class Swiper extends Component {
     this._mounted = false
     this.state.pan.x.removeAllListeners()
     this.state.pan.y.removeAllListeners()
-    Dimensions.removeEventListener('change', this.onDimensionsChange)
+    this.dimensionsChangeSubscription.remove()
   }
 
   getCardStyle = () => {
@@ -110,7 +110,7 @@ class Swiper extends Component {
 
   initializeCardStyle = () => {
     // this.forceUpdate()
-    Dimensions.addEventListener('change', this.onDimensionsChange)
+    this.dimensionsChangeSubscription = Dimensions.addEventListener('change', this.onDimensionsChange)
   }
 
   initializePanResponder = () => {
