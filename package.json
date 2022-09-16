@@ -1,6 +1,6 @@
 {
     "name": "react-native-deck-swiper",
-    "version": "1.6.8",
+    "version": "2.0.9",
     "description": "Awesome tinder like card swiper for react-native. Highly Customizable!",
     "main": "index.js",
     "scripts": {
@@ -8,11 +8,14 @@
         "lint": "standard --verbose | snazzy",
         "lintdiff": "git diff --name-only --cached --relative | grep '\\.js$' | xargs standard | snazzy",
         "format": "prettier-eslint \"./**/*.js\" --ignore \"./node_modules/**\" --write",
-        "lint:fix": "eslint --fix Swiper.js index.js styles.js"
+        "lint:fix": "eslint --fix Swiper.js index.js styles.js",
+        "clean-example": "cd example && rm -rf node_modules && yarn cache clean && yarn",
+        "run-ios-example": "cd example && npx react-native run-ios",
+        "run-android-example": "cd example && npx react-native run-android"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/alexbrillant/react-native-deck-swiper.git"
+        "url": "git+https://github.com/webraptor/react-native-deck-swiper.git"
     },
     "keywords": [
         "react-native",
@@ -25,18 +28,17 @@
         "deck",
         "animation"
     ],
-    "author": "Alexandre Brillant",
+    "author": "Bogdan Pop / WebRaptor",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/alexbrillant/react-native-deck-swiper/issues"
+        "url": "https://github.com/webraptor/react-native-deck-swiper/issues"
     },
-    "homepage": "https://github.com/alexbrillant/react-native-deck-swiper#readme",
+    "homepage": "https://github.com/webraptor/react-native-deck-swiper#readme",
     "dependencies": {
         "prop-types": "15.5.10"
     },
     "peerDependencies": {
-        "react-native-view-overflow": "0.0.4",
-        "react": "^16.0.0-beta.5",
+        "react": "^16.0.0-beta.5 || ^17.0.0 || ^18.0.0",
         "react-native": "^0.49.1"
     },
     "devDependencies": {

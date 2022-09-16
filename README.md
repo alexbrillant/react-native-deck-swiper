@@ -6,8 +6,26 @@
 ## Installation
 
 ```
+yarn add react-native-deck-swiper
+```
+OR
+```
 npm install react-native-deck-swiper --save
 ```
+
+## Versions info
+
+Version 2.0.0-beta is technically version 1.7.2 of the package. However, npm recommended that due to the change in ownership the version be bumped.
+
+| react-native-deck-swiper      | react-native      | description                                                            |
+| :---------------------------- | :---------------- | :--------------------------------------------------------------------- |
+| <= 2.0.3-beta                 | <= 0.56.x         | should install **react-native-view-overflow** and set **useViewOverflow** _true_ |
+| >= 2.0.4                      | => 0.57.x         | no longer requires react-native-view-overflow; **useViewOverflow removed** |
+
+## Issues
+
+Before submitting a new issue please check if it hasn't [already been reported yet](https://github.com/webraptor/react-native-deck-swiper/issues).
+With respect to bugfixes and further developments, please check the [To Do](https://github.com/webraptor/react-native-deck-swiper/projects/1) board.
 
 ## Overview
 
@@ -43,7 +61,7 @@ npm install react-native-deck-swiper --save
 | horizontalSwipe | bool           | enable/disable horizontal swiping                                    |          | true    |
 | verticalSwipe   | bool           | enable/disable vertical swiping                                      |          | true    |
 | showSecondCard  | bool           | enable/disable second card while swiping                             |          | true    |
-| stackSize       | number         | number of underlaying cards to show (showSecondCard must be enabled) |          | 0       |
+| stackSize       | number         | number of underlaying cards to show (showSecondCard must be enabled) |          | 1       |
 
 ### Event callbacks
 
@@ -252,7 +270,7 @@ Make sure you set showSecondCard={false} for smoother and proper transitions whi
 
 | Name                | type   | description                                        |
 | :------------------- | :----- | :------------------------------------------------- |
-| swipeBack       | callback                       | swipe back into deck last swiped card |
+| swipeBack       | callback                       | swipe back into deck last swiped card. stacksize should be 2 cards or more |
 
 ## Props
 
@@ -306,7 +324,7 @@ render () {
 }
 ```
 
-Demo inside the [Example Folder](https://github.com/alexbrillant/react-native-deck-swiper/tree/master/Example)
+Demo inside the [Example Folder](https://github.com/webraptor/react-native-deck-swiper/tree/master/example)
 
 ## Stylesheet example
 
@@ -355,7 +373,7 @@ By making sure that external changes on the cardIndex match those the swiper per
 
 ## Development
 
-If you've encountered issues while running the example app located in the _Example_ folder, try the following steps:
+If you've encountered issues while running the example app located in the _example_ folder, try the following steps:
 
 **If you're using yarn**
 1. rm -rf node_modules && rm yarn.lock
