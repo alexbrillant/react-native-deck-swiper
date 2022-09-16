@@ -85,7 +85,12 @@ class Swiper extends Component {
     this._mounted = false
     this.state.pan.x.removeAllListeners()
     this.state.pan.y.removeAllListeners()
-    Dimensions.removeEventListener('change', this.onDimensionsChange)
+    if (this.dimensionsChangeSubscription) {
+      this.dimensionsChangeSubscription.remove();
+    } else {
+      // for backward compatibility with RN <0.65
+      Dimensions.removeEventListener('change', this.onDimensionChange);
+    }
   }
 
   getCardStyle = () => {
